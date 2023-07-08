@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Music_playlist extends Model
+class Instrument_type extends Model
 {
     use HasFactory;
+    use HasFactory;
+
+    protected $fillable = [
+       'type',
+       
+    ];
 }
