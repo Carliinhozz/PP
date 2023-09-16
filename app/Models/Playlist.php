@@ -9,13 +9,8 @@ use App\Models\Time;
 class Playlist extends Model
 {
     use HasFactory;
-    public function time()
-    {
-        return $this->belongsTo(Time::class, 'time_id', 'id');    
-    }
-
     protected $fillable = [
        'day',
-       'time_id',
+       'time',
     ];
 }

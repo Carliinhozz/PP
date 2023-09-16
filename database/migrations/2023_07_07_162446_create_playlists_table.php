@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->date('day');
-            $table->unsignedBigInteger('time_id');
-            $table->foreign('time_id')->references('id')->on('times');
+            $table->boolean('time');
         });
     }
 
