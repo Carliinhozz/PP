@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+ 
+
 use App\Models\Music;
 class MusicController extends Controller
 {
@@ -26,8 +29,12 @@ class MusicController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    { 
+        $search=$request->search;
+        $response = json_decode(Http::get("https://api.deezer.com/search/track?q=$search"));
+        return view('welcome',['response' => $response->data]);
+ 
+        // return redirect(route("musicas.store"));
     }
 
     /**
