@@ -5,11 +5,7 @@
         <input type="text" name="search" placeholder="Pesquise a música">
         <button>Pesquisar</button>
     </form>
-    <form action="{{route('login.index')}}" method="post">
-        @csrf
-        
-        <button>Login</button>
-    </form>
+    
     
     @isset($response)
         @foreach ($response as $music)

@@ -11,7 +11,7 @@
           <li><a href="{{url('/')}}">Página inicial</a></li>
           <li><a href="{{url('/quadros')}}">Quadros</a></li>
           <li><a href="{{url('/sobre')}}">Sobre nós</a></li>
-          <li><a class="btn btn-primary w-auto p-lg-2"  role="button" href="#portfolio">Entrar</a></li>
+          <li><a class="btn btn-primary w-auto p-lg-2"  role="button" href="{{ config('suap.uri_login') }}">Entrar</a></li>
           {{-- <li><a href="#team">Team</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>

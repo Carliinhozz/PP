@@ -12,7 +12,10 @@ class LoginController extends Controller
      */
     public function index()
     {
-        Http::get("https://suap.ifrn.edu.br/api/v2/autenticacao");
+       $response= Http::get("https://suap.ifrn.edu.br/login");
+       return 123;
+    // var_dump($response);
+        
         
     }
 
