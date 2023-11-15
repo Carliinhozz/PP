@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('role');
             $table->string('registration');
-            $table->string('email')->unique();
+            $table->string('email_ifrn');
             $table->boolean('admin')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

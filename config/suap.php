@@ -8,7 +8,7 @@ $suap_uri = 'https://suap.ifrn.edu.br';
 
 # Parâmetros que dependem do ambiente de execução
 $client_id = env('SUAP_CLIENT_ID');
-
+$redirect_uri = env('REDIRECT_URI');
 
 return [
     # URI base do SUAP
@@ -21,12 +21,12 @@ return [
         'grant_type' => $grant_type,
         'client_id' => $client_id,
         'scope' => $scope,
-        'redirect_uri' => 'http://localhost:8000/',
+        'redirect_uri' => $redirect_uri,
     ]),
     # Dados de autenticação com OAuth2, caso seja necessário, por exemplo,
     # em javascript
     'grant_type' => $grant_type,
     'client_id' => $client_id,
     'scope' => $scope,
-    'redirect_uri' => 'http://localhost:8000/',
+    'redirect_uri' => $redirect_uri,
 ];

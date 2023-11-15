@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -12,19 +14,34 @@ class LoginController extends Controller
      */
     public function index()
     {
-       $response= Http::get("https://suap.ifrn.edu.br/login");
-       return 123;
-    // var_dump($response);
-        
-        
+
+        return view('auth');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function callback(Request $request)
     {
-        //
+        $res = Http::withUrlParameters([
+            'scope' => 'identificacao'
+        ])
+        ->withToken($request->suap_token)
+        ->acceptJson()
+        ->get(config('suap.uri_eu'));
+
+        $user= new User([
+            'name'=>$res['nome_usual'],
+            'registration'=>$res['identificacao'],
+            'email_ifrn'=>$res['email_google_classroom'],
+            'role'=>$res['tipo_usuario'],
+        ]);  
+
+        $user->save();
+
+        Auth::login($user, $remember = true);
+
+        return response($res)->cookie('suapToken', $request->suap_token);
     }
 
     /**
