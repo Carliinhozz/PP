@@ -1,10 +1,10 @@
 <header id="header" class="header d-flex align-items-center">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="{{url('/')}}" class="logo d-flex align-items-center">
+      <a href="{{url('/')}}" class="align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Impact<span>.</span></h1>
+        <img src="assets/img/Logo.png" alt="Logo" class="p-2 mt-2 w-25">
       </a>
       <nav id="navbar" class="navbar">
         <ul>
@@ -14,7 +14,7 @@
           @if (Auth::check())
             <li><a href="{{url('/sobre')}}">Perfil</a></li>
           @else
-            <li><a class="btn btn-primary w-auto p-lg-2"  role="button" href="{{ config('suap.uri_login') }}">Entrar</a></li>
+            <li><a class="btn btn-enter w-auto p-lg-2" role="button" href="{{ config('suap.uri_login') }}">Entrar</a></li>
           @endif
           
           {{-- <li><a href="#team">Team</a></li>

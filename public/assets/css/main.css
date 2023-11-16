@@ -290,8 +290,13 @@ section {
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 90px;
-  background-color: var(--color-primary);
+  height: 100px;
+  background-color: #534881;
+}
+
+.btn-enter{
+  background-color: #E16C24;
+  color: #000;
 }
 
 .header.sticked {
@@ -299,7 +304,7 @@ section {
   top: 0;
   right: 0;
   left: 0;
-  height: 70px;
+  height: 90px;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -363,7 +368,7 @@ section {
     font-family: var(--font-secondary);
     font-size: 16px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
+    color: #fff;
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
@@ -1870,7 +1875,7 @@ section {
 .hero {
   width: 100%;
   position: relative;
-  background: var(--color-primary);
+  background: #fff;
   padding: 60px 0 0 0;
 }
 
@@ -1884,13 +1889,14 @@ section {
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #fff;
+  color: #534881;
 }
 
 .hero p {
-  color: rgba(255, 255, 255, 0.6);
+  color: #534881;
   font-weight: 400;
   margin-bottom: 30px;
+  text-align: justify;
 }
 
 .hero .btn-get-started {
@@ -2558,7 +2564,7 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background-color: var(--color-primary);
+  background-color: #534881;
   padding: 50px 0;
   color: white;
 }
