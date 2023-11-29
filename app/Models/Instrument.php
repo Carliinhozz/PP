@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\InstrumentType;
+use App\Models\Instrument_model;
 
 class Instrument extends Model
 {
     use HasFactory;
-    public function type()
+    public function model()
     {
-        return $this->belongsTo(InstrumentType::class, 'type_id', 'id');    
+        return $this->belongsTo(Instrument_model::class, 'model_id', 'id');    
     }
     protected $fillable = [
        'description',
-       'type_id',
-       'control_code',
+       'model_id',
+       'institucional_code',
+       'disponibility',
     ];
 }

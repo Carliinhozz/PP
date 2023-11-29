@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instument_types', function (Blueprint $table) {
+        Schema::create('instruments', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('description');
+            $table->string('institucional_code');
+            $table->boolean('disponibility')->default(1);
             $table->timestamps();
+            $table->unsignedBigInteger('model_id');
+            $table->foreign('model_id')->references('id')->on('intrument_models');
         });
     }
 
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instument_types');
+        Schema::dropIfExists('instruments');
     }
 };

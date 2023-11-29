@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -39,7 +40,7 @@ class LoginController extends Controller
 
         $user->save();
 
-        Auth::login($user, $remember = true);
+        Auth::login($user);
 
         return response($res)->cookie('suapToken', $request->suap_token);
     }
@@ -49,7 +50,9 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Gate::authorize('suapToken');
+        return view('about');
     }
 
     /**

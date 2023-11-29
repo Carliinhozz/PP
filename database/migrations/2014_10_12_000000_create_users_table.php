@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('registration');
             $table->string('email_ifrn');
             $table->boolean('admin')->default(0);
-            $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('super_admin')->default(0);
+            
             $table->rememberToken();
             $table->timestamps();
         });

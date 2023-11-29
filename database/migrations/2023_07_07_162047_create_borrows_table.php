@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('start', $precision = 0);
-            $table->dateTime('end', $precision = 0);
+            $table->dateTime('day_time', $precision = 0);
+            $table->boolean('finished')->default(false);
+            $table->string('observations');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

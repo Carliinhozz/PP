@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instuments', function (Blueprint $table) {
+        Schema::create('instument_models', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
-            $table->string('control_code');
+            $table->string('model');
             $table->timestamps();
-            $table->unsignedBigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('intrument_types');
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instuments');
+        Schema::dropIfExists('instument_models');
     }
 };

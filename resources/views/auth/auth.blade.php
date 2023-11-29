@@ -11,7 +11,7 @@
 
 <body>
 
-    <div id="preloader"></div>
+    carregando
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -61,7 +61,7 @@
       } else {
         // O usuário não está autenticado
         alert('A autenticação via SUAP falhou.');
-        window.location = "{{route('home')}}";
+        window.location = "/";
       }
     </script>
     @csrf <!-- Necessário para evitar ataques CSRF, não remova -->

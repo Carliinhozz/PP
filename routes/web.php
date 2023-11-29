@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,19 +22,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/api', function () {
-    return view('main.welcome');
-});
+
 Route::name('home')->get('/', function () {
     return view('index');
+  
 });
 Route::get('/quadros', function () {
-    return view('main.programs');
+    return view('programs');
 });
-Route::get('/sobre', function () {
-    return view('mai.about');
-});
-Route::get('', function () {    
+Route::get('/sobre', [LoginController::class, 'store'])->middleware (SuapToken::class);
+Route::get('/perfil', function () {    
     return view('user.perfil');
 });
 Route::resource("musicas",MusicController::class);
@@ -45,5 +43,5 @@ Route::name('login.')
         Route::post('/authorization-callback',[LoginController::class,'callback']);        
     }
 );
-// ->middleware (SuapToken::class)
+// 
 

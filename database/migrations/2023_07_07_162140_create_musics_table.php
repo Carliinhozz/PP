@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('musics', function (Blueprint $table) {
             $table->string('id');
             $table->string('title');
+            $table->string('artist');
+            $table->boolean('time');
+            $table->boolean('already_added')->default(false);
             $table->string('duration');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             
         

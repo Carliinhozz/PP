@@ -23,6 +23,7 @@ class User extends Authenticatable
         'role',
         'registration',
         'admin',
+        'super_admin'
         
     ];
 
@@ -42,8 +43,5 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+
 }
