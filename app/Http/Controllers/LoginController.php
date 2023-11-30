@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
@@ -48,11 +49,14 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function pre_login()
     {
-
-        // Gate::authorize('suapToken');
-        return view('about');
+        
+        Cookie::queue(Cookie::forget('suapToken'));
+        Cookie::queue(Cookie::forget('suapTokenExpirationTime'));
+        Cookie::queue(Cookie::forget('suapScope'));
+        return redirect(config('suap.uri_login'));
+        
     }
 
     /**

@@ -1,9 +1,11 @@
 <header id="header" class="header d-flex align-items-center">
-
+{{-- 
+  TODO: classe header com problema 
+  TODO: verificar tamanho da imagem
+  --}}
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="{{url('/')}}" class="align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+
         <img src="assets/img/Logo.png" alt="Logo" class="p-2 mt-2 w-25">
       </a>
       <nav id="navbar" class="navbar">
@@ -12,9 +14,9 @@
           <li><a href="{{url('/quadros')}}">Quadros</a></li>
           <li><a href="{{url('/sobre')}}">Sobre nós</a></li>
           @if (Auth::check())
-            <li><a href="{{url('/sobre')}}">Perfil</a></li>
+            <li><a href="{{url('/perfil')}}">Perfil</a></li>
           @else
-            <li><a class="btn btn-enter w-auto p-lg-2" role="button" href="{{ config('suap.uri_login') }}">Entrar</a></li>
+            <li><a class="btn btn-enter w-auto p-lg-2" role="button" href="{{url('login')}}">Entrar</a></li>
           @endif
           
           {{-- <li><a href="#team">Team</a></li>

@@ -30,18 +30,22 @@ Route::name('home')->get('/', function () {
 Route::get('/quadros', function () {
     return view('programs');
 });
-Route::get('/sobre', [LoginController::class, 'store'])->middleware (SuapToken::class);
+Route::get('/sobre', function ()  {
+    return view('about');
+});
+
 Route::get('/perfil', function () {    
     return view('user.perfil');
-});
+})->middleware (SuapToken::class);
+
 Route::resource("musicas",MusicController::class);
 
 Route::name('login.')
     ->group(function () {
         Route::get('/auth', [LoginController::class, 'index']);
-        
+        Route::get('/login', [LoginController::class, 'pre_login']);
         Route::post('/authorization-callback',[LoginController::class,'callback']);        
     }
 );
-// 
+
 
