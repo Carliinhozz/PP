@@ -14,25 +14,25 @@ class MusicController extends Controller
      */
     public function index()
     {
-        //
+        return view('auth.music.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function search(Request $request)
     {
-        //
+        $search=$request->search;
+        $response = json_decode(Http::get("https://api.deezer.com/search/track?q=$search&limit=10"));
+        return view('auth.music.index',['response' => $response->data, 'search'=>$search]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     { 
-        $search=$request->search;
-        $response = json_decode(Http::get("https://api.deezer.com/search/track?q=$search"));
-        return view('welcome',['response' => $response->data]);
+        
  
         // return redirect(route("musicas.store"));
     }

@@ -24,6 +24,9 @@ use Illuminate\Http\Request;
 
 
 Route::name('home')->get('/', function () {
+    if(Auth::check()){
+        return view('auth.index');
+    }
     return view('index');
   
 });
@@ -38,7 +41,13 @@ Route::get('/perfil', function () {
     return view('user.perfil');
 })->middleware (SuapToken::class);
 
-Route::resource("musicas",MusicController::class);
+
+Route::name('musicas.')->group(function () {
+        Route::get('musicas', [MusicController::class,'index'])->name('index');
+        Route::post('musicas', [MusicController::class,'search'])->name('search');
+    }
+
+)->middleware(SuapToken::class);
 
 Route::name('login.')
     ->group(function () {
@@ -47,5 +56,3 @@ Route::name('login.')
         Route::post('/authorization-callback',[LoginController::class,'callback']);        
     }
 );
-
-
