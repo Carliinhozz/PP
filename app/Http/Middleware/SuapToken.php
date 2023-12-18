@@ -17,9 +17,7 @@ class SuapToken
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->cookie('suapToken') && Cookie::has('suapTokenExpirationTime')){
-            # TODO: Verificar se o token é válido no SUAP?
-            # TODO: Vertificar se o token passado é o mesmo da Session atual
+        if ($request->cookie('suapToken') && Cookie::has('suapTokenExpirationTime') && Auth::check()){
             return $next($request);
         }
   

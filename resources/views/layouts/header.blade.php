@@ -1,4 +1,4 @@
-{{-- FIXME:Arrumar a class header, ta "puxando a tela pra baixo" --}}
+
 @if (Auth::check())
   <header id="header" class="header d-flex align-items-center">
 
@@ -11,7 +11,7 @@
         <ul>
           <li><a href="{{url('/')}}">Página inicial</a></li>
           <li><a href="{{url('/agendamentos')}}">Agendamentos</a></li>
-          <li><a href="{{route('musicas.index')}}">Pedir música</a></li>
+          <li><a href="{{route('music.index')}}">Pedir música</a></li>
       
           <li><a href="{{url('/perfil')}}">Perfil</a></li>
           

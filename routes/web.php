@@ -22,7 +22,9 @@ use Illuminate\Http\Request;
 |
 */
 
-
+Route::get('/testes', function () {
+    return view('auth.music.show');
+});
 Route::name('home')->get('/', function () {
     if(Auth::check()){
         return view('auth.index');
@@ -42,12 +44,13 @@ Route::get('/perfil', function () {
 })->middleware (SuapToken::class);
 
 
-Route::name('musicas.')->group(function () {
+Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
         Route::post('musicas', [MusicController::class,'search'])->name('search');
+        Route::post('musicas/{id}', [MusicController::class,'store'])->name('store');
     }
 
-)->middleware(SuapToken::class);
+);
 
 Route::name('login.')
     ->group(function () {
