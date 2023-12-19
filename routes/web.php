@@ -34,6 +34,14 @@ Route::get('/sobre', function ()  {
     return view('about');
 });
 
+Route::get('/pedirmusica', function () {
+    return view('pedirMusica');
+})->name('pedirmusica');
+
+Route::get('/fazeragendamento', function () {
+    return view('fazerAgendamento');
+})->name('fazeragendamento');
+
 Route::get('/perfil', function () {    
     return view('user.perfil');
 })->middleware (SuapToken::class);
@@ -48,4 +56,4 @@ Route::name('login.')
     }
 );
 
-
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

@@ -59,6 +59,18 @@ class LoginController extends Controller
         
     }
 
+    public function logout()
+    {
+        Auth::logout();
+
+        // Remova os cookies relacionados à autenticação, se existirem
+        Cookie::queue(Cookie::forget('suapToken'));
+        Cookie::queue(Cookie::forget('suapTokenExpirationTime'));
+        Cookie::queue(Cookie::forget('suapScope'));
+
+        return redirect('/'); // Altere para a rota desejada após o logout
+    }
+
     /**
      * Display the specified resource.
      */

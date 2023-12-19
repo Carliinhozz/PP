@@ -313,6 +313,11 @@ section {
   margin-right: 6px;
 }
 
+.header .text-white{
+  font-size: 20px;
+  white-space: nowrap;
+}
+
 .header .logo h1 {
   font-size: 30px;
   margin: 0;
@@ -2672,4 +2677,17 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #534881; /* Cor do botão de rolagem */
+  border-radius: 8px; /* Borda do botão de rolagem */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f2eeff; /* Cor de fundo da barra de rolagem */
 }
