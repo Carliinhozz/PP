@@ -18,6 +18,26 @@
   </section>
   <!-- End Hero Section -->
 
+  <!-- Painel horizontal para usuários não autenticados -->
+  @if (!Auth::check())
+    <section id="social-panel" class="social-panel">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>Conecte-se conosco nas plataformas:</h3>
+            <div class="social-icons">
+              <a href="https://www.instagram.com/radio_desopila/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==" target="_blank" title="Instagram"><img src="assets/img/plataformas/instagram.png" alt="Instagram"></a>
+              <a href="https://www.youtube.com/channel/UCEoxxtXdjrVTmIl-op0kT0w" target="_blank" title="YouTube"><img src="assets/img/plataformas/youtube.png" alt="YouTube"></a>
+              <a href="https://open.spotify.com/show/4i0Gru4spSte7Gdf5ppqzk?si=13f981c031ae40d6" target="_blank" title="Spotify"><img src="assets/img/plataformas/spotify.png" alt="Spotify"></a>
+              <a href="https://deezer.page.link/p9ZSg7kZFP1YLQMN7" target="_blank" title="Deezer"><img src="assets/img/plataformas/deezer.png" alt="Deezer"></a>
+              <a href="https://podcasts.apple.com/us/podcast/r%C3%A1dio-desopila-ifrn/id1509957658" target="_blank" title="Apple Podcasts"><img src="assets/img/plataformas/apple-podcasts.png" alt="Apple Podcasts"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  @endif
+
   <!-- Adicionando o Contêiner da Playlist do Dia para Usuários Autenticados -->
   @if (Auth::check())
     <section id="playlist" class="playlist">
@@ -144,6 +164,17 @@
 
   .agendamentos-days li.active {
     font-weight: bold;
+  }
+
+  .social-panel {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .social-icons img {
+    width: 50px; /* Ajuste a largura dos ícones conforme necessário */
+    margin: 0 10px;
   }
 
 </style>
