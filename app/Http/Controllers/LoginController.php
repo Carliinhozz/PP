@@ -31,8 +31,8 @@ class LoginController extends Controller
         ->withToken($request->suap_token)
         ->acceptJson()
         ->get(config('suap.uri_eu'));
-
-        $user= new User([
+        
+        $user=User::firstOrCreate([
             'name'=>$res['nome_usual'],
             'registration'=>$res['identificacao'],
             'email_ifrn'=>$res['email_google_classroom'],

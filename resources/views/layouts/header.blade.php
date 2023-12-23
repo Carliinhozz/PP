@@ -12,7 +12,7 @@
           <li><a href="{{url('/')}}">Página inicial</a></li>
           <li><a href="{{url('/agendamentos')}}">Agendamentos</a></li>
           <li><a href="{{route('music.index')}}">Pedir música</a></li>
-      
+          <li><a href="{{route('playlist.index')}}">Editar playlist</a></li>
           <li><a href="{{url('/perfil')}}">Perfil</a></li>
           
           
