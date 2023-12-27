@@ -59,6 +59,10 @@ h6 {
 /*--------------------------------------------------------------
 # Sections & Section Header
 --------------------------------------------------------------*/
+.img_header{
+  width:230px;
+}
+
 section {
   padding: 60px 0;
   overflow: hidden;
@@ -335,6 +339,34 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Página Inicial
+--------------------------------------------------------------*/
+.social-panel {
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.social-panel h3{
+  font-size: 15pt;
+  font-weight: bold;
+  background-color: #534881;
+  color: white;
+  padding: 5px;
+}
+
+.social-icons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+}
+
+.social-icons img {
+  width: 80px; /* Ajuste a largura dos ícones conforme necessário */
+  margin: 0 10px;
+}
+
+/*--------------------------------------------------------------
 # Desktop Navigation
 --------------------------------------------------------------*/
 @media (min-width: 1280px) {
@@ -343,9 +375,10 @@ section {
   }
 
   .navbar ul {
+    display:flex;
+    flex-direction:
     margin: 0;
     padding: 0;
-    display: flex;
     list-style: none;
     align-items: center;
   }
@@ -363,10 +396,10 @@ section {
   .navbar a:focus {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0 3px;
     font-family: var(--font-secondary);
-    font-size: 16px;
+    font-size: 13pt;
     font-weight: 600;
     color: #fff;
     white-space: nowrap;
@@ -2007,6 +2040,10 @@ section {
 .hero .icon-box:hover .title a,
 .hero .icon-box:hover .icon {
   color: #fff;
+}
+
+.video-index img{
+  width: 450px;
 }
 
 /*--------------------------------------------------------------
