@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('role');
-            $table->string('registration');
-            $table->string('email_ifrn');
-            $table->boolean('admin')->default(0);
-            $table->boolean('super_admin')->default(0);
+            $table->string('registration')->uniqid;
+            $table->string('email_ifrn')->uniqid;
+            $table->enum('admin', ['0', '1', '2'])->default('0');
             
             $table->rememberToken();
             $table->timestamps();

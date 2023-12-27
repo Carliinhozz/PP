@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Music;
 use Illuminate\Http\Request;
 use App\Models\Playlist;
+use Carbon\Carbon;
+
+
 
 class PlaylistController extends Controller
 {
@@ -12,7 +16,26 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        //
+        //Código de selecionar as músicas para a playlist da manhã
+        $morning_playlist_duration=0;
+        $morning_playlist_id=[];
+        $morning_musics=Music::where('time', 0)->where('already_added', 0)->get();
+      
+        foreach($morning_musics as $music)
+        {
+           if ($morning_playlist_duration+$music->duration >1200) {
+                break;
+            }
+            $morning_playlist_duration+= $music->duration;
+            array_push($morning_playlist_id, $music->id);
+            
+        }
+        $morning_playlist_musics = $morning_musics->intersect(Music::whereIn('id',$morning_playlist_id )->get());
+        
+        
+        
+        return view('auth.playlist.index',['musics'=>$morning_playlist_musics, 'playlist_duration'=>$morning_playlist_duration]);
+        // return Carbon::today('America/Sao_Paulo');
     }
 
     /**
