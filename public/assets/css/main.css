@@ -20,8 +20,8 @@
 /* Colors */
 :root {
   --color-default: #222222;
-  --color-primary: #534881;
-  --color-secondary: #E16C24;
+  --color-primary: #008374;
+  --color-secondary: #f85a40;
 }
 
 /* Smooth scroll behavior */
@@ -97,10 +97,6 @@ section {
 .section-header p {
   margin-bottom: 0;
   color: #6f6f6f;
-}
-
-#headername{
-  cursor: pointer;
 }
 
 /*--------------------------------------------------------------
@@ -184,7 +180,7 @@ section {
 }
 
 .scroll-top:hover {
-  background: #E16C24;
+  background: rgba(248, 90, 64, 0.8);
   color: #fff;
 }
 
@@ -242,7 +238,7 @@ section {
 # Header
 --------------------------------------------------------------*/
 .topbar {
-  background: #534881;
+  background: #00796b;
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -317,11 +313,6 @@ section {
   margin-right: 6px;
 }
 
-.header .text-white{
-  font-size: 20px;
-  white-space: nowrap;
-}
-
 .header .logo h1 {
   font-size: 30px;
   margin: 0;
@@ -332,7 +323,7 @@ section {
 }
 
 .header .logo h1 span {
-  color: #E16C24;
+  color: #f96f59;
 }
 
 .sticked-header-offset {
@@ -442,7 +433,7 @@ section {
     font-size: 15px;
     text-transform: none;
     font-weight: 600;
-    color: #534881;
+    color: #006a5d;
   }
 
   .navbar .dropdown ul a i {
@@ -513,7 +504,7 @@ section {
     inset: 0;
     padding: 50px 0 10px 0;
     margin: 0;
-    background: #534881;
+    background: rgba(0, 131, 116, 0.9);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -569,8 +560,8 @@ section {
     padding: 10px 0;
     margin: 10px 20px;
     transition: all 0.5s ease-in-out;
-    background-color: #534881;
-    border: 1px solid #534881;
+    background-color: #007466;
+    border: 1px solid #006459;
   }
 
   .navbar .dropdown>.dropdown-active,
@@ -612,7 +603,7 @@ section {
     content: "";
     position: fixed;
     inset: 0;
-    background: #534881;
+    background: rgba(0, 106, 93, 0.8);
     z-index: 9996;
   }
 }
@@ -695,7 +686,7 @@ section {
   animation-timing-function: steps;
   opacity: 1;
   border-radius: 50%;
-  border: 5px solid #534881;
+  border: 5px solid rgba(0, 131, 116, 0.7);
   top: -15%;
   left: -15%;
   background: rgba(198, 16, 0, 0);
@@ -1010,7 +1001,7 @@ section {
 }
 
 .services .service-item:hover .icon:before {
-  background: #534881;
+  background: #00b6a1;
 }
 
 .services .service-item:hover h3 {
@@ -1064,7 +1055,7 @@ section {
 
 .testimonials .testimonial-item .quote-icon-left,
 .testimonials .testimonial-item .quote-icon-right {
-  color: #534881;
+  color: #009d8b;
   font-size: 26px;
   line-height: 0;
 }
@@ -1307,7 +1298,7 @@ section {
 }
 
 .portfolio-details .portfolio-info .btn-visit:hover {
-  background: #534881;
+  background: #009d8b;
 }
 
 .portfolio-details .portfolio-description h2 {
@@ -1351,7 +1342,7 @@ section {
 
 .portfolio-details .portfolio-description .testimonial-item .quote-icon-left,
 .portfolio-details .portfolio-description .testimonial-item .quote-icon-right {
-  color: #534881;
+  color: #009d8b;
   font-size: 26px;
   line-height: 0;
 }
@@ -2681,17 +2672,4 @@ section {
 
 .footer .credits a {
   color: #fff;
-}
-
-::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem */
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #534881; /* Cor do botão de rolagem */
-  border-radius: 8px; /* Borda do botão de rolagem */
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f2eeff; /* Cor de fundo da barra de rolagem */
 }

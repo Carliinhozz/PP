@@ -30,14 +30,6 @@ Route::get('/sobre', function ()  {
     return view('about');
 });
 
-Route::get('/pedirmusica', function () {
-    return view('pedirMusica');
-})->name('pedirmusica');
-
-Route::get('/fazeragendamento', function () {
-    return view('fazerAgendamento');
-})->name('fazeragendamento');
-
 Route::get('/perfil', function () {    
     return view('auth.user.perfil');
 })->middleware (SuapToken::class);
@@ -53,6 +45,7 @@ Route::middleware(SuapToken::class)->name('music.')->group(function () {
 
 Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::get('playlist', [PlaylistController::class,'index'])->name('index');
+    Route::get('playlist/{id}', [PlaylistController::class,'edit'])->name('edit');
 
 }
 
@@ -66,4 +59,3 @@ Route::name('suap.')
     }
 );
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

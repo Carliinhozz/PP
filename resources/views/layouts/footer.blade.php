@@ -66,18 +66,4 @@
     </div>
 
   </footer><!-- End Footer -->
-
-
-  <style>
-    /* Adicione este estilo no seu arquivo CSS */
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-#footer {
-    margin-top: auto;
-}
-</style>
+  <!-- End Footer -->

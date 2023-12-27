@@ -3,48 +3,80 @@
     Editar playlist
 @endsection
 @section('main')
-<div class="container p-5">
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Músicas</h3>
-            <div class="list-group">
-                <a class="list-group-item clearfix" onclick="alert('Action1 -> Details');">
-                    Action1
-                    <span class="pull-right">
-                        <span class="btn btn-xs btn-default" onclick="alert('Action1 -> Play'); event.stopPropagation();">
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </span>
-                    </span>
-                </a>
-                <a class="list-group-item clearfix" onclick="alert('Action2 -> Details');">
-                    Action2
-                    <span class="pull-right">
-                        <span class="btn btn-xs btn-default" onclick="alert('Action2 -> Play'); event.stopPropagation();">
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </span>
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
+
+<p class="p-5">
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Manhã</a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Tarde</button>
+</p>
 <div class="row">
-    <div class="col-4">
-      <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-
-      </div>
-    </div>
-    <div class="col-8">
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">1</div>
-        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">2</div>
-       
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+        <ul class="list-group list-group-numbered">          
+        @if (isset($morning_playlist_musics))
+            @foreach ($morning_playlist_musics as $music)
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{$music->title}}</div>
+                        {{$music->artist}}
+                        
+                    </div>
+                    <div class="align-items-end">
+                        <p>{{gmdate("i:s", $music->duration)}}</p>
+                    </div>
+                </li>
+                
+            @endforeach
+            <p>Duração total:{{gmdate("i:s", $morning_playlist_duration)}}</p>
+            <a href="{{route('playlist.edit', ['id' => $afternoon_playlist_id])}}">Editar</a>
+        </ul>
+        @else
+        
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Sem músicas!</h4>
+            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+            <hr>
+            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+          </div>
+        @endif
       </div>
     </div>
   </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+        <ul class="list-group list-group-numbered"> 
+        @if (isset($afternoon_playlist_musics))
+            @foreach ($afternoon_playlist_musics as $music)
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{$music->title}}</div>
+                        {{$music->artist}}
+                        
+                    </div>
+                    <div class="align-items-end">
+                        <p>{{gmdate("i:s", $music->duration)}}</p>
+                    </div>
+                </li>
+                
+            @endforeach
+            <p>Duração total:{{gmdate("i:s", $afternoon_playlist_duration)}}</p>
+            <a href="">Editar</a>
+        </ul>
+        @else
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Sem músicas!</h4>
+            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+            <hr>
+            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+          </div>
+        @endif
+        
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('footer')
     @include('layouts.footer'){{-- se tiver footer coloca, se não tiver não coloca o include--}}

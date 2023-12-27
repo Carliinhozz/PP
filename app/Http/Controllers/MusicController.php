@@ -51,7 +51,7 @@ class MusicController extends Controller
         $music->duration=$response->duration;
         $music->user_id=Auth::id();
         $music->save();
-        return 'positive';   
+        return redirect(route('music.index'));   
         
     }
     /*

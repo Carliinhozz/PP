@@ -1,4 +1,5 @@
 @extends('layouts.default')
+
 @section('main')
     <div class="p-5">
         <form class="input-group" action="{{route('music.search')}}" method="post">
