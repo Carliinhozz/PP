@@ -6,7 +6,7 @@
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
         <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
-          <h2>Rádio Desopila</h2>
+          <h2>Rádio Desopilar</h2>
           <p>A plataforma da Rádio Desopila é fonte de comunicação e entretenimento dentro da escola e por isso se tornou um ponto de convergência para a diversidade de vozes e interesses, através de programas culturais, revista, pedidos de música, etc., a rádio se esforça para oferecer conteúdo que informe, inspire e, claro, divirta.
           </p>
         </div>
