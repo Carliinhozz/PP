@@ -7,7 +7,7 @@
       <div class="row gy-5" data-aos="fade-in">
         <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
           <h2>Fazer Agendamento</h2>
-          <p>Agende um horário para tocar na Rádio Desopila. Preencha as informações abaixo e reserve seu horário!</p>
+          <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
           <!-- Adicione uma imagem representativa, se desejar -->
@@ -22,8 +22,8 @@
   @if (Auth::check())
     <section id="fazer-agendamento" class="fazer-agendamento">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
+        <div class="row justify-content-center" data-aos="fade-in">
+          <div class="col-lg-12">
             <div class="purple-box rounded-3 p-4">
               <form action="{{ route('fazeragendamento') }}" method="POST">
                 @csrf
@@ -75,7 +75,7 @@
                     </select>
                 </div>
                 </div>
-                <button type="submit" class="btn btn-yellow">Enviar</button>
+                <button type="submit" class="btn-env">Enviar</button>
               </form>
             </div>
           </div>
@@ -84,17 +84,6 @@
     </section>
   @endif
 @endsection
-
-<style>
-  .purple-box {
-    background-color: #534881;
-  }
-
-  .btn-yellow {
-    background-color: #f4d65d;
-    color: #000000;
-  }
-</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', async function () {

@@ -369,10 +369,11 @@ section {
 /*--------------------------------------------------------------
 # Desktop Navigation
 --------------------------------------------------------------*/
-@media (min-width: 1280px) {
+@media (min-width: 1280px){
   .navbar {
     padding: 0;
   }
+}
 
   .navbar ul {
     display:flex;
@@ -496,7 +497,6 @@ section {
     top: 0;
     left: 100%;
     visibility: visible;
-  }
 }
 
 @media (min-width: 1280px) and (max-width: 1366px) {
@@ -1921,7 +1921,7 @@ section {
 .hero h2 {
   font-size: 48px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #534881;
 }
 
@@ -2709,4 +2709,61 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+/*--------------------------------------------------------------
+# Agendamento
+--------------------------------------------------------------*/
+.btn-env{
+  background-color: #F8E182;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  font-weight: bold;
+  color: #534881;
+  width: 150px;
+  margin-top: 20px;
+}
+
+.purple-box {
+  background-color: #534881;
+}
+
+.fazer-agendamento{
+  margin-top: -50px;
+}
+
+/*--------------------------------------------------------------
+# Pedidos de música
+--------------------------------------------------------------*/
+.btn-search, .btn-music{
+  background-color: #534881;
+  color:white;
+  font-weight:bold;
+}
+
+.btn-music{
+  width: 100%;
+}
+
+.btn-search:hover, .btn-music:hover{
+  background-color: #F8E182;
+  color: #534881;
+  font-weight:bold;
+}
+
+.input-search{
+  margin-top: 100px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas, cada uma com a mesma largura */
+  gap: 10px; /* Espaçamento entre os itens do grid */
+}
+
+.grid-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }
