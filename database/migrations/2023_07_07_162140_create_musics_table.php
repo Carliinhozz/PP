@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('musics', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
+            $table->string('deezer_id');
             $table->string('title');
             $table->string('artist');
             $table->boolean('time');
-            $table->boolean('already_added')->default(false);
+            $table->boolean('already_added')->default(0);
             $table->string('duration');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

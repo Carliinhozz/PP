@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('disponibility')->default(1);
             $table->timestamps();
             $table->unsignedBigInteger('model_id');
-            $table->foreign('model_id')->references('id')->on('intrument_models');
+            $table->foreign('model_id')->references('id')->on('instrument_models');
         });
     }
 

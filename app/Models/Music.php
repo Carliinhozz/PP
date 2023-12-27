@@ -22,4 +22,5 @@ class Music extends Model
         'user_id',
 
     ];
+    protected $table = 'musics';
 }
