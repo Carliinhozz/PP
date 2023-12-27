@@ -59,6 +59,10 @@ h6 {
 /*--------------------------------------------------------------
 # Sections & Section Header
 --------------------------------------------------------------*/
+.img_header{
+  width:230px;
+}
+
 section {
   padding: 60px 0;
   overflow: hidden;
@@ -371,9 +375,10 @@ section {
   }
 
   .navbar ul {
+    display:flex;
+    flex-direction:
     margin: 0;
     padding: 0;
-    display: flex;
     list-style: none;
     align-items: center;
   }
@@ -391,10 +396,10 @@ section {
   .navbar a:focus {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0 3px;
     font-family: var(--font-secondary);
-    font-size: 16px;
+    font-size: 13pt;
     font-weight: 600;
     color: #fff;
     white-space: nowrap;

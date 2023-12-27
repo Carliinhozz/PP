@@ -1,10 +1,8 @@
 
 <header id="header" class="header d-flex align-items-center">
-
-<div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<div class="container d-flex flex-row justify-content-between align-content-center">
   <a href="{{url('/')}}" class="align-items-center">
-
-    <img src="assets/img/Logo.png" alt="Logo" class="p-2 mt-2 w-25">
+    <img src="assets/img/Logo.png" alt="Logo" class="img_header p-2 mt-2">
   </a>
   <nav id="navbar" class="navbar">
   <ul>
@@ -24,6 +22,5 @@
 
   <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
   <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
 </div>
 </header>
