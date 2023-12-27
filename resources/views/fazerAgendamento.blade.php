@@ -48,10 +48,32 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="mb-3 col-md-6">
+                <div class="mb-3 col-md-6">
                     <label for="horario" class="form-label text-white">Horário:</label>
-                    <input type="time" class="form-control" name="horario" required>
-                  </div>
+                    <select class="form-select" name="horario" required>
+                        <!-- Manhã -->
+                        <optgroup label="Manhã">
+                            <option value="7h - 8h">7h - 8h</option>
+                            <option value="9h - 10h">9h - 10h</option>
+                            <option value="10h - 11h">10h - 11h</option>
+                            <option value="11h - 12h">11h - 12h</option>
+                        </optgroup>
+
+                        <!-- Tarde -->
+                        <optgroup label="Tarde">
+                            <option value="13h - 14h">13h - 14h</option>
+                            <option value="15h - 16h">15h - 16h</option>
+                            <option value="16h - 17h">16h - 17h</option>
+                            <option value="17h - 18h">17h - 18h</option>
+                        </optgroup>
+
+                        <!-- Noite -->
+                        <optgroup label="Noite">
+                            <option value="19h - 20h">19h - 20h</option>
+                            <option value="20h - 21h">20h - 21h</option>
+                        </optgroup>
+                    </select>
+                </div>
                 </div>
                 <button type="submit" class="btn btn-yellow">Enviar</button>
               </form>
@@ -73,6 +95,48 @@
     color: #000000;
   }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        var dataInput = document.querySelector('input[name="data"]');
+
+        // Função para verificar se a data é um feriado ou final de semana
+        async function isHolidayOrWeekend(date) {
+            var formattedDate = date.toISOString().split('T')[0];
+            var apiKey = '5930|Dm6va8HOVnVmCTQiNI4KcdZUEvSs3KmP';
+            var state = 'RN';
+
+            var url = `https://api.invertexto.com/v1/holidays/${date.getFullYear()}?token=${apiKey}&state=${state}`;
+
+            try {
+                var response = await fetch(url);
+                var data = await response.json();
+
+                // Verifica se a data é um feriado ou final de semana
+                return data.some(feriado => feriado.date === formattedDate) || date.getDay() === 0 || date.getDay() === 6;
+            } catch (error) {
+                console.error('Erro ao verificar feriado:', error);
+                return false;
+            }
+        }
+
+        // Função para validar a data ao selecioná-la
+        async function validarDataSelecionada() {
+            var dataSelecionada = new Date(dataInput.value);
+
+            if (await isHolidayOrWeekend(dataSelecionada)) {
+                alert('Selecione uma data válida. Finais de semana e feriados não são permitidos.');
+                dataInput.value = ''; // Limpar o campo se for inválido
+            }
+        }
+
+        // Adicione um ouvinte de eventos ao campo de data
+        dataInput.addEventListener('change', validarDataSelecionada);
+    });
+</script>
+
+
+
 
 @section('footer')
   <!-- Sem footer nesta página -->

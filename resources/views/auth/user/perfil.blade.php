@@ -43,15 +43,6 @@
                 <div class="row">
                     <span>{{Auth::user()->registration}}</span>
                 </div>
-
-                @if (Auth::check())
-                    <div class="row mt-3">
-                        <form action="{{ url('/logout') }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Logout</button>
-                        </form>
-                    </div>
-                    @endif
             </div>
         </div>
     </div>
