@@ -34,6 +34,9 @@ Route::get('/perfil', function () {
     return view('auth.user.perfil');
 })->middleware (SuapToken::class);
 
+Route::get('/fazeragendamento', function () {
+    return view('fazerAgendamento');
+})->name('fazeragendamento');
 
 Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
@@ -59,3 +62,4 @@ Route::name('suap.')
     }
 );
 
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

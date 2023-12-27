@@ -3,7 +3,7 @@
     Perfil
 @endsection
 @section('main')
-    <div class="container-fluid ">
+    <div class="container-fluid " style="padding-top: 80px;">
         <div class="row">
             <div class="col col-4  ">
                 <div class="row w-100">
@@ -43,7 +43,15 @@
                 <div class="row">
                     <span>{{Auth::user()->registration}}</span>
                 </div>
-               
+
+                @if (Auth::check())
+                    <div class="row mt-3">
+                        <form action="{{ url('/logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    </div>
+                    @endif
             </div>
         </div>
     </div>
