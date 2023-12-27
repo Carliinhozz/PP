@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->date('day');
             $table->boolean('time');
+            $table->string('duration');
         });
     }
 

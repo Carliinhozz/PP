@@ -50,7 +50,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="{{url('/')}}" class="align-items-center">
 
-        <img src="assets/img/Logo.png" alt="Logo" class="p-2 mt-2 w-25">
+        <img src="/assets/img/Logo.png" alt="Logo" class="p-2 mt-2 w-25">
       </a>
       <nav id="navbar" class="navbar">
         <ul>
