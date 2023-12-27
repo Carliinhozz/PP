@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,7 +11,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+{
+    if (!Schema::hasTable('personal_access_tokens')) {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
             $table->morphs('tokenable');
@@ -24,8 +25,10 @@ return new class extends Migration
         });
 
         DB::statement('CREATE INDEX tokenable_index ON personal_access_tokens(tokenable_type(191), tokenable_id)');
-
     }
+}
+
+
 
     /**
      * Reverse the migrations.
