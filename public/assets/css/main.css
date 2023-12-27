@@ -335,6 +335,34 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Página Inicial
+--------------------------------------------------------------*/
+.social-panel {
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.social-panel h3{
+  font-size: 15pt;
+  font-weight: bold;
+  background-color: #534881;
+  color: white;
+  padding: 5px;
+}
+
+.social-icons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+}
+
+.social-icons img {
+  width: 80px; /* Ajuste a largura dos ícones conforme necessário */
+  margin: 0 10px;
+}
+
+/*--------------------------------------------------------------
 # Desktop Navigation
 --------------------------------------------------------------*/
 @media (min-width: 1280px) {
@@ -2007,6 +2035,10 @@ section {
 .hero .icon-box:hover .title a,
 .hero .icon-box:hover .icon {
   color: #fff;
+}
+
+.video-index img{
+  width: 450px;
 }
 
 /*--------------------------------------------------------------
