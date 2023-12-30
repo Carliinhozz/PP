@@ -41,6 +41,7 @@ Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
         Route::post('musicas', [MusicController::class,'search'])->name('search');
         Route::post('musicas/{id}', [MusicController::class,'store'])->name('store');
+        Route::post('musicas/{id}/delete/{id_music}', [MusicController::class,'destroy'])->name('delete');
     }
 
 );
@@ -49,9 +50,9 @@ Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::get('playlist', [PlaylistController::class,'index'])->name('index');
     Route::post('playlist/{id}', [PlaylistController::class,'edit'])->name('edit');
     Route::get('playlist/{id}', [PlaylistController::class,'show'])->name('show');
-    Route::post('playlist/{id}/delete/{id_music}', [PlaylistController::class,'destroy'])->name('delete');
-    Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add'])->name('add');
-
+    Route::post('playlist/{id}/delete/{id_music}', [PlaylistController::class,'delete'])->name('delete');
+    Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add_index'])->name('add_index');
+    Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store');
 
 }
 

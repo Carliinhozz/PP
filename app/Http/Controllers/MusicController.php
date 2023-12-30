@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Music_playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
  
@@ -54,24 +55,7 @@ class MusicController extends Controller
         return redirect(route('music.index'));   
         
     }
-    /*
-     
-    @if ( $response != null)
-    <div class="card-deck">
-        {{-- FIXME: arrumar o sistema de cartões ou pensar em uma forma melhor --}}
-        
-            <div class="card" style="width: 18rem;">
-                <img src="{{$response->album->cover_big}}" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">{{$response->title}}</h5>
-                <p class="card-text">{{$response->artist->name}}</p>
-                <a href="#" class="btn btn-primary">Solicitar música</a>
-                </div>
-            </div>
-        
-    </div>
-@else
-    */
+
 
     /**
      * Display the specified resource.
@@ -100,8 +84,14 @@ class MusicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, string $music_id)
     {
-        //
+        if(Music_playlist::where('music_id',$music_id)->get()->isNotEmpty()){
+            return abort(404);
+        }
+        $music=Music::findOrFail($music_id);
+        $music->delete();
+        return redirect(route('playlist.add', ['id'=>$id]));
+
     }
 }

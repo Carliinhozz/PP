@@ -32,13 +32,10 @@
             <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $morning_playlist->id])}}">Editar</a>            
         </ul>
         @else
-        
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Sem músicas!</h4>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $morning_playlist->id,
-            'musics'=>$morning_playlist_musics,
-            ])}}">Editar</a> 
-          </div>
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Sem músicas!</h4>
+                <a class="btn btn-enter" href="{{route('music.index')}}">Solicitar músicas</a> 
+            </div>
         @endif
       </div>
     </div>
@@ -62,16 +59,12 @@
                 
             @endforeach
             <p>Duração total:{{gmdate("i:s", $afternoon_playlist->duration)}}</p>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $afternoon_playlist->id, 
-            'musics'=>$afternoon_playlist_musics,
-            ])}}">Editar</a>            
+            <a class="btn btn-enter" href="{{route('music.index')}}">Editar</a>            
         </ul>
         @else
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">Sem músicas!</h4>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $afternoon_playlist->id,
-            'musics'=>$afternoon_playlist_musics,
-            ])}}">Editar</a> 
+            <a class="btn btn-enter" href="{{route('music.index')}}">Solicitar músicas</a> 
           </div>
         @endif
         

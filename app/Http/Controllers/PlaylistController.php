@@ -98,7 +98,7 @@ class PlaylistController extends Controller
     {
         //
     }
-    public function add(string $id)
+    public function add_index(string $id)
     {
         $playlist=Playlist::findOrFail($id);
         $musics=Music::where('already_added',0)->where('time',$playlist->time)->get();
@@ -111,7 +111,36 @@ class PlaylistController extends Controller
             'playlist'=>$playlist
         ]);
     }
+    public function add_store(string $id, string $music_id)
+    {
 
+        $playlist=Playlist::findOrFail($id);
+        $music=Music::findOrFail($music_id);
+        if($playlist->duration+$music->duration>1230){
+            return 'A duração da playlist estrapolou o limite';
+        }
+        $musics_ids=$playlist->time ?
+                session('afternoon_ids'):
+                session('morning_ids');
+
+        $musics=Music::where('already_added',0)->where('time',$playlist->time)->get();
+        if($musics->find($music->id)->isEmpty() && in_array($music->id,$musics_ids)){
+            return abort(404);
+        }
+        array_push($musics_ids, $music->id);
+        
+        $playlist->time ?session()->forget('afternoon_ids'):session()->forget('morning_ids');
+        $playlist->time?session(['afternoon_ids' => $musics_ids]):session(['morning_ids' => $musics_ids]);
+        $playlist->duration+=$music->duration;
+        $playlist->save();
+
+        $musics = $playlist->time ? 
+        $musics->diff(Music::whereIn('id', session('afternoon_ids'))->get()):
+        $musics->diff(Music::whereIn('id', session('morning_ids'))->get());
+        
+
+        return redirect(route('playlist.add_index', ['id'=>$playlist->id]));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -125,16 +154,21 @@ class PlaylistController extends Controller
      */
     public function show(string $id)
     {
-        
-        $all_musics=Music::where('already_added', 0)->get();
         $playlist=Playlist::findOrFail($id);
+        $musics=Music::where('already_added',0)->where('time',$playlist->time)->get();
+        $stored_musics=$musics;
         $musics=$playlist->time ?
-        $all_musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
-        $all_musics->intersect(Music::whereIn('id',session('morning_ids') )->get());
+        $musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
+        $musics->intersect(Music::whereIn('id',session('morning_ids') )->get());
+        if($musics->isEmpty() && $stored_musics->isEmpty()){
+            return redirect(route('music.index'));
+        }elseif($musics->isEmpty() && $stored_musics->isNotEmpty()){
+            return redirect(route('playlist.add', ['id'=>$playlist->id]));
+        }
 
         
         return view('auth.playlist.show',[
-            'playlist'=>Playlist::find($id),
+            'playlist'=>$playlist,
             'musics'=>$musics
          ]);
         
@@ -159,7 +193,7 @@ class PlaylistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, string $music_id)
+    public function delete(string $id, string $music_id)
     {
         
         $playlist=Playlist::findOrFail($id);
@@ -176,6 +210,7 @@ class PlaylistController extends Controller
             $playlist->save();
             return redirect(route('playlist.show', ['id' => $id]));
         }
-        abort(404,'Música não encontrada');
+        return abort(404,'Música não encontrada');
     }
+  
 }

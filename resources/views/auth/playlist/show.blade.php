@@ -4,8 +4,7 @@
 @endsection
 @section('main')
 
-<ul class="list-group list-group-numbered p-5"> 
-    @if (!$musics->isEmpty())
+    <ul class="list-group list-group-numbered p-5"> 
         @foreach ($musics as $music)
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
@@ -22,16 +21,10 @@
             </li>
         @endforeach
         <p>Duração total:{{gmdate("i:s", $playlist->duration)}}</p>
-        <a  class="col-4 btn btn-secondary" href="{{route('playlist.add', ['id'=>$playlist->id])}}">Adicionar músicas</a>   
+        <a  class="col-4 btn btn-secondary" href="{{route('playlist.add_index', ['id'=>$playlist->id])}}">Adicionar músicas</a>   
         <a class="btn btn-enter col-4" href="">Salvar</a>            
     </ul>
-    @else
-    <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">Sem músicas!</h4>
-        <a  class="btn btn-enter col-4 d-inline" href="">Adicionar músicas</a> 
-      </div>
-    </ul>
-    @endif    
+
 @endsection
 @section('footer')
     @include('layouts.footer'){{-- se tiver footer coloca, se não tiver não coloca o include--}}
