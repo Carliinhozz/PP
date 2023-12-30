@@ -26,7 +26,10 @@
 @endforeach
 <p>Duração total:{{gmdate("i:s", $playlist->duration)}}</p>
  
-<a class="btn btn-enter col-4" href="">Salvar</a>            
+<form action="{{route('playlist.store',['id'=>$playlist->id])}}" method="post">
+    @csrf
+    <button data-mdb-ripple-init class="btn btn-enter col-4">Salvar</button>
+</form>                    
 </ul>
 @else
 <div class="alert alert-danger" role="alert">

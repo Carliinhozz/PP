@@ -12,7 +12,7 @@
                     {{$music->artist}}   
                 </div>
                 <div class="align-items-end">
-                    <form action="{{route('playlist.delete', ['id'=>$playlist->id, 'id_music' => $music->id])}}" method="post">
+                    <form action="{{route('playlist.delete', ['id'=>$playlist->id, 'music_id' => $music->id])}}" method="post">
                         @csrf
                         <button data-mdb-ripple-init class="btn btn-danger">Deletar</button>
                     </form>
@@ -22,7 +22,11 @@
         @endforeach
         <p>Duração total:{{gmdate("i:s", $playlist->duration)}}</p>
         <a  class="col-4 btn btn-secondary" href="{{route('playlist.add_index', ['id'=>$playlist->id])}}">Adicionar músicas</a>   
-        <a class="btn btn-enter col-4" href="">Salvar</a>            
+
+        <form action="{{route('playlist.store',['id'=>$playlist->id])}}" method="post">
+            @csrf
+            <button data-mdb-ripple-init class="btn btn-enter col-4">Salvar</button>
+        </form>            
     </ul>
 
 @endsection

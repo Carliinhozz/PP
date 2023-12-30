@@ -87,11 +87,11 @@ class MusicController extends Controller
     public function destroy(string $id, string $music_id)
     {
         if(Music_playlist::where('music_id',$music_id)->get()->isNotEmpty()){
-            return abort(404);
+            return abort(403,'Operação inválida');
         }
         $music=Music::findOrFail($music_id);
         $music->delete();
-        return redirect(route('playlist.add', ['id'=>$id]));
+        return redirect(route('playlist.add_index', ['id'=>$id]));
 
     }
 }
