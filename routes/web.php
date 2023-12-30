@@ -50,6 +50,7 @@ Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::post('playlist/{id}', [PlaylistController::class,'edit'])->name('edit');
     Route::get('playlist/{id}', [PlaylistController::class,'show'])->name('show');
     Route::post('playlist/{id}/delete/{id_music}', [PlaylistController::class,'destroy'])->name('delete');
+    Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add'])->name('add');
 
 
 }

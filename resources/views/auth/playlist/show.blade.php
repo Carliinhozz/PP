@@ -3,6 +3,7 @@
     Playlist
 @endsection
 @section('main')
+
 <ul class="list-group list-group-numbered p-5"> 
     @if (!$musics->isEmpty())
         @foreach ($musics as $music)
@@ -21,7 +22,7 @@
             </li>
         @endforeach
         <p>Duração total:{{gmdate("i:s", $playlist->duration)}}</p>
-        <a style="background-color: #534881" class="btn col-4 d-inline" href="">Adicionar músicas</a>   
+        <a  class="col-4 btn btn-secondary" href="{{route('playlist.add', ['id'=>$playlist->id])}}">Adicionar músicas</a>   
         <a class="btn btn-enter col-4" href="">Salvar</a>            
     </ul>
     @else

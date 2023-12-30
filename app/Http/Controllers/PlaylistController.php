@@ -19,6 +19,7 @@ class PlaylistController extends Controller
     public function index()
     {
         //Código de selecionar as músicas para a playlist da manhã
+
         $morning_playlist_duration=0;
         $morning_playlist_id=[];
         $morning_musics=Music::where('time', 0)->where('already_added', 0)->get();
@@ -51,20 +52,31 @@ class PlaylistController extends Controller
         $afternoon_playlist_musics = $afternoon_musics->intersect(Music::whereIn('id',$afternoon_playlist_id )->get());
 
 
-        $morning_playlist=Playlist::create([
-            'time'=> 0,
-            'duration'=>$morning_playlist_duration,
-            'day'=>Carbon::today(),
-        ]);
-   
-        $afternoon_playlist=Playlist::create([
-            'time'=> 1,
-            'duration'=>$afternoon_playlist_duration,
-            'day'=>Carbon::today(),
+
+
+
+
+        $morning_playlist=Playlist::firstOrCreate([
+            'time'=>0,
+            'day'=>Carbon::today(),            
         ]);
         
-        $morning_playlist->save;
-        $afternoon_playlist->save;
+        $morning_playlist->duration=$morning_playlist_duration;
+        $morning_playlist->save();
+       
+   
+        $afternoon_playlist=Playlist::firstOrCreate([
+            'time'=> 1,
+            'day'=>Carbon::today(),
+        ]);
+        $afternoon_playlist->duration=$afternoon_playlist_duration;
+        $afternoon_playlist->save();
+        
+       
+       
+        
+        
+        
         session(['morning_ids' => $morning_playlist_id]);
         session(['afternoon_ids' => $afternoon_playlist_id]);
         
@@ -73,10 +85,9 @@ class PlaylistController extends Controller
         'afternoon_playlist_musics'=>$afternoon_playlist_musics,
         'morning_playlist'=>$morning_playlist,
         'afternoon_playlist'=>$afternoon_playlist,
+         ]);
+      
         
-
-
-        ]);
         
     }
 
@@ -86,6 +97,19 @@ class PlaylistController extends Controller
     public function create()
     {
         //
+    }
+    public function add(string $id)
+    {
+        $playlist=Playlist::findOrFail($id);
+        $musics=Music::where('already_added',0)->where('time',$playlist->time)->get();
+        $musics = $playlist->time ? 
+        $musics->diff(Music::whereIn('id', session('afternoon_ids'))->get()):
+        $musics->diff(Music::whereIn('id', session('morning_ids'))->get());
+
+        return view('auth.playlist.add',[
+            'musics'=>$musics,
+            'playlist'=>$playlist
+        ]);
     }
 
     /**
@@ -108,11 +132,12 @@ class PlaylistController extends Controller
         $all_musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
         $all_musics->intersect(Music::whereIn('id',session('morning_ids') )->get());
 
-        // return var_dump($musics);
+        
         return view('auth.playlist.show',[
             'playlist'=>Playlist::find($id),
             'musics'=>$musics
          ]);
+        
     }
 
     /**
