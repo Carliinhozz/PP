@@ -24,7 +24,7 @@ class PlaylistController extends Controller
 
         $morning_playlist=Playlist::firstOrCreate([
             'time'=>0,
-            'day'=>Carbon::today(),            
+            'day'=>Carbon::tomorrow(),            
         ]);
 
         $afternoon_playlist=Playlist::firstOrCreate([
@@ -35,7 +35,7 @@ class PlaylistController extends Controller
         
         $morning_playlist->duration=0;
         $morning_playlist_id=[];
-        $morning_musics=Music::where('time', 0)->get();
+        $morning_musics=Music::where('time', 0)->where('already_added', 0)->get();
       
         foreach($morning_musics as $music)
         {
@@ -116,15 +116,21 @@ class PlaylistController extends Controller
     public function add_index(string $id)
     {
         $playlist=Playlist::findOrFail($id);
-        $musics=Music::where('time',$playlist->time)->get();
-        $musics = $playlist->time ? 
+        $musics=Music::where('time',$playlist->time)->where('already_added', 0)->get();
+        $available_musics = $playlist->time ? 
         $musics->diff(Music::whereIn('id', session('afternoon_ids'))->get()):
         $musics->diff(Music::whereIn('id', session('morning_ids'))->get());
 
+        $playlist_musics = $playlist->time ?
+        $musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
+        $musics->intersect(Music::whereIn('id',session('morning_ids') )->get());
+
         return view('auth.playlist.add',[
-            'musics'=>$musics,
-            'playlist'=>$playlist
+            'musics'=>$available_musics,
+            'playlist'=>$playlist,
+            'playlist_musics'=>$playlist_musics,
         ]);
+        // return var_dump($playlist_musics);
     }
     public function add_store(string $id, string $music_id)
     {
@@ -250,7 +256,7 @@ class PlaylistController extends Controller
             $playlist->time?session(['afternoon_ids' => $musics_ids]):session(['morning_ids' => $musics_ids]);
             $playlist->duration-=$music->duration;
             $playlist->save();
-            return redirect(route('playlist.show', ['id' => $id]));
+            return redirect(route('playlist.add_index', ['id' => $id]));
         }
         return abort(404,'Música não encontrada');
     }

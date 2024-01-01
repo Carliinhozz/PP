@@ -12,10 +12,6 @@
                     {{$music->artist}}   
                 </div>
                 <div class="align-items-end">
-                    <form action="{{route('playlist.delete', ['id'=>$playlist->id, 'music_id' => $music->id])}}" method="post">
-                        @csrf
-                        <button data-mdb-ripple-init class="btn btn-danger">Deletar</button>
-                    </form>
                     <p class="mt-1 mb-0">{{gmdate("i:s", $music->duration)}}</p>
                 </div>       
             </li>
