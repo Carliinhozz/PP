@@ -26,11 +26,7 @@
     @endforeach
     <p>Playlist do dia: {{$newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $playlist->day)
         ->format('d-m-Y')}}</p>
-    <p>Duração total:{{gmdate("i:s", $playlist->duration)}}</p>
-    <form action="{{route('playlist.store',['id'=>$playlist->id])}}" method="post">
-        @csrf
-        <button data-mdb-ripple-init class="btn btn-enter col-4">Salvar</button>
-    </form>                    
+    <p>Duração total:{{gmdate("i:s", $playlist->duration)}}</p>                   
     </ul>
 @else
     <div class="alert alert-danger" role="alert">
@@ -38,7 +34,7 @@
     <hr>
     <a  class="btn btn-enter col-4 d-inline" href="{{route('music.index')}}">Solicite músicas</a> 
     <p class="mb-0 mt-2">Duração total:{{gmdate("i:s", $playlist->duration)}}</p>
-    </div>
+    </div> 
     </ul>
 @endif
 
@@ -60,8 +56,13 @@
                     <p class="mt-1 mb-0">{{gmdate("i:s", $music->duration)}}</p>
                 </div>       
             </li>
-        @endforeach            
+        @endforeach
+            <form action="{{route('playlist.store',['id'=>$playlist->id])}}" method="post">
+                @csrf
+                <button data-mdb-ripple-init class="btn btn-enter col-4">Salvar</button>
+            </form>             
         </ul>
+        
     @else
         <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Sem músicas!</h4>

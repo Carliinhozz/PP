@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Models\Playlist;
 use Carbon\Carbon;
-
-
-
+use Illuminate\Support\Facades\DB;
 
 class PlaylistController extends Controller
 {
@@ -24,7 +22,7 @@ class PlaylistController extends Controller
 
         $morning_playlist=Playlist::firstOrCreate([
             'time'=>0,
-            'day'=>Carbon::tomorrow(),            
+            'day'=>Carbon::today(),            
         ]);
 
         $afternoon_playlist=Playlist::firstOrCreate([
@@ -76,8 +74,10 @@ class PlaylistController extends Controller
                 $music=Music::findOrFail($music_playlist->music_id);
                 array_push($morning_playlist_id,$music->id);
                 $morning_playlist->duration+= $music->duration;
+                // return var_dump($musics_playlist);
                 
-            }            
+            }
+            $morning_musics=Music::where('time', 0)->get();            
         }
         if(Music_playlist::where('playlist_id',$afternoon_playlist->id)->get()->isNotEmpty()){
             $afternoon_playlist->duration=0;
@@ -88,7 +88,8 @@ class PlaylistController extends Controller
                 array_push($afternoon_playlist_id,$music->id);
                 $afternoon_playlist->duration+= $music->duration;
                 
-            }            
+            }
+            $afternoon_musics=Music::where('time', 0)->get();             
         }
         $morning_playlist->save();
         $afternoon_playlist->save();
@@ -116,7 +117,9 @@ class PlaylistController extends Controller
     public function add_index(string $id)
     {
         $playlist=Playlist::findOrFail($id);
-        $musics=Music::where('time',$playlist->time)->where('already_added', 0)->get();
+        $musics=Music::where('time',$playlist->time)->get();
+        
+
         $available_musics = $playlist->time ? 
         $musics->diff(Music::whereIn('id', session('afternoon_ids'))->get()):
         $musics->diff(Music::whereIn('id', session('morning_ids'))->get());
@@ -125,12 +128,35 @@ class PlaylistController extends Controller
         $musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
         $musics->intersect(Music::whereIn('id',session('morning_ids') )->get());
 
+        if(Music_playlist::where('playlist_id',$playlist->id)->get()->isNotEmpty()){
+
+            $musics= Music::select('musics.id','musics.duration','musics.title','musics.already_added')->leftjoin('playlist_musics', 'musics.id', '=', 'playlist_musics.music_id')
+            ->where('playlist_id', '=', $id)->orWhere('playlist_id', '=', NULL)->where('musics.time','=',$playlist->time)
+            ->get();
+
+            $available_musics = $playlist->time ? 
+            $musics->diff(Music::whereIn('id', session('afternoon_ids'))->get()):
+            $musics->diff(Music::whereIn('id', session('morning_ids'))->get());
+
+            $playlist->duration=0;
+            foreach ($playlist_musics as $music) {                               
+                $playlist->duration+= $music->duration;
+                $playlist->save();
+            }
+            $available_musics = $playlist->time ? 
+            $musics->diff(Music::whereIn('id', session('afternoon_ids'))->get()):
+            $musics->diff(Music::whereIn('id', session('morning_ids'))->get());
+            $playlist->save();
+            // return var_dump($available_musics);             
+        }
+        
+
         return view('auth.playlist.add',[
             'musics'=>$available_musics,
             'playlist'=>$playlist,
             'playlist_musics'=>$playlist_musics,
         ]);
-        // return var_dump($playlist_musics);
+        
     }
     public function add_store(string $id, string $music_id)
     {
@@ -152,7 +178,7 @@ class PlaylistController extends Controller
         
         $playlist->time ?session()->forget('afternoon_ids'):session()->forget('morning_ids');
         $playlist->time?session(['afternoon_ids' => $musics_ids]):session(['morning_ids' => $musics_ids]);
-        $playlist->duration+=$music->duration;
+        $playlist->duration=$music->duration+$playlist->duration;
         $playlist->save();
 
         $musics = $playlist->time ? 
@@ -161,7 +187,7 @@ class PlaylistController extends Controller
         
 
         return redirect(route('playlist.add_index', ['id'=>$playlist->id]));
-        // return var_dump($musics_ids);
+
     }
     /**
      * Store a newly created resource in storage.
@@ -169,7 +195,10 @@ class PlaylistController extends Controller
     public function store(Request $request, string $id)
     {
         $playlist=Playlist::findOrFail($id);
-        $all_musics=Music::where('time',$playlist->time)->get();
+        $all_musics= Music::select('musics.id','musics.duration','musics.title','musics.already_added')->leftjoin('playlist_musics', 'musics.id', '=', 'playlist_musics.music_id')
+        ->where('playlist_id', '=', $id)->orWhere('playlist_id', '=', NULL)->where('musics.time','=',$playlist->time)
+        ->get();
+        
         
         $selected_musics=$playlist->time ?
         $all_musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
@@ -195,6 +224,7 @@ class PlaylistController extends Controller
             $music->save();
         }
         return redirect(route('home'));
+        // return var_dump($all_musics->find(9));
     }
 
     /**
