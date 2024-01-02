@@ -3,7 +3,7 @@
     Perfil
 @endsection
 @section('main')
-    <div class="container-fluid ">
+    <div class="container-fluid " style="padding-top: 80px;">
         <div class="row">
             <div class="col col-4  ">
                 <div class="row w-100">
@@ -43,7 +43,6 @@
                 <div class="row">
                     <span>{{Auth::user()->registration}}</span>
                 </div>
-               
             </div>
         </div>
     </div>

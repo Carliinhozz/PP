@@ -2,20 +2,24 @@
 
     <div class="container">
       <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-info">
+        <div class="col-lg-6 col-md-12 footer-info">
           <a href="{{url('/')}}" class="logo d-flex align-items-center">
-            <span>Impact</span>
+            <span>Rádio desopila</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-          <div class="social-links d-flex mt-4">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
+          <div class="col-lg-6 col-md-12 footer-contact text-center text-md-start">
+          <h4>Entre em contato</h4>
+          <p>
+            Campus IFRN - Caicó <br>
+            Rodovia RN 288, s/n <br>
+            Nova Caicó<br>
+            Caicó-RN<br><br>
+            <strong>Telefone:</strong>(84) 4005-4102<br>
+            <strong>Email:</strong> info@example.com<br>
+          </p>
+        </div>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
+        <div class="col-lg-3 col-md-12 footer-links">
           <h4>Useful Links</h4>
           <ul>
             <li><a href="#">Home</a></li>
@@ -26,29 +30,16 @@
           </ul>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+        <div class="col-lg-3 col-md-12 footer-links">
+          <h4>Nossos projetos</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="#">Carreiras</a></li>
+            <li><a href="#">IFCast</a></li>
+            <li><a href="#">Papo de Almoço</a></li>
+            <li><a href="#">Desopila News</a></li>
+            <li><a href="#">Revista Impúrpura</a></li>
           </ul>
         </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
-          <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
-          </p>
-
-        </div>
-
       </div>
     </div>
 

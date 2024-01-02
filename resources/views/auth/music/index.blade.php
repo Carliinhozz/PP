@@ -1,40 +1,46 @@
 @extends('layouts.default')
 
 @section('main')
-    <div class="p-5">
+<section id="hero" class="hero">
+    <div class="container position-relative">
+      <div class="row gy-5" data-aos="fade-in">
+        <div class="col-lg-6 order-1 flex-column justify-content-center text-center text-lg-start">
+          <h2>Pedidos de música</h2>
+          <p>Sua música favorita tocando nos corredores do IFRN!</p>
+        </div>
+        <div class="col-lg-6 order-2 input-search">
         <form class="input-group" action="{{route('music.search')}}" method="post">
             @csrf
-            
                 <input type="text" class="form-control rounded" 
                 @isset($search)
                     value="{{$search}}"
                 @endisset  
                 placeholder="Pesquise a música" name="search"/>
-                <button class="btn btn-enter" data-mdb-ripple-init>Pesquisar</button>
-              
+                <button class="btn btn-search" data-mdb-ripple-init>Pesquisar</button>
         </form>
-    </div>
+</div>
+</section>
+</div>
     @isset($it_worked)   
         @if ($it_worked && $response != null)
-            <div class="card-deck">
+            <div class="container grid-container card-deck">
                 {{-- FIXME: arrumar o sistema de cartões ou pensar em uma forma melhor --}}
                 @foreach ($response as $music)
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{$music->album->cover_big}}" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">{{$music->title}}</h5>
-                        <p class="card-text">{{$music->artist->name}}</p>
-                        <form method="POST" action="{{route('music.store', ['id' => $music->id])}}">
-                            @csrf
-                            <div class="card-text">
-                                <select class="form-select" name="time">
-                                    <option value= 0>Matutino</option>
-                                    <option value= 1>Vespertino</option>
-                                </select>
-                            </div>
-                            <button href="" class="btn btn-primary">Solicitar música</button>
-                        </form>
-                       
+                    <div class="grid-item card">
+                            <img src="{{$music->album->cover_big}}">
+                            <div class="card-body">
+                            <h5 class="card-title">{{$music->title}}</h5>
+                            <p class="card-text">{{$music->artist->name}}</p>
+                            <form method="POST" action="{{route('music.store', ['id' => $music->id])}}">
+                                @csrf
+                                <div class="card-text">
+                                    <select class="form-select" name="time">
+                                        <option value= 0>Matutino</option>
+                                        <option value= 1>Vespertino</option>
+                                    </select>
+                                </div>
+                            <button href="" class="btn btn-music">Solicitar música</button>
+                            </form>
                         </div>
                     </div>
                 @endforeach
@@ -51,7 +57,4 @@
     
         
     
-@endsection
-@section('footer')
-    @include('layouts.footer'){{-- se tiver footer coloca, se não tiver não coloca o include--}}
 @endsection
