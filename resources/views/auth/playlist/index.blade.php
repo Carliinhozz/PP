@@ -14,7 +14,7 @@
     <div class="collapse multi-collapse" id="multiCollapseExample1">
       <div class="card card-body">
         <ul class="list-group list-group-numbered">          
-        @if (isset($morning_playlist_musics))
+        @if (!$morning_playlist_musics->isEmpty())
             @foreach ($morning_playlist_musics as $music)
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
@@ -28,17 +28,14 @@
                 </li>
                 
             @endforeach
-            <p>Duração total:{{gmdate("i:s", $morning_playlist_duration)}}</p>
-            <a href="{{route('playlist.edit', ['id' => $afternoon_playlist_id])}}">Editar</a>
+            <p>Duração total:{{gmdate("i:s", $morning_playlist->duration)}}</p>
+            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $morning_playlist->id])}}">Editar</a>            
         </ul>
         @else
-        
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Sem músicas!</h4>
-            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-            <hr>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-          </div>
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Sem músicas!</h4>
+                <a class="btn btn-enter" href="{{route('music.index')}}">Solicitar músicas</a> 
+            </div>
         @endif
       </div>
     </div>
@@ -47,7 +44,7 @@
     <div class="collapse multi-collapse" id="multiCollapseExample2">
       <div class="card card-body">
         <ul class="list-group list-group-numbered"> 
-        @if (isset($afternoon_playlist_musics))
+        @if (!$afternoon_playlist_musics->isEmpty())
             @foreach ($afternoon_playlist_musics as $music)
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
@@ -61,15 +58,13 @@
                 </li>
                 
             @endforeach
-            <p>Duração total:{{gmdate("i:s", $afternoon_playlist_duration)}}</p>
-            <a href="">Editar</a>
+            <p>Duração total:{{gmdate("i:s", $afternoon_playlist->duration)}}</p>
+            <a class="btn btn-enter" href="{{route('music.index')}}">Editar</a>            
         </ul>
         @else
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">Sem músicas!</h4>
-            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-            <hr>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+            <a class="btn btn-enter" href="{{route('music.index')}}">Solicitar músicas</a> 
           </div>
         @endif
         
