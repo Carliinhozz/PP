@@ -27,18 +27,27 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         if (Cookie::has('suapTokenExpirationTime') && Cookie::has('suapToken') && Auth::check()){
-
+        
             $morning_playlist=Playlist::where('day',Carbon::today())->where('time',0)->first();
             $musics=Music::all();
-            $morning_playlist_musics = $musics->intersect(Music::whereIn('id',
-            Music_playlist::select('music_id')->where('playlist_id',$morning_playlist->id
-            )->get()->toArray() )->get());
+            if(isset($morning_playlist)){
+                
+                $morning_playlist_musics = $musics->intersect(Music::whereIn('id',
+                Music_playlist::select('music_id')->where('playlist_id',$morning_playlist->id
+                )->get()->toArray() )->get());
+                
+            }else{
+                $morning_playlist_musics = collect();
+            }
 
             $afternoon_playlist=Playlist::where('day',Carbon::today())->where('time',1)->first();
+            if(isset($afternoon_playlist)){
             $afternoon_playlist_musics = $musics->intersect(Music::whereIn('id',
             Music_playlist::select('music_id')->where('playlist_id',$afternoon_playlist->id
             )->get()->toArray() )->get());
-            
+            }else{
+                $afternoon_playlist_musics= collect();
+            }
             
             return view('auth.index',[
                 'morning_musics'=>$morning_playlist_musics,
