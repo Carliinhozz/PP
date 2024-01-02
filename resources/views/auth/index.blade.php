@@ -7,17 +7,17 @@
     <section id="playlist" class="playlist">
       <div class="container">
         <div class="row">
-          <h3>Playlist do dia</h3>
-          <div class="col-lg-4">
-            <ul class="playlist-tabs">
-              <li onclick="showPlaylist('manha', event)" class="active">Manhã</li>
-              <li onclick="showPlaylist('tarde', event)">Tarde</li>
-              <li onclick="showPlaylist('noite', event)">Noite</li>
+          <h2>Playlist do dia</h2>
+          <div class="container col-lg-2">
+            <ul class="playlist-tabs row justify-content-center">
+              <li onclick="showPlaylist('manha', event)" class="active col-12 mt-4">Manhã</li>
+              <li onclick="showPlaylist('tarde', event)" class="col-12">Tarde</li>
+              <li onclick="showPlaylist('noite', event)" class="col-12">Noite</li>
             </ul>
           </div>
-          <div class="col-lg-8">
-            <div id="manha" class="playlist-content">
-              <ol>
+          <div class="col-lg-10">
+            <div id="manha" class="container playlist-content">
+              <ol class="row justify-content-center">
                 <li>Se - Djavan</li>
                 <li>Esse Cara sou eu - Roberto Carlos</li>
                 <!-- Adicione mais músicas conforme necessário -->
@@ -47,9 +47,9 @@
     <section id="agendamentos" class="agendamentos">
       <div class="container">
         <div class="row">
-          <h3>Agendamentos</h3>
+          <h2>Agendamentos</h2>
           <div class="col-lg-12">
-            <ul class="agendamentos-days">
+            <ul class="agendamentos-days d-flex justify-content-around">
               <li onclick="showContent('segunda', 'agendamentos')" class="active">Segunda</li>
               <li onclick="showContent('terca', 'agendamentos')">Terça</li>
               <li onclick="showContent('quarta', 'agendamentos')">Quarta</li>
