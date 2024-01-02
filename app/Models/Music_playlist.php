@@ -24,4 +24,5 @@ class Music_playlist extends Model
         'music_id',
 
     ];
+    protected $table = 'playlist_musics';
 }

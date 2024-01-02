@@ -12,5 +12,7 @@ class Playlist extends Model
     protected $fillable = [
        'day',
        'time',
+       'duration',
     ];
+    protected $table = 'playlists';
 }
