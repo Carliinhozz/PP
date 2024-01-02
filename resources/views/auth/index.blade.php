@@ -18,15 +18,25 @@
           <div class="col-lg-10">
             <div id="manha" class="container playlist-content">
               <ol class="row justify-content-center">
-                <li>Se - Djavan</li>
-                <li>Esse Cara sou eu - Roberto Carlos</li>
+                @if($morning_musics->isNotEmpty())
+                  @foreach ($morning_musics as $music)
+                      <li>{{$music->title}}</li>
+                  @endforeach
+                @else
+                  <li>Sem músicas ate o momento</li>
+                @endif
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
             </div>
             <div id="tarde" class="playlist-content" style="display: none;">
               <ol>
-                <li>Gol bolinha 2 - MC Pedrinho</li>
-                <li>Show das poderosas - Anitta</li>
+                @if($afternoon_musics->isNotEmpty())
+                  @foreach ($afternoon_musics as $music)
+                      <li>{{$music->title}}</li>
+                  @endforeach
+                @else
+                  <li>Sem músicas ate o momento</li>
+                @endif
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
             </div>
