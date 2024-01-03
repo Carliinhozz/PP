@@ -7,6 +7,7 @@
             <ul>
             <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Página inicial</a></li>
                 @if (Auth::check())
+                    <li><a href="{{ route('instruments.index') }}" class="{{ Request::is('fazeragendamento') ? 'active' : '' }}">Instrumentos</a></li>
                     <li><a href="{{ url('/fazeragendamento') }}" class="{{ Request::is('fazeragendamento') ? 'active' : '' }}">Fazer Agendamento</a></li>
                     <li><a href="{{ url('/musicas') }}" class="{{ Request::is('musicas') ? 'active' : '' }}">Pedir Música</a></li>
                     <li><a href="{{ route('playlist.index') }}" class="{{ Request::is('playlist') ? 'active' : '' }}">Editar playlist</a></li>

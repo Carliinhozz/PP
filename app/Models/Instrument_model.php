@@ -14,4 +14,5 @@ class Instrument_model extends Model
        'model',
        
     ];
+    protected $table = 'instrument_models';
 }
