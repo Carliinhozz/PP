@@ -37,7 +37,9 @@ class LoginController extends Controller
             'registration'=>$res['identificacao'],
             'email_ifrn'=>$res['email_google_classroom'],
             'role'=>$res['tipo_usuario'],
-        ]);  
+        ]);
+        
+        $user->admin=  $user->registration == 'Servidor (Docente)'? 2:0;
 
         $user->save();
 
