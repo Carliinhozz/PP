@@ -14,8 +14,12 @@
           <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
         </div> -->
         <div class="video-index col-lg-6 order-1 order-lg-2">
-          <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-          <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
+          <!-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+          <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt=""> -->
+          <video src="https://www.youtube.com/watch?v=DTIetbQKFEY" controls class="rounded video">
+                <!-- <source src="assets/videos/Alfabeto.mkv">
+                <source src="assets/videos/Alfabeto.mp4">
+                <source src="assets/videos/Alfabeto.mov"> -->
         </div>
       </div>
     </div>
