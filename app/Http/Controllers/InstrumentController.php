@@ -106,6 +106,6 @@ class InstrumentController extends Controller
         Instrument::find($id)->delete():
         abort(404);
         return redirect(route('instruments.index'));
-        // return 1;
+        
     }
 }

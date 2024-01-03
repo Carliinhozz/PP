@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InstrumentController;
@@ -37,9 +38,9 @@ Route::get('/perfil', function () {
     return view('auth.user.perfil');
 })->middleware (SuapToken::class);
 
-Route::get('/fazeragendamento', function () {
-    return view('fazerAgendamento');
-})->name('fazeragendamento');
+Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
+    Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
+});
 
 Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
