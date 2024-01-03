@@ -12,6 +12,7 @@
                     <a href="#dados" class="text-left" onclick="showContent('dados')">Dados pessoais</a>
                     <a href="#pedidos" class="text-left" onclick="showContent('pedidos')">Seus pedidos</a>
                     <a href="#agendamentos" class="text-left" onclick="showContent('agendamentos')">Seus agendamentos</a>
+                    <a href="#ficha-instrumentos" class="text-left" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
                 </div>
             </div>
             <div id="container2" class="col-md-8" style="background-color: #6B6198; color: white;">
@@ -53,6 +54,45 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="content-ficha-instrumentos" class="content">
+                    <h3>Ficha de Instrumentos:</h3>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                        <div class="form-group flex-grow-1 mr-2">
+                            <label for="tipo-instrumento">Tipo de Instrumento:</label>
+                            <select class="form-control" name="tipo-instrumento" id="tipo-instrumento">
+                                <option value="sopro">Sopro</option>
+                                <option value="percussao">Percussão</option>
+                                <option value="corda">Corda</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-grow-1 mr-2">
+                            <label for="instrumento">Instrumento:</label>
+                            <select class="form-control" name="instrumento" id="instrumento">
+                                
+                            </select>
+                        </div>
+                        <button class="btn btn-primary">Buscar</button>
+                    </div>
+                    <div style="background-color: #534881; padding: 20px; color: white; margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4>Guitarra</h4>
+                            <div>
+                                <label for="status">Status:</label>
+                                <select class="form-control" name="status" id="status">
+                                    <option value="disponivel">Disponível</option>
+                                    <option value="indisponivel">Indisponível</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-success">Salvar</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="descricao">Descrição:</label>
+                            <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Digite a descrição">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -79,8 +119,8 @@
         }
 
         .pedido-list {
-            background-color: white; 
-            padding: 20px; 
+            background-color: white;
+            padding: 20px;
             margin-bottom: 20px;
             color: black;
         }
@@ -98,41 +138,41 @@
             display: block;
         }
     </style>
-    
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const contents = document.querySelectorAll('.content');
-        const hash = window.location.hash.substring(1);
 
-        contents.forEach((content) => {
-            content.classList.remove('active');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const contents = document.querySelectorAll('.content');
+            const hash = window.location.hash.substring(1);
+
+            contents.forEach((content) => {
+                content.classList.remove('active');
+            });
+
+            if (hash) {
+                const targetContent = document.getElementById(`content-${hash}`);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            } else {
+                const defaultContent = document.getElementById('content-dados');
+                if (defaultContent) {
+                    defaultContent.classList.add('active');
+                }
+            }
         });
 
-        if (hash) {
-            const targetContent = document.getElementById(`content-${hash}`);
+        function showContent(contentId) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach((content) => {
+                content.classList.remove('active');
+            });
+
+            const targetContent = document.getElementById(`content-${contentId}`);
             if (targetContent) {
                 targetContent.classList.add('active');
-            }
-        } else {
-            const defaultContent = document.getElementById('content-dados');
-            if (defaultContent) {
-                defaultContent.classList.add('active');
+                window.location.hash = contentId;
             }
         }
-    });
-
-    function showContent(contentId) {
-        const contents = document.querySelectorAll('.content');
-        contents.forEach((content) => {
-            content.classList.remove('active');
-        });
-
-        const targetContent = document.getElementById(`content-${contentId}`);
-        if (targetContent) {
-            targetContent.classList.add('active');
-            window.location.hash = contentId;
-        }
-    }
-</script>
+    </script>
 
 @endsection
