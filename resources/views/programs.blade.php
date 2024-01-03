@@ -17,11 +17,11 @@
                 <div class="col-lg-4 col-md-6">
                   <div class="service-item  position-relative">
                     <div class="icon">
-                      <i class="bi bi-activity"></i>
+                      <i class="bi bi-briefcase"></i>
                     </div>
-                    <h3>Nesciunt Mete</h3>
-                    <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Carreiras</h3>
+                    <p>Quadro onde você conhece a trajetória de diversos profissionais que compartilham suas experiências desde os primeiros passos na carreira até os desafios enfrentados durante a sua formação e sua rotina naquela profissão. </p>
+                    <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
       
@@ -30,44 +30,44 @@
                 <div class="col-lg-4 col-md-6">
                   <div class="service-item position-relative">
                     <div class="icon">
-                      <i class="bi bi-easel"></i>
+                    <i class="bi bi-mic"></i>
                     </div>
-                    <h3>Ledo Markt</h3>
+                    <h3>IFCast</h3>
                     <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
       
                 <div class="col-lg-4 col-md-6">
                   <div class="service-item position-relative">
                     <div class="icon">
-                      <i class="bi bi-bounding-box-circles"></i>
+                    <i class="bi bi-chat"></i>
                     </div>
-                    <h3>Asperiores Commodit</h3>
+                    <h3>Papo de Almoço</h3>
                     <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
       
                 <div class="col-lg-6 col-md-6">
                   <div class="service-item position-relative">
                     <div class="icon">
-                      <i class="bi bi-calendar4-week"></i>
+                    <i class="bi bi-newspaper"></i>
                     </div>
-                    <h3>Velit Doloremque</h3>
-                    <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Desopila News</h3>
+                    <p>Aqui, você permanece informado sobre as últimas notícias envolvendo o </p>
+                    <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
       
                 <div class="col-lg-6 col-md-6">
                   <div class="service-item position-relative">
                     <div class="icon">
-                      <i class="bi bi-chat-square-text"></i>
+                    <i class="bi bi-book"></i>
                     </div>
-                    <h3>Dolori Architecto</h3>
+                    <h3>Revista Impúrpura</h3>
                     <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
       
