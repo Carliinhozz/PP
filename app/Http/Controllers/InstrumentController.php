@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrow;
+use App\Models\Instrument_model;
 use Illuminate\Http\Request;
 use App\Models\Instrument;
 class InstrumentController extends Controller
@@ -11,7 +13,12 @@ class InstrumentController extends Controller
      */
     public function index()
     {
-        //
+        $isntruments=Instrument::all();
+        $instrument_models=Instrument_model::all();
+        return view('auth.instruments.index',[
+            'instrument_models'=>$instrument_models,
+            'instruments'=>$isntruments,
+        ]);
     }
 
     /**
@@ -27,7 +34,20 @@ class InstrumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate=$request->validate([
+            'description'=>'required',
+            'instrument_model'=>'required',
+            'institucional_code'=>'required',
+        ]);
+
+        $instrument=Instrument::create([
+            'description'=>$request->description,
+            'model_id'=>$request->instrument_model,
+            'institucional_code'=>$request->institucional_code,
+
+        ]);
+        $instrument->save();
+        return redirect(route('instruments.index'));
     }
 
     /**
@@ -35,7 +55,17 @@ class InstrumentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $instrument=Instrument::findOrFail($id);
+        $instrument_models=Instrument_model::all();
+        $delete_condicion=Borrow::where('instrument_id',$instrument->id)->get()->isEmpty()?
+        true:
+        false;
+        
+        return view('auth.instruments.show',[
+            'instrument'=> $instrument,
+            'delete_condicion'=>$delete_condicion,
+            'instrument_models'=>$instrument_models,
+        ]);
     }
 
     /**
@@ -51,7 +81,20 @@ class InstrumentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate=$request->validate([
+            'description'=>'required',
+            'instrument_model'=>'required',
+            'institucional_code'=>'required',
+        ]);
+
+        $instrument=Instrument::findOrFail($id);
+        $instrument->update([
+            'description'=>$request->description,
+            'model_id'=>$request->instrument_model,
+            'institucional_code'=>$request->institucional_code,
+        ]);
+        $instrument->save();
+        return redirect(route('instruments.index'));
     }
 
     /**
@@ -59,6 +102,10 @@ class InstrumentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Borrow::where('instrument_id',$id)->get()->isEmpty()?
+        Instrument::find($id)->delete():
+        abort(404);
+        return redirect(route('instruments.index'));
+        // return 1;
     }
 }

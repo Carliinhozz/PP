@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -16,6 +17,12 @@ return new class extends Migration
             $table->string('model');
             $table->timestamps();
         });
+        DB::table('instrument_models')->insert([
+            ['id'=>1,'model' => 'Sopro',],
+            ['id'=>2,'model' => 'Corda', ],
+            ['id'=>3,'model' => 'Percussão',],
+        ]);
+        
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PlaylistController;
@@ -58,10 +59,14 @@ Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store');
     Route::post('playlist/{id}/store', [PlaylistController::class,'store'])->name('store');
 
-}
-
-);
-
+});
+Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
+    Route::get('instrumentos',[InstrumentController::class, 'index'])->name('index');
+    Route::post('instrumentos',[InstrumentController::class, 'store'])->name('store');
+    Route::get('instrumentos/{id}',[InstrumentController::class, 'show'])->name('show');
+    Route::post('instrumentos/{id}/editar',[InstrumentController::class, 'update'])->name('update');
+    Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete');
+});
 Route::name('suap.')
     ->group(function () {
         Route::get('/auth', [LoginController::class, 'index']);

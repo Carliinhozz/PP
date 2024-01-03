@@ -24,7 +24,6 @@
     @isset($it_worked)   
         @if ($it_worked && $response != null)
             <div class="container grid-container card-deck">
-                {{-- FIXME: arrumar o sistema de cartões ou pensar em uma forma melhor --}}
                 @foreach ($response as $music)
                     <div class="grid-item card">
                             <img src="{{$music->album->cover_big}}">
