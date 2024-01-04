@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Borrow;
+use App\Models\Instrument;
+
 class BorrowController extends Controller
 {
     /**
@@ -11,7 +13,10 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        return view('auth.borrow.index');
+        $instruments = Instrument::all();
+        return view('auth.borrow.index', [
+            'instruments' => $instruments,
+        ]);
     }
 
     /**
@@ -19,7 +24,22 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        //
+        request()->validate([
+            'date' => 'required|date',
+            'horario' => 'required',
+            'instrument' => 'required|exists:instruments,id',
+        ]);
+
+        $borrow = new Borrow();
+        $borrow->user_id = auth()->user()->id;
+        $borrow->day = request()->input('date');
+        $borrow->instrument_id = request()->input('instrument');
+        $borrow->time = request()->input('horario'); 
+        $borrow->observations = '';
+
+        $borrow->save();
+
+        return redirect()->route('borrow.index');
     }
 
     /**

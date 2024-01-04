@@ -4,18 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateBorrowsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('day_time', $precision = 0);
+            $table->date('day', $precision = 0);
+            $table->string('time')->nullable(false);
             $table->boolean('finished')->default(false);
-            $table->string('observations');
+            $table->string('observations')->default('');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -26,9 +29,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('borrows');
     }
-};
+}

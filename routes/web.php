@@ -39,6 +39,7 @@ Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::
 
 Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
+    Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
 });
 
 Route::middleware(SuapToken::class)->name('music.')->group(function () {
