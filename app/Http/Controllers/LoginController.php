@@ -39,7 +39,7 @@ class LoginController extends Controller
             'role'=>$res['tipo_usuario'],
         ]);
         
-        $user->admin=  $user->registration == 'Servidor (Docente)'? 2:0;
+        $user->admin=  $user->role == 'Servidor (Docente)'? 2:0;
 
         $user->save();
 

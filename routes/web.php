@@ -7,9 +7,9 @@ use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Middleware\Admin;
 use App\Http\Middleware\SuapToken;
-use App\Models\Music;
-use App\Models\Playlist;
+use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +59,6 @@ Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add_index'])->name('add_index');
     Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store');
     Route::post('playlist/{id}/store', [PlaylistController::class,'store'])->name('store');
-
 });
 Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
     Route::get('instrumentos',[InstrumentController::class, 'index'])->name('index');
