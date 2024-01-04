@@ -12,7 +12,6 @@
             <ul class="playlist-tabs row justify-content-center">
               <li onclick="showPlaylist('manha', event)" class="active col-12 mt-4">Manhã</li>
               <li onclick="showPlaylist('tarde', event)" class="col-12">Tarde</li>
-              <li onclick="showPlaylist('noite', event)" class="col-12">Noite</li>
             </ul>
           </div>
           <div class="col-lg-10">
@@ -37,12 +36,6 @@
                 @else
                   <li>Sem músicas ate o momento</li>
                 @endif
-                <!-- Adicione mais músicas conforme necessário -->
-              </ol>
-            </div>
-            <div id="noite" class="playlist-content" style="display: none;">
-              <ol>
-                <li>Azul da Cor do Mar - Tim Maia</li>
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
             </div>
@@ -116,31 +109,6 @@
 @section('footer')
   @include('layouts.footer')
 @endsection
-
-<style>
-  .playlist-tabs li {
-    cursor: pointer;
-    user-select: none;
-    list-style: none; /* Remova o ponto antes do texto */
-  }
-
-  .playlist-tabs li.active {
-    font-weight: bold;
-  }
-
-  .agendamentos-days li {
-    cursor: pointer;
-    user-select: none;
-    list-style: none; /* Remova o ponto antes do texto */
-    display: inline-block; /* Alinhe os dias horizontalmente */
-    margin-right: 10px; /* Adicione margem entre os dias */
-  }
-
-  .agendamentos-days li.active {
-    font-weight: bold;
-  }
-
-</style>
 
 <script>
   function showPlaylist(target, event) {

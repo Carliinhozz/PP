@@ -300,7 +300,7 @@ section {
 
 .btn-enter{
   background-color: #E16C24;
-  color: #000;
+  color: white;
 }
 
 .header.sticked {
@@ -2738,10 +2738,39 @@ section {
   color: white;
 }
 
+.playlist-tabs li {
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Remova o ponto antes do texto */
+}
+
+.playlist-tabs li.active {
+  font-weight: bold;
+}
+
+.agendamentos-days li {
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Remova o ponto antes do texto */
+  display: inline-block; /* Alinhe os dias horizontalmente */
+  margin-right: 10px; /* Adicione margem entre os dias */
+}
+
+.agendamentos-days li.active {
+  font-weight: bold;
+}
+
 /*--------------------------------------------------------------
 # Editar Playlist
 --------------------------------------------------------------*/
 .edit-btn{
   background-color: #534881;
   color: white;
+  font-weight: bold;
+}
+
+.edit-btn:hover{
+  background-color: #F8E182;
+  color: #534881;
+  font-weight: bold;
 }
