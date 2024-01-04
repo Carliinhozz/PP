@@ -28,8 +28,8 @@
                 </li>
                 
             @endforeach
-            <p>Duração total: {{gmdate("i:s", $morning_playlist->duration)}}</p>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $morning_playlist->id])}}">Editar</a>            
+            <p>Duração total:{{gmdate("i:s", $morning_playlist->duration)}}</p>
+            <a class="btn btn-enter" href="{{route('playlist.add_index', ['id' => $morning_playlist->id])}}">Editar</a>            
         </ul>
         @else
             <div class="alert alert-danger" role="alert">
@@ -59,7 +59,7 @@
                 
             @endforeach
             <p>Duração total:{{gmdate("i:s", $afternoon_playlist->duration)}}</p>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $afternoon_playlist->id])}}">Editar</a>            
+            <a class="btn btn-enter" href="{{route('playlist.add_index', ['id' => $afternoon_playlist->id])}}">Editar</a>            
         </ul>
         @else
         <div class="alert alert-danger" role="alert">
