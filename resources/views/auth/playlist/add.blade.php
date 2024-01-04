@@ -9,7 +9,10 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{$music->title}}</div>
-                {{$music->artist}}   
+                <p>{{$music->artist}}</p>
+                <p>Solicitado por: {{App\Models\User::find($music->user_id)->name}}</p>
+                
+
             </div>
             <div class="align-items-end">
                 <form action="{{route('music.delete', ['id'=>$playlist->id, 'music_id' => $music->id])}}" method="post">
@@ -46,7 +49,8 @@
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">{{$music->title}}</div>
-                    {{$music->artist}}   
+                    <p>{{$music->artist}}</p>
+                    <p>Solicitado por: {{App\Models\User::find($music->user_id)->name}}</p>   
                 </div>
                 <div class="align-items-end">
                     <form action="{{route('playlist.delete', ['id'=>$playlist->id, 'music_id' => $music->id])}}" method="post">
