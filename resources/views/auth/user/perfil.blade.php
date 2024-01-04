@@ -25,11 +25,17 @@
                 <div id="content-pedidos" class="content">
                     <h3>Seus Pedidos:</h3>
                     <div class="pedido-list">
-                        <h4>Janeiro 2024</h4>
                         <ol>
-                            <li>Música 1</li>
-                            <li>Música 2</li>
-                            <li>Música 3</li>
+                            @if ($musics->isNotEmpty())
+                                @foreach ($musics as $music)
+                                    <li>
+                                        <div><b>{{$music->title}}</b></div>
+                                        <p>{{$music->artist}}</p>
+                                    </li>
+                                @endforeach
+                            @else
+                            <li>Sem pedidos</li>
+                            @endif
                         </ol>
                     </div>
                 </div>

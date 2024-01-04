@@ -54,7 +54,10 @@
             <ul class="list-group col-10">
                 @foreach ($instruments as $instrument)
                     <li class="list-group-item d-flex justify-content-between align-items-start">
-                        {{ $instrument->description }}
+                        <div class="align-items-start">
+                            <b>{{$instrument->name}}</b>
+                            <p>{{ $instrument->description }}</p>
+                        </div> 
                         <div class="align-items-end">
                             <a href="{{ route('instruments.show',['id'=>$instrument->id]) }}" class="btn btn-enter">Editar</a>
                         </div>

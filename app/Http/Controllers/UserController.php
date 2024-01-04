@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Music;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function perfil()
     {
-        //
+        $musics=Music::where('user_id',Auth::id())->where('already_added',0)->get();
+        return view('auth.user.perfil',[
+            'musics'=>$musics,
+        ]);
     }
 
     /**

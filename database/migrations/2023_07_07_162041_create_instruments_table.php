@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('instruments', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->string('name');
             $table->string('institucional_code');
             $table->boolean('disponibility')->default(1);
             $table->timestamps();
