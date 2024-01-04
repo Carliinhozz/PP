@@ -25,7 +25,7 @@
         <div class="row justify-content-center" data-aos="fade-in">
           <div class="col-lg-12">
             <div class="purple-box rounded-3 p-4">
-              <form action="{{ route('fazeragendamento') }}" method="POST">
+              <form action="{{ route('borrow.index') }}" method="POST">
                 @csrf
                 <div class="row">
                   <div class="mb-3 col-md-6">

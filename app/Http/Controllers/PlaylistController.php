@@ -232,23 +232,6 @@ class PlaylistController extends Controller
      */
     public function show(string $id)
     {
-        $playlist=Playlist::findOrFail($id);
-        $musics=Music::where('time',$playlist->time)->get();
-        $stored_musics=$musics;
-        $musics=$playlist->time ?
-        $musics->intersect(Music::whereIn('id',session('afternoon_ids') )->get()):
-        $musics->intersect(Music::whereIn('id',session('morning_ids') )->get());
-        if($musics->isEmpty() && $stored_musics->isEmpty()){
-            return redirect(route('music.index'));
-        }elseif($musics->isEmpty() && $stored_musics->isNotEmpty()){
-            return redirect(route('playlist.add_index', ['id'=>$playlist->id]));
-        }
-
-        
-        return view('auth.playlist.show',[
-            'playlist'=>$playlist,
-            'musics'=>$musics
-         ]);
         
     }
 

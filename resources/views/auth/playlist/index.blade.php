@@ -5,13 +5,13 @@
 @section('main')
 
 
-<div class="row gap-1 justify-content-center p-5">
+<div class="container-fluid row gap-1 justify-content-center p-5"> 
     <button class="btn edit-btn col-5" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Manhã</button>
     <button class="btn edit-btn col-5" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Tarde</button>
 </div>
 <div class="row">
   <div class="col">
-    <div class="collapse multi-collapse" id="multiCollapseExample1">
+    <div class="container collapse multi-collaps" id="multiCollapseExample1">
       <div class="card card-body">
         <ul class="list-group list-group-numbered">          
         @if (!$morning_playlist_musics->isEmpty())
@@ -29,7 +29,7 @@
                 
             @endforeach
             <p>Duração total:{{gmdate("i:s", $morning_playlist->duration)}}</p>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $morning_playlist->id])}}">Editar</a>            
+            <a class="btn btn-enter" href="{{route('playlist.add_index', ['id' => $morning_playlist->id])}}">Editar</a>            
         </ul>
         @else
             <div class="alert alert-danger" role="alert">
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="col">
-    <div class="collapse multi-collapse" id="multiCollapseExample2">
+    <div class="collapse multi-collapse container" id="multiCollapseExample2">
       <div class="card card-body">
         <ul class="list-group list-group-numbered"> 
         @if (!$afternoon_playlist_musics->isEmpty())
@@ -59,7 +59,7 @@
                 
             @endforeach
             <p>Duração total:{{gmdate("i:s", $afternoon_playlist->duration)}}</p>
-            <a class="btn btn-enter" href="{{route('playlist.show', ['id' => $afternoon_playlist->id])}}">Editar</a>            
+            <a class="btn btn-enter" href="{{route('playlist.add_index', ['id' => $afternoon_playlist->id])}}">Editar</a>            
         </ul>
         @else
         <div class="alert alert-danger" role="alert">
