@@ -377,7 +377,7 @@ section {
 
   .navbar ul {
     display:flex;
-    flex-direction:
+    flex-direction: row;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -515,6 +515,33 @@ section {
   .mobile-nav-hide {
     display: none;
   }
+}
+
+.perfil-drop{
+  background-color: #534881;
+}
+
+.drop-perfil-item{
+  background-color: #534881;
+  border-radius: 10px;
+  color: white;
+  font-size: 11pt;
+  font-weight: bold;
+}
+.drop-perfil-item:hover{
+  font-size: 12pt;
+  background-color: #534881;
+  color: #F8E182;
+}
+
+#dadosp{
+  color: white;
+  font-size: 12pt;
+}
+
+#dadosp:hover{
+  color: #F8E182;
+  font-size: 14pt;
 }
 
 /*--------------------------------------------------------------
@@ -2773,4 +2800,31 @@ section {
   background-color: #F8E182;
   color: #534881;
   font-weight: bold;
+}
+
+/*--------------------------------------------------------------
+# Dados do usuário
+--------------------------------------------------------------*/
+.perfil-title{
+  background-color: #F8E182;
+  color: #E16C24;
+}
+
+.perfil-title h3{
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.perfil-descricao{
+  font-size: 13pt;
+  color: #F8E182;
+}
+
+.perfil-info{
+  display: flex;
+  align-content: center;
+  align-self: center;
+  background-color: #f8e0824f;
+  padding: 12px;
+  border-radius: 10px;
 }

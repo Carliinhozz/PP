@@ -3,24 +3,31 @@
     Perfil
 @endsection
 @section('main')
-    <div class="container-fluid" style="padding-top: 80px;">
+    <div class="container pt-5">
         <div class="row no-gutters">
             <div id="container1" class="col-md-4">
                 <div id="profile" class="d-flex flex-column align-items-center">
                     <img src="assets/img/user.png" alt="Foto do Perfil">
-                    <h3 style="color: white;">Perfil</h3>
-                    <a href="#dados" class="text-left" onclick="showContent('dados')">Dados pessoais</a>
-                    <a href="#pedidos" class="text-left" onclick="showContent('pedidos')">Seus pedidos</a>
-                    <a href="#agendamentos" class="text-left" onclick="showContent('agendamentos')">Seus agendamentos</a>
-                    <a href="#ficha-instrumentos" class="text-left" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
+                    <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
+                    <div class="container row justify-content-start gap-5 mt-4">
+                        <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
+                        <a href="#pedidos" class="text-left text-light col-12" onclick="showContent('pedidos')">Seus pedidos</a>
+                        <a href="#agendamentos" class="text-left text-light col-12" onclick="showContent('agendamentos')">Seus agendamentos</a>
+                        <a href="#ficha-instrumentos" class="text-left text-light col-12" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
+                    </div>
                 </div>
             </div>
             <div id="container2" class="col-md-8" style="background-color: #6B6198; color: white;">
-                <div id="content-dados" class="content active">
-                    <h3>Dados pessoais:</h3>
-                    <p>{{ Auth::user()->email_ifrn }}</p>
-                    <p>{{ Auth::user()->role }}</p>
-                    <p>{{ Auth::user()->registration }}</p>
+                <div id="content-dados" class="container mt-4 content active">
+                    <div class="perfil-title">
+                        <h3>Dados pessoais:</h3>
+                    </div>
+                    <h4 class="perfil-descricao mt-4">Email:</h4>
+                    <p class="perfil-info">{{ Auth::user()->email_ifrn }}</p>
+                    <h4 class="perfil-descricao">Matrícula:</h4>
+                    <p class="perfil-info">{{ Auth::user()->registration }}</p>
+                    <h4 class="perfil-descricao">Tipo de usuário:</h4>
+                    <p class="perfil-info">{{ Auth::user()->role }}</p>
                 </div>
                 <div id="content-pedidos" class="content">
                     <h3>Seus Pedidos:</h3>

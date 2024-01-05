@@ -15,11 +15,11 @@
                         <a class="nav-link dropdown-toggle {{ Request::is('perfil') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             @auth {{ auth()->user()->name }} @endauth
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #534881;">
-                            <a class="dropdown-item" href="{{ url('/perfil') }}" style="color: white;">Dados do Usuário</a>
+                        <div class="perfil-drop dropdown-menu p-2" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item drop-perfil-item p-1" href="{{ url('/perfil') }}" id="dadosp">Dados do Usuário</a>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item" style="color: white;">Sair</button>
+                                <button type="submit" class="dropdown-item drop-perfil-item mt-1 p-1">Sair</button>
                             </form>
                         </div>
                     </li>
