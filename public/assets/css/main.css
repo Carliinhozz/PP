@@ -2828,3 +2828,14 @@ section {
   padding: 12px;
   border-radius: 10px;
 }
+
+
+.pedido-list{
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.agendamento-list{
+  height: 350px;
+  overflow-y: scroll;
+}

@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div id="container2" class="col-md-8" style="background-color: #6B6198; color: white;">
+            <div id="container2" class="col-md-8 text-light" style="background-color: #6B6198;">
                 <div id="content-dados" class="container mt-4 content active">
                     <div class="perfil-title">
                         <h3>Dados pessoais:</h3>
@@ -30,7 +30,9 @@
                     <p class="perfil-info">{{ Auth::user()->role }}</p>
                 </div>
                 <div id="content-pedidos" class="content">
-                    <h3>Seus Pedidos:</h3>
+                    <div class="perfil-title mt-4">
+                        <h3>Seus Pedidos:</h3>
+                    </div>
                     <div class="pedido-list">
                         <ol>
                             @if ($musics->isNotEmpty())
@@ -47,7 +49,9 @@
                     </div>
                 </div>
                 <div id="content-agendamentos" class="content">
-                    <h3>Seus Agendamentos:</h3>
+                    <div class="perfil-title mt-4">
+                        <h3>Seus Agendamentos:</h3>
+                    </div>
                     <div class="agendamento-list">
                         @if ($borrows->isNotEmpty())
                             <table class="table table-bordered">
@@ -80,8 +84,10 @@
                     </div>
                 </div>
                 <div id="content-ficha-instrumentos" class="content">
-                    <h3>Ficha de Instrumentos:</h3>
-                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <div class="perfil-title mt-4">
+                        <h3>Ficha de Instrumentos:</h3>
+                    </div>
+                    <div class="row">
                         <div class="form-group flex-grow-1 mr-2">
                             <label for="tipo-instrumento">Tipo de Instrumento:</label>
                             <select class="form-control" name="instrument_model" id="instrument_model">
