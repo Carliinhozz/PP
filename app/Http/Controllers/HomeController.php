@@ -49,6 +49,19 @@ class HomeController extends Controller
             }else{
                 $afternoon_playlist_musics= collect();
             }
+            $borrows= Borrow::where('finished',0)->orderBy('day')->get();
+            foreach ($borrows as $borrow) {
+                $day=Carbon::create($borrow->day);
+                if($day->lessThan(Carbon::today())){
+                    $borrow->finished=1;
+                    $borrow->save();
+                    
+                    
+                }else{
+                    break;
+                }
+                
+            }
 
             $from=Carbon::today()->startOfWeek();
             $to=Carbon::today()->endOfWeek()->subDays(6);
@@ -69,7 +82,7 @@ class HomeController extends Controller
             $from=Carbon::today()->startOfWeek()->addDays(4);
             $to=Carbon::today()->endOfWeek()->subDays(2);
             $borrows_friday    =Borrow::where('finished',0)->whereBetween('day',[$from,$to])->orderBy('day')->get();
-            
+
             return view('auth.index',[
                 'morning_musics'=>$morning_playlist_musics,
                 'afternoon_musics'=>$afternoon_playlist_musics,
