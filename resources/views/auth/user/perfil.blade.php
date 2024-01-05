@@ -82,6 +82,7 @@
                                             </form>
                                         </td>
                                     </tr>
+<<<<<<< HEAD
                                 @endforeach
                             </tbody>
                         </table>
@@ -95,6 +96,30 @@
                         </table>
                     @endif
                 </div>
+=======
+                                </thead>
+                                <tbody>
+                                    @foreach ($borrows as $borrow)
+                                        <tr>
+                                            <td>{{$newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $borrow->day)
+                                                ->format('d-m-Y')}}</td>
+                                            <td>{{ $borrow->time }}</td>
+                                            <td>{{ $borrow->instrument->name }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Sem agendamentos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
+>>>>>>> d050c3c90efcd9a60c09bdd57313bf9007579191
                 </div>
                 <div id="content-ficha-instrumentos" class="content">
                     <div class="perfil-title mt-4">

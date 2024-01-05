@@ -58,41 +58,84 @@
             </ul>
             <div id="segunda" class="agendamentos-content">
               <ul>
-                <li>7h - 9h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
+                @if($borrows_monday->isNotEmpty())
+                  @foreach ($borrows_monday as $borrow)
+                  <li><p>{{$borrow->time}}</p>
+                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
+                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
+                    <hr>
+                  </li>
+                  @endforeach
+                @else
+                <li>Sem agendamentos</li>
+                @endif
                 <!-- Adicione mais agendamentos conforme necessário -->
               </ul>
             </div>
             <div id="terca" class="agendamentos-content" style="display: none;">
               <ul>
-                <li>7h - 8h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
+                @if($borrows_tuesday->isNotEmpty())
+                  @foreach ($borrows_tuesday as $borrow)
+                  <li><p>{{$borrow->time}}</p>
+                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
+                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
+                    <hr>
+                  </li>
+                  @endforeach
+                @else
+                  <li>Sem agendamentos</li>
+                @endif
+                
                 <!-- Adicione mais agendamentos conforme necessário -->
               </ul>
             </div>
             <div id="quarta" class="agendamentos-content" style="display: none;">
               <ul>
-                <li>7h - 9h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
+                @if($borrows_wednesday->isNotEmpty())
+                  @foreach ($borrows_wednesday as $borrow)
+                    <li><p>{{$borrow->time}}</p>
+                      <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
+                      <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
+                      <hr>
+                    </li>
+                  @endforeach
+                @else
+                <li>Sem agendamentos</li>
+                @endif
                 <!-- Adicione mais agendamentos conforme necessário -->
               </ul>
             </div>
             <div id="quinta" class="agendamentos-content" style="display: none;">
               <ul>
-                <li>7h - 8h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
+                @if($borrows_thursday->isNotEmpty())
+                  @foreach ($borrows_thursday as $borrow)
+                  <li><p>{{$borrow->time}}</p>
+                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
+                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
+                    <hr>
+                  </li>
+                  @endforeach
+                @else
+                <li>Sem agendamentos</li>
+                @endif
+
                 <!-- Adicione mais agendamentos conforme necessário -->
               </ul>
             </div>
             <div id="sexta" class="agendamentos-content" style="display: none;">
               <ul>
-                <li>7h - 8h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
+                @if($borrows_friday->isNotEmpty())
+                  @foreach ($borrows_friday as $borrow)
+                  <li><p>{{$borrow->time}}</p>
+                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
+                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
+                    <hr>
+                  </li>
+                  @endforeach
+                @else
+                <li>Sem agendamentos</li>
+                @endif
+
                 <!-- Adicione mais agendamentos conforme necessário -->
               </ul>
             </div>

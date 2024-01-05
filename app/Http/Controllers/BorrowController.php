@@ -40,12 +40,10 @@ class BorrowController extends Controller
         $time = request()->input('horario');
         $instrument_ids = request()->input('instruments');
 
-        $existingBorrow = Borrow::where('user_id', $user_id)
-            ->where('day', Carbon::createFromDate($day))
-            ->where('time', $time)
-            ->exists();
+        $existingBorrow = Borrow::where('day', Carbon::createFromDate($day))
+            ->where('time', $time)->get();
 
-        if ($existingBorrow) {
+        if ($existingBorrow->isNotEmpty()) {
             return redirect()->back()->with('alert', 'danger')->with('message', 'Já existe um agendamento para esta data e horário.');
         }
 

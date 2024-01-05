@@ -37,24 +37,23 @@
                     <select class="form-select" name="horario" required>
                         <!-- Manhã -->
                         <optgroup label="Manhã">
-                            <option value="7h - 8h">7h - 8h</option>
-                            <option value="9h - 10h">9h - 10h</option>
-                            <option value="10h - 11h">10h - 11h</option>
-                            <option value="11h - 12h">11h - 12h</option>
+                            <option value="7">7h - 8h</option>
+                            <option value="9">9h - 10h</option>
+                            <option value="10">10h - 11h</option>
                         </optgroup>
 
                         <!-- Tarde -->
                         <optgroup label="Tarde">
-                            <option value="13h - 14h">13h - 14h</option>
-                            <option value="15h - 16h">15h - 16h</option>
-                            <option value="16h - 17h">16h - 17h</option>
-                            <option value="17h - 18h">17h - 18h</option>
+                            <option value="13">13h - 14h</option>
+                            <option value="15">15h - 16h</option>
+                            <option value="16">16h - 17h</option>
+                            <option value="17">17h - 18h</option>
                         </optgroup>
 
                         <!-- Noite -->
                         <optgroup label="Noite">
-                            <option value="19h - 20h">19h - 20h</option>
-                            <option value="20h - 21h">20h - 21h</option>
+                            <option value="19">19h - 20h</option>
+                            <option value="20">20h - 21h</option>
                         </optgroup>
                     </select>
                 </div>
