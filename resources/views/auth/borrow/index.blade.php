@@ -8,6 +8,11 @@
         <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
           <h2>Fazer Agendamento</h2>
           <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
+          @if(session('alert') && session('message'))
+              <div class="alert alert-{{ session('alert') }}">
+                  {{ session('message') }}
+              </div>
+          @endif
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
         </div>
@@ -74,38 +79,55 @@
     </section>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', async function () {
-        var dataInput = document.querySelector('input[name="data"]');
+    function isWeekend(date) {
+        const day = date.getDay();
+        return day === 5 || day === 6;
+    }
 
-        async function isHolidayOrWeekend(date) {
-            var formattedDate = date.toISOString().split('T')[0];
-            var apiKey = '5930|Dm6va8HOVnVmCTQiNI4KcdZUEvSs3KmP';
-            var state = 'RN';
+    function isHoliday(date, holidays) {
+        return holidays.some(holiday => holiday.date === date);
+    }
 
-            var url = `https://api.invertexto.com/v1/holidays/${date.getFullYear()}?token=${apiKey}&state=${state}`;
+    $(document).ready(function () {
+        const currentYear = new Date().getFullYear();
 
-            try {
-                var response = await fetch(url);
-                var data = await response.json();
+        const holidaysUrl = `https://api.invertexto.com/v1/holidays/${currentYear}?token=6029|NzXSNB9YQnuGlg6gQ10KsgyZL11VN584&state=RN`;
 
-                return data.some(feriado => feriado.date === formattedDate) || date.getDay() === 0 || date.getDay() === 6;
-            } catch (error) {
-                console.error('Erro ao verificar feriado:', error);
-                return false;
-            }
-        }
+        $.getJSON(holidaysUrl, function (data) {
+            const holidays = data;
 
-        async function validarDataSelecionada() {
-            var dataSelecionada = new Date(dataInput.value);
+            $('input[name="date"]').change(function () {
+                const selectedDate = $(this).val();
+                
+                if (!selectedDate) {
+                    return;
+                }
 
-            if (await isHolidayOrWeekend(dataSelecionada)) {
-                alert('Selecione uma data válida. Finais de semana e feriados não são permitidos.');
-                dataInput.value = ''; 
-            }
-        }
+                const selectedDateObj = new Date(selectedDate);
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
 
-        dataInput.addEventListener('change', validarDataSelecionada);
+                if (selectedDateObj.getFullYear() > currentYear) {
+                    alert(`Selecione uma data válida para o ano de ${currentYear}.`);
+                    $(this).val('');
+                    return;
+                }
+
+                if (selectedDateObj < yesterday) {
+                    alert('Selecione uma data igual ou posterior a hoje.');
+                    $(this).val('');
+                    return;
+                }
+
+                if (isWeekend(selectedDateObj) || isHoliday(selectedDate, holidays)) {
+                    alert('Selecione uma data que não seja feriado ou fim de semana.');
+                    $(this).val('');
+                }
+            });
+        });
     });
 </script>
 
