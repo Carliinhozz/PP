@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Borrow;
 use App\Models\Instrument;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class BorrowController extends Controller
@@ -37,22 +38,21 @@ class BorrowController extends Controller
         $time = request()->input('horario');
         $instrument_id = request()->input('instrument');
     
-        $existingBorrow = Borrow::where('user_id', $user_id)
-            ->where('day', $day)
-            ->where('time', $time)
-            ->first();
+        $existingBorrow = Borrow::where('day', Carbon::createFromDate($day))
+            ->where('time', $time)->get();
     
-        if ($existingBorrow) {
+        if ($existingBorrow->isNotEmpty()) {
             return redirect()->back()->with('alert', 'danger')->with('message', 'Já existe um agendamento para esta data e horário.');
         }
+        
     
         $borrow = new Borrow();
         $borrow->user_id = $user_id;
-        $borrow->day = $day;
+        $borrow->day = Carbon::createFromDate($day)->hour($time);
         $borrow->instrument_id = $instrument_id;
-        $borrow->time = $time;
+        $end=$time+1;
+        $borrow->time = $time.'-'.$end.'h';
         $borrow->observations = '';
-    
         $borrow->save();
     
         return redirect()->route('borrow.index')->with('alert', 'success')->with('message', 'Agendamento criado com sucesso.');
