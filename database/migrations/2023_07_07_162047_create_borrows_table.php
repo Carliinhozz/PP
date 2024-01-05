@@ -22,8 +22,6 @@ class CreateBorrowsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('instrument_id');
-            $table->foreign('instrument_id')->references('id')->on('instruments');
         });
     }
 

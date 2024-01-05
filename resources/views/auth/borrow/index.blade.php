@@ -60,17 +60,31 @@
                 </div>
                 </div>
                 <div class="row">
-                  <div class="mb-3">
-                    <label for="instrument" class="form-label text-white">Instrumento:</label>
-                    <select class="form-select" name="instrument" required>
-                      @foreach ($instruments as $instrument)
-                        <option value="{{ $instrument->id }}">
-                          {{ $instrument->name }} - {{ $instrument->description }}
-                        </option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
+                <div class="row">
+                <div class="row">
+    <div class="mb-3">
+        <label for="instruments" class="form-label text-white">Instrumentos:</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="instrumentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Selecionar Instrumentos
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="instrumentDropdown">
+                @foreach ($instruments as $instrument)
+                    <li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="instruments[]" value="{{ $instrument->id }}" id="instrument{{ $instrument->id }}">
+                            <label class="form-check-label" for="instrument{{ $instrument->id }}">
+                                {{ $instrument->name }} - {{ $instrument->description }}
+                            </label>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+
+
                 <button type="submit" class="btn-env">Enviar</button>
               </form>
             </div>

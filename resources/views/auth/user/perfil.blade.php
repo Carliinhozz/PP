@@ -54,34 +54,47 @@
                     </div>
                     <div class="agendamento-list">
                         @if ($borrows->isNotEmpty())
-                            <table class="table table-bordered">
-                                <thead>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Instrumento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($borrows as $borrow)
                                     <tr>
-                                        <th>Data</th>
-                                        <th>Hora</th>
-                                        <th>Instrumento</th>
+                                        <td>{{$newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $borrow->day)->format('d-m-Y')}}</td>
+                                        <td>{{ $borrow->time }}</td>
+                                        <td>
+                                            @foreach ($borrow->instruments as $instrument)
+                                                {{ $instrument->name }}
+                                                @if (!$loop->last)
+                                                    ,
+                                                @endif
+                                            @endforeach
+                                       
+                                            <form action="{{ route('borrow.delete', ['id' => $borrow->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Cancelar</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($borrows as $borrow)
-                                        <tr>
-                                            <td>{{ $borrow->day }}</td>
-                                            <td>{{ $borrow->time }}</td>
-                                            <td>{{ $borrow->instrument->name }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>Sem agendamentos</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        @endif
-                    </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>Sem agendamentos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @endif
+                </div>
                 </div>
                 <div id="content-ficha-instrumentos" class="content">
                     <div class="perfil-title mt-4">

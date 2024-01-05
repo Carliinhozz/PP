@@ -20,4 +20,9 @@ class Instrument extends Model
        'institucional_code',
        'disponibility',
     ];
+
+    public function borrows()
+    {
+        return $this->belongsToMany(Borrow::class);
+    }
 }

@@ -30,5 +30,10 @@ class Borrow extends Model
     {
         return $this->belongsTo(Instrument::class, 'instrument_id');
     }
+
+    public function instruments()
+    {
+        return $this->belongsToMany(Instrument::class);
+    }
 }
 
