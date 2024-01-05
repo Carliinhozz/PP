@@ -8,6 +8,11 @@
         <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
           <h2>Fazer Agendamento</h2>
           <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
+          @if(session('alert') && session('message'))
+              <div class="alert alert-{{ session('alert') }}">
+                  {{ session('message') }}
+              </div>
+          @endif
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
         </div>
@@ -97,22 +102,28 @@
 
             $('input[name="date"]').change(function () {
                 const selectedDate = $(this).val();
-                const currentDate = new Date();
-                const selectedYear = new Date(selectedDate).getFullYear();
+                
+                if (!selectedDate) {
+                    return;
+                }
 
-                if (selectedYear !== currentYear) {
+                const selectedDateObj = new Date(selectedDate);
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+
+                if (selectedDateObj.getFullYear() > currentYear) {
                     alert(`Selecione uma data válida para o ano de ${currentYear}.`);
                     $(this).val('');
                     return;
                 }
 
-                if (new Date(selectedDate) < currentDate) {
-                    alert('Selecione uma data igual ou posterior à hoje.');
+                if (selectedDateObj < yesterday) {
+                    alert('Selecione uma data igual ou posterior a hoje.');
                     $(this).val('');
                     return;
                 }
 
-                if (isWeekend(new Date(selectedDate)) || isHoliday(selectedDate, holidays)) {
+                if (isWeekend(selectedDateObj) || isHoliday(selectedDate, holidays)) {
                     alert('Selecione uma data que não seja feriado ou fim de semana.');
                     $(this).val('');
                 }
