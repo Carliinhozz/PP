@@ -65,7 +65,8 @@
                                 <tbody>
                                     @foreach ($borrows as $borrow)
                                         <tr>
-                                            <td>{{ $borrow->day }}</td>
+                                            <td>{{$newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $borrow->day)
+                                                ->format('d-m-Y')}}</td>
                                             <td>{{ $borrow->time }}</td>
                                             <td>{{ $borrow->instrument->name }}</td>
                                         </tr>
