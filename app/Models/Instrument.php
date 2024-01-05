@@ -14,6 +14,7 @@ class Instrument extends Model
         return $this->belongsTo(Instrument_model::class, 'model_id', 'id');    
     }
     protected $fillable = [
+        'name',
        'description',
        'model_id',
        'institucional_code',

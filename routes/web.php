@@ -7,6 +7,7 @@ use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\SuapToken;
 use App\Http\Middleware\SuperAdmin;
@@ -34,12 +35,12 @@ Route::get('/sobre', function ()  {
     return view('about');
 });
 
-Route::get('/perfil', function () {    
-    return view('auth.user.perfil');
-})->middleware (SuapToken::class);
+Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::class);
+
 
 Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
+    Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
 });
 
 Route::middleware(SuapToken::class)->name('music.')->group(function () {

@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
 @section('main')
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero">
+
+<section id="hero" class="hero">
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
         <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
@@ -10,45 +10,24 @@
           <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
-          <!-- Adicione uma imagem representativa, se desejar -->
-          <!-- <img src="caminho-para-sua-imagem.jpg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100"> -->
         </div>
       </div>
     </div>
   </section>
-  <!-- End Hero Section -->
 
-  <!-- Adicione o Contêiner de Formulário para Fazer Agendamento -->
-  @if (Auth::check())
     <section id="fazer-agendamento" class="fazer-agendamento">
       <div class="container">
         <div class="row justify-content-center" data-aos="fade-in">
           <div class="col-lg-12">
             <div class="purple-box rounded-3 p-4">
-              <form action="{{ route('borrow.index') }}" method="POST">
+              <form action="{{ route('borrow.create') }}" method="POST">
                 @csrf
                 <div class="row">
                   <div class="mb-3 col-md-6">
-                    <label for="estudante" class="form-label text-white">Estudante:</label>
-                    <input type="text" class="form-control" name="estudante" value="{{ Auth::user()->name }}" readonly>
+                    <label for="date" class="form-label text-white">Data:</label>
+                    <input type="date" class="form-control" name="date" required>
                   </div>
                   <div class="mb-3 col-md-6">
-                    <label for="matricula" class="form-label text-white">Matrícula:</label>
-                    <input type="text" class="form-control" name="matricula" value="{{ Auth::user()->registration }}" readonly>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="mb-3 col-md-6">
-                    <label for="data" class="form-label text-white">Data:</label>
-                    <input type="date" class="form-control" name="data" required>
-                  </div>
-                  <div class="mb-3 col-md-6">
-                    <label for="instrumento" class="form-label text-white">Instrumento:</label>
-                    <input type="text" class="form-control" name="instrumento" required>
-                  </div>
-                </div>
-                <div class="row">
-                <div class="mb-3 col-md-6">
                     <label for="horario" class="form-label text-white">Horário:</label>
                     <select class="form-select" name="horario" required>
                         <!-- Manhã -->
@@ -75,6 +54,18 @@
                     </select>
                 </div>
                 </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="instrument" class="form-label text-white">Instrumento:</label>
+                    <select class="form-select" name="instrument" required>
+                      @foreach ($instruments as $instrument)
+                        <option value="{{ $instrument->id }}">
+                          {{ $instrument->name }} - {{ $instrument->description }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
                 <button type="submit" class="btn-env">Enviar</button>
               </form>
             </div>
@@ -82,14 +73,12 @@
         </div>
       </div>
     </section>
-  @endif
 @endsection
 
 <script>
     document.addEventListener('DOMContentLoaded', async function () {
         var dataInput = document.querySelector('input[name="data"]');
 
-        // Função para verificar se a data é um feriado ou final de semana
         async function isHolidayOrWeekend(date) {
             var formattedDate = date.toISOString().split('T')[0];
             var apiKey = '5930|Dm6va8HOVnVmCTQiNI4KcdZUEvSs3KmP';
@@ -101,7 +90,6 @@
                 var response = await fetch(url);
                 var data = await response.json();
 
-                // Verifica se a data é um feriado ou final de semana
                 return data.some(feriado => feriado.date === formattedDate) || date.getDay() === 0 || date.getDay() === 6;
             } catch (error) {
                 console.error('Erro ao verificar feriado:', error);
@@ -109,27 +97,18 @@
             }
         }
 
-        // Função para validar a data ao selecioná-la
         async function validarDataSelecionada() {
             var dataSelecionada = new Date(dataInput.value);
 
             if (await isHolidayOrWeekend(dataSelecionada)) {
                 alert('Selecione uma data válida. Finais de semana e feriados não são permitidos.');
-                dataInput.value = ''; // Limpar o campo se for inválido
+                dataInput.value = ''; 
             }
         }
 
-        // Adicione um ouvinte de eventos ao campo de data
         dataInput.addEventListener('change', validarDataSelecionada);
     });
 </script>
-
-
-
-
-@section('footer')
-  <!-- Sem footer nesta página -->
-@endsection
 
 <div id="preloader"></div>
 
