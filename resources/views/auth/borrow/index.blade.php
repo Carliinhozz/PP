@@ -75,38 +75,49 @@
     </section>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', async function () {
-        var dataInput = document.querySelector('input[name="data"]');
+    function isWeekend(date) {
+        const day = date.getDay();
+        return day === 5 || day === 6;
+    }
 
-        async function isHolidayOrWeekend(date) {
-            var formattedDate = date.toISOString().split('T')[0];
-            var apiKey = '5930|Dm6va8HOVnVmCTQiNI4KcdZUEvSs3KmP';
-            var state = 'RN';
+    function isHoliday(date, holidays) {
+        return holidays.some(holiday => holiday.date === date);
+    }
 
-            var url = `https://api.invertexto.com/v1/holidays/${date.getFullYear()}?token=${apiKey}&state=${state}`;
+    $(document).ready(function () {
+        const currentYear = new Date().getFullYear();
 
-            try {
-                var response = await fetch(url);
-                var data = await response.json();
+        const holidaysUrl = `https://api.invertexto.com/v1/holidays/${currentYear}?token=6029|NzXSNB9YQnuGlg6gQ10KsgyZL11VN584&state=RN`;
 
-                return data.some(feriado => feriado.date === formattedDate) || date.getDay() === 0 || date.getDay() === 6;
-            } catch (error) {
-                console.error('Erro ao verificar feriado:', error);
-                return false;
-            }
-        }
+        $.getJSON(holidaysUrl, function (data) {
+            const holidays = data;
 
-        async function validarDataSelecionada() {
-            var dataSelecionada = new Date(dataInput.value);
+            $('input[name="date"]').change(function () {
+                const selectedDate = $(this).val();
+                const currentDate = new Date();
+                const selectedYear = new Date(selectedDate).getFullYear();
 
-            if (await isHolidayOrWeekend(dataSelecionada)) {
-                alert('Selecione uma data válida. Finais de semana e feriados não são permitidos.');
-                dataInput.value = ''; 
-            }
-        }
+                if (selectedYear !== currentYear) {
+                    alert(`Selecione uma data válida para o ano de ${currentYear}.`);
+                    $(this).val('');
+                    return;
+                }
 
-        dataInput.addEventListener('change', validarDataSelecionada);
+                if (new Date(selectedDate) < currentDate) {
+                    alert('Selecione uma data igual ou posterior à hoje.');
+                    $(this).val('');
+                    return;
+                }
+
+                if (isWeekend(new Date(selectedDate)) || isHoliday(selectedDate, holidays)) {
+                    alert('Selecione uma data que não seja feriado ou fim de semana.');
+                    $(this).val('');
+                }
+            });
+        });
     });
 </script>
 
