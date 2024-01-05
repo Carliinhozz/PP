@@ -3,7 +3,6 @@
 @section('main')
 
   <!-- Adicionando o Contêiner da Playlist do Dia para Usuários Autenticados -->
-  @if (Auth::check())
     <section id="playlist" class="playlist">
       <div class="container">
         <div class="row">
@@ -43,10 +42,8 @@
         </div>
       </div>
     </section>
-  @endif
 
   <!-- Adicionando o Contêiner de Agendamentos para Usuários Autenticados -->
-  @if (Auth::check())
     <section id="agendamentos" class="agendamentos">
       <div class="container">
         <div class="row">
@@ -103,7 +100,6 @@
         </div>
       </div>
     </section>
-  @endif
 @endsection
 
 @section('footer')

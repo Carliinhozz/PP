@@ -33,42 +33,54 @@
                                         <p>{{$music->artist}}</p>
                                     </li>
                                 @endforeach
-                            @else
-                            <li>Sem pedidos</li>
-                            @endif
                         </ol>
+                        @else
+                            <p>Sem pedidos</p>
+                        @endif
                     </div>
                 </div>
                 <div id="content-agendamentos" class="content">
                     <h3>Seus Agendamentos:</h3>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Data e Hora</th>
-                                <th>Instrumentos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>01/01/2024 10:00 AM</td>
-                                <td>Piano</td>
-                            </tr>
-                            <tr>
-                                <td>02/01/2024 02:30 PM</td>
-                                <td>Guitarra</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="agendamento-list">
+                        @if ($borrows->isNotEmpty())
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Hora</th>
+                                        <th>Instrumento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($borrows as $borrow)
+                                        <tr>
+                                            <td>{{ $borrow->day }}</td>
+                                            <td>{{ $borrow->time }}</td>
+                                            <td>{{ $borrow->instrument->name }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Sem agendamentos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
                 </div>
                 <div id="content-ficha-instrumentos" class="content">
                     <h3>Ficha de Instrumentos:</h3>
                     <div style="display: flex; justify-content: space-between; margin-top: 10px;">
                         <div class="form-group flex-grow-1 mr-2">
                             <label for="tipo-instrumento">Tipo de Instrumento:</label>
-                            <select class="form-control" name="tipo-instrumento" id="tipo-instrumento">
-                                <option value="sopro">Sopro</option>
-                                <option value="percussao">Percussão</option>
-                                <option value="corda">Corda</option>
+                            <select class="form-control" name="instrument_model" id="instrument_model">
+                                @foreach ($instrument_models as $model)
+                                    <option value="{{ $model->id }}">{{ $model->model }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group flex-grow-1 mr-2">
@@ -85,8 +97,8 @@
                             <div>
                                 <label for="status">Status:</label>
                                 <select class="form-control" name="status" id="status">
-                                    <option value="disponivel">Disponível</option>
-                                    <option value="indisponivel">Indisponível</option>
+                                    <option value="1">Disponível</option>
+                                    <option value="0">Indisponível</option>
                                 </select>
                             </div>
                             <div>
@@ -94,8 +106,8 @@
                             </div>
                         </div>
                         <div>
-                            <label for="descricao">Descrição:</label>
-                            <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Digite a descrição">
+                            <label for="descrition">Descrição:</label>
+                            <input type="text" id="descrition" name="descrition" class="form-control" placeholder="Digite a descrição">
                         </div>
                     </div>
                 </div>
@@ -179,6 +191,7 @@
                 window.location.hash = contentId;
             }
         }
+        
     </script>
 
 @endsection

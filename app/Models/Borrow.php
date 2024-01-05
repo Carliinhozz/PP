@@ -25,4 +25,10 @@ class Borrow extends Model
        'finished',
        'observations',
     ];
+
+    public function instrument()
+    {
+        return $this->belongsTo(Instrument::class, 'instrument_id');
+    }
 }
+
