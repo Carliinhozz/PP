@@ -56,71 +56,93 @@
               <li onclick="showContent('quinta', 'agendamentos')">Quinta</li>
               <li onclick="showContent('sexta', 'agendamentos')">Sexta</li>
             </ul>
-            <div id="segunda" class="agendamentos-content">
-              <ul>
-                @if($borrows_monday->isNotEmpty())
-                  @foreach ($borrows_monday as $borrow)
-                  <li><p>{{$borrow->time}}</p>
-                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
-                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
-                    <hr>
-                  </li>
-                  @endforeach
-                @else
-                <li>Sem agendamentos</li>
-                @endif
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
-            </div>
-            <div id="terca" class="agendamentos-content" style="display: none;">
-              <ul>
-                @if($borrows_tuesday->isNotEmpty())
-                  @foreach ($borrows_tuesday as $borrow)
-                  <li><p>{{$borrow->time}}</p>
-                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
-                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
-                    <hr>
-                  </li>
-                  @endforeach
-                @else
-                  <li>Sem agendamentos</li>
-                @endif
-                
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
-            </div>
-            <div id="quarta" class="agendamentos-content" style="display: none;">
-              <ul>
-                @if($borrows_wednesday->isNotEmpty())
-                  @foreach ($borrows_wednesday as $borrow)
-                    <li><p>{{$borrow->time}}</p>
-                      <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
-                      <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
-                      <hr>
-                    </li>
-                  @endforeach
-                @else
-                <li>Sem agendamentos</li>
-                @endif
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
-            </div>
-            <div id="quinta" class="agendamentos-content" style="display: none;">
-              <ul>
-                @if($borrows_thursday->isNotEmpty())
-                  @foreach ($borrows_thursday as $borrow)
-                  <li><p>{{$borrow->time}}</p>
-                    <p><b>{{App\Models\User::find($borrow->user_id)->name}}</b></p>
-                    <p>{{App\Models\Instrument::find($borrow->instrument_id)->name}}</p>
-                    <hr>
-                  </li>
-                  @endforeach
-                @else
-                <li>Sem agendamentos</li>
-                @endif
+              <div id="segunda" class="agendamentos-content" style="display: none;">
+                  <ul>
+                  @if($borrows_friday->isNotEmpty())
+                      <ul class="agendamento-list">
+                          @foreach ($borrows_friday as $borrow)
+                              <li class="agendamento-item">
+                                  <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                      @foreach ($borrow->instruments as $instrument)
+                                          {{ $instrument->name }}
+                                          @if (!$loop->last), @endif
+                                      @endforeach
+                                  </p>
 
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
+                                  <hr>
+                              </li>
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>Sem agendamentos</p>
+                  @endif
+                  </ul>
+              </div>
+              <div id="terca" class="agendamentos-content" style="display: none;">
+                  <ul>
+                  @if($borrows_friday->isNotEmpty())
+                      <ul class="agendamento-list">
+                          @foreach ($borrows_friday as $borrow)
+                              <li class="agendamento-item">
+                                  <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                      @foreach ($borrow->instruments as $instrument)
+                                          {{ $instrument->name }}
+                                          @if (!$loop->last), @endif
+                                      @endforeach
+                                  </p>
+
+                                  <hr>
+                              </li>
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>Sem agendamentos</p>
+                  @endif
+                  </ul>
+              </div>
+              <div id="quarta" class="agendamentos-content" style="display: none;">
+                  <ul>
+                  @if($borrows_friday->isNotEmpty())
+                      <ul class="agendamento-list">
+                          @foreach ($borrows_friday as $borrow)
+                              <li class="agendamento-item">
+                                  <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                      @foreach ($borrow->instruments as $instrument)
+                                          {{ $instrument->name }}
+                                          @if (!$loop->last), @endif
+                                      @endforeach
+                                  </p>
+
+                                  <hr>
+                              </li>
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>Sem agendamentos</p>
+                  @endif
+                  </ul>
+              </div>
+              <div id="quinta" class="agendamentos-content" style="display: none;">
+                <ul>
+                @if($borrows_friday->isNotEmpty())
+                    <ul class="agendamento-list">
+                        @foreach ($borrows_friday as $borrow)
+                            <li class="agendamento-item">
+                                <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                    @foreach ($borrow->instruments as $instrument)
+                                        {{ $instrument->name }}
+                                        @if (!$loop->last), @endif
+                                    @endforeach
+                                </p>
+
+                                <hr>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Sem agendamentos</p>
+                @endif
+                </ul>
             </div>
             <div id="sexta" class="agendamentos-content" style="display: none;">
               <ul>
