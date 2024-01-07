@@ -20,11 +20,9 @@
                             <div class="mb-3">
                                 <label for="instrument_model" class="form-label text-white">Tipo de instrumento:</label>
                                 <select class="form-select" name="instrument_model" id="instrument_model">
-                                    @foreach ($instrument_models as $model)
-                                        <option value="{{ $model->id }}" {{ $model->id == $instrument->instrument_model_id ? 'selected' : '' }}>
-                                            {{ $model->model }}
-                                        </option>
-                                    @endforeach
+                                    <option value="1" {{ $instrument->model_id === 1 ? 'selected' : '' }}>Sopro</option>
+                                    <option value="2" {{ $instrument->model_id === 2 ? 'selected' : '' }}>Corda</option>
+                                    <option value="3" {{ $instrument->model_id === 3 ? 'selected' : '' }}>Percussão</option>
                                 </select>
                             </div>
                             <div class="mb-3">

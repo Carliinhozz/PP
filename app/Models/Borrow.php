@@ -4,20 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Instrument;
-use App\Models\User;
 
 class Borrow extends Model
 {
     use HasFactory;
-    public function instrumentId()
-    {
-        return $this->belongsTo(Instrument::class, 'instrument_id', 'id');    
-    }
-    public function userId()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');    
-    }
+
     protected $fillable = [
        'day_time',
        'user_id',
@@ -30,5 +21,14 @@ class Borrow extends Model
     {
         return $this->belongsTo(Instrument::class, 'instrument_id');
     }
-}
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function instruments()
+    {
+        return $this->belongsToMany(Instrument::class);
+    }
+}

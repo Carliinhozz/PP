@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrow;
 use App\Models\Music;
 use App\Models\Music_playlist;
 use App\Models\Playlist;
@@ -48,11 +49,52 @@ class HomeController extends Controller
             }else{
                 $afternoon_playlist_musics= collect();
             }
-            
+            $borrows= Borrow::where('finished',0)->orderBy('day')->get();
+            foreach ($borrows as $borrow) {
+                $day=Carbon::create($borrow->day);
+                if($day->lessThan(Carbon::today())){
+                    $borrow->finished=1;
+                    $borrow->save();
+                    
+                    
+                }else{
+                    break;
+                }
+                
+            }
+
+            $from=Carbon::today()->startOfWeek();
+            $to=Carbon::today()->endOfWeek()->subDays(6);
+            $borrows_monday=Borrow::where('finished',0)->whereBetween('day',[$from,$to])->orderBy('day')->get();
+
+            $from=Carbon::today()->startOfWeek()->addDays(1);
+            $to=Carbon::today()->endOfWeek()->subDays(5);
+            $borrows_tuesday =Borrow::where('finished',0)->whereBetween('day',[$from,$to])->orderBy('day')->get();
+
+            $from=Carbon::today()->startOfWeek()->addDays(2);
+            $to=Carbon::today()->endOfWeek()->subDays(4);
+            $borrows_wednesday  =Borrow::where('finished',0)->whereBetween('day',[$from,$to])->orderBy('day')->get();
+
+            $from=Carbon::today()->startOfWeek()->addDays(3);
+            $to=Carbon::today()->endOfWeek()->subDays(3);
+            $borrows_thursday   =Borrow::where('finished',0)->whereBetween('day',[$from,$to])->orderBy('day')->get();
+
+            $from=Carbon::today()->startOfWeek()->addDays(4);
+            $to=Carbon::today()->endOfWeek()->subDays(2);
+            $borrows_friday    =Borrow::where('finished',0)->whereBetween('day',[$from,$to])->orderBy('day')->get();
+
             return view('auth.index',[
                 'morning_musics'=>$morning_playlist_musics,
-                'afternoon_musics'=>$afternoon_playlist_musics
+                'afternoon_musics'=>$afternoon_playlist_musics,
+                'borrows_monday'=>$borrows_monday,
+                'borrows_tuesday'=>$borrows_tuesday,
+                'borrows_wednesday'=>$borrows_wednesday,
+                'borrows_thursday'=>$borrows_thursday,
+                'borrows_friday'=>$borrows_friday,
+
             ]);
+            // return var_dump($borrows_friday);
+            
             
         }
         Auth::logout();

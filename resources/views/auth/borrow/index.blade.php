@@ -8,6 +8,11 @@
         <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
           <h2>Fazer Agendamento</h2>
           <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
+          @if(session('alert') && session('message'))
+              <div class="alert alert-{{ session('alert') }}">
+                  {{ session('message') }}
+              </div>
+          @endif
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
         </div>
@@ -32,40 +37,53 @@
                     <select class="form-select" name="horario" required>
                         <!-- Manhã -->
                         <optgroup label="Manhã">
-                            <option value="7h - 8h">7h - 8h</option>
-                            <option value="9h - 10h">9h - 10h</option>
-                            <option value="10h - 11h">10h - 11h</option>
-                            <option value="11h - 12h">11h - 12h</option>
+                            <option value="7">7h - 8h</option>
+                            <option value="9">9h - 10h</option>
+                            <option value="10">10h - 11h</option>
                         </optgroup>
 
                         <!-- Tarde -->
                         <optgroup label="Tarde">
-                            <option value="13h - 14h">13h - 14h</option>
-                            <option value="15h - 16h">15h - 16h</option>
-                            <option value="16h - 17h">16h - 17h</option>
-                            <option value="17h - 18h">17h - 18h</option>
+                            <option value="13">13h - 14h</option>
+                            <option value="15">15h - 16h</option>
+                            <option value="16">16h - 17h</option>
+                            <option value="17">17h - 18h</option>
                         </optgroup>
 
                         <!-- Noite -->
                         <optgroup label="Noite">
-                            <option value="19h - 20h">19h - 20h</option>
-                            <option value="20h - 21h">20h - 21h</option>
+                            <option value="19">19h - 20h</option>
+                            <option value="20">20h - 21h</option>
                         </optgroup>
                     </select>
                 </div>
                 </div>
                 <div class="row">
-                  <div class="mb-3">
-                    <label for="instrument" class="form-label text-white">Instrumento:</label>
-                    <select class="form-select" name="instrument" required>
-                      @foreach ($instruments as $instrument)
-                        <option value="{{ $instrument->id }}">
-                          {{ $instrument->name }} - {{ $instrument->description }}
-                        </option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
+                <div class="row">
+                <div class="row">
+    <div class="mb-3">
+        <label for="instruments" class="form-label text-white">Instrumentos:</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="instrumentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Selecionar Instrumentos
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="instrumentDropdown">
+                @foreach ($instruments as $instrument)
+                    <li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="instruments[]" value="{{ $instrument->id }}" id="instrument{{ $instrument->id }}">
+                            <label class="form-check-label" for="instrument{{ $instrument->id }}">
+                                {{ $instrument->name }} - {{ $instrument->description }}
+                            </label>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+
+
                 <button type="submit" class="btn-env">Enviar</button>
               </form>
             </div>
@@ -97,22 +115,28 @@
 
             $('input[name="date"]').change(function () {
                 const selectedDate = $(this).val();
-                const currentDate = new Date();
-                const selectedYear = new Date(selectedDate).getFullYear();
+                
+                if (!selectedDate) {
+                    return;
+                }
 
-                if (selectedYear !== currentYear) {
+                const selectedDateObj = new Date(selectedDate);
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+
+                if (selectedDateObj.getFullYear() > currentYear) {
                     alert(`Selecione uma data válida para o ano de ${currentYear}.`);
                     $(this).val('');
                     return;
                 }
 
-                if (new Date(selectedDate) < currentDate) {
-                    alert('Selecione uma data igual ou posterior à hoje.');
+                if (selectedDateObj < yesterday) {
+                    alert('Selecione uma data igual ou posterior a hoje.');
                     $(this).val('');
                     return;
                 }
 
-                if (isWeekend(new Date(selectedDate)) || isHoliday(selectedDate, holidays)) {
+                if (isWeekend(selectedDateObj) || isHoliday(selectedDate, holidays)) {
                     alert('Selecione uma data que não seja feriado ou fim de semana.');
                     $(this).val('');
                 }
