@@ -10,14 +10,14 @@
                     <img src="assets/img/user.png" alt="Foto do Perfil">
                     <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
                     <div class="container row justify-content-start gap-5 mt-4">
-                        <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
-                        <a href="#pedidos" class="text-left text-light col-12" onclick="showContent('pedidos')">Seus pedidos</a>
-                        <a href="#agendamentos" class="text-left text-light col-12" onclick="showContent('agendamentos')">Seus agendamentos</a>
-                        <a href="#ficha-instrumentos" class="text-left text-light col-12" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
+                        <a href="#dados" class="text-left text-light col-12 op-perfil" onclick="showContent('dados')">Dados pessoais</a>
+                        <a href="#pedidos" class="text-left text-light col-12 op-perfil" onclick="showContent('pedidos')">Seus pedidos</a>
+                        <a href="#agendamentos" class="text-left text-light col-12 op-perfil" onclick="showContent('agendamentos')">Seus agendamentos</a>
+                        <a href="#ficha-instrumentos" class="text-left text-light col-12 mb-4 op-perfil" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
                     </div>
                 </div>
             </div>
-            <div id="container2" class="col-md-8 text-light" style="background-color: #6B6198;">
+            <div id="container2" class="col-md-8 text-light">
                 <div id="content-dados" class="container mt-4 content active">
                     <div class="perfil-title">
                         <h3>Dados pessoais:</h3>
@@ -87,8 +87,8 @@
                     <div class="perfil-title mt-4">
                         <h3>Ficha de Instrumentos:</h3>
                     </div>
-                    <div class="row">
-                        <div class="form-group flex-grow-1 mr-2">
+                    <div class="row gap-3 mt-3">
+                        <div class="form-group col-4">
                             <label for="tipo-instrumento">Tipo de Instrumento:</label>
                             <select class="form-control" name="instrument_model" id="instrument_model">
                                 @foreach ($instrument_models as $model)
@@ -96,79 +96,40 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group flex-grow-1 mr-2">
+                        <div class="form-group col-4 mr-2">
                             <label for="instrumento">Instrumento:</label>
                             <select class="form-control" name="instrumento" id="instrumento">
                                 
                             </select>
                         </div>
-                        <button class="btn btn-primary">Buscar</button>
+                        <div class="col-3 d-flex flex-column justify-content-end align-items-center"><button class="btn-instrumento">Buscar</button></div>
                     </div>
-                    <div style="background-color: #534881; padding: 20px; color: white; margin-top: 20px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="box-instrumento mt-5">
+                        <div class="info-instrumento">
                             <h4>Guitarra</h4>
-                            <div>
-                                <label for="status">Status:</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option value="1">Disponível</option>
-                                    <option value="0">Indisponível</option>
-                                </select>
-                            </div>
-                            <div>
-                                <button class="btn btn-success">Salvar</button>
-                            </div>
+                                <div class="row gap-3">
+                                    <div class="col-3">
+                                        <label for="status">Status:</label>
+                                        <select class="form-control" name="status" id="status">
+                                        <option value="1">Disponível</option>
+                                        <option value="0">Indisponível</option>
+                                        </select>
+                                    </div>
+                                <div class="col-8">
+                                    <label for="descrition">Descrição:</label>
+                                    <!-- <input type="text" name="descrition" class="form-control" placeholder="Digite a descrição"> -->
+                                    <textarea name="" id="descrition" name="descrition" class="form-control" placeholder="Digite a descrição" rows="1"></textarea>
+                                </div>
+                                <div class="col-12 mt-5 d-flex flex-column justify-content-end align-content-end">
+                                    <button class="btn-save">Salvar</button>
+                                </div>
                         </div>
-                        <div>
-                            <label for="descrition">Descrição:</label>
-                            <input type="text" id="descrition" name="descrition" class="form-control" placeholder="Digite a descrição">
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <style>
-        #profile {
-            background-color: #534881;
-            text-align: left;
-            padding: 20px;
-            color: white;
-            height: 100%;
-        }
-
-        #profile img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        #container2 {
-            max-height: calc(100vh - 80px);
-            overflow-y: auto;
-        }
-
-        .pedido-list {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            color: black;
-        }
-
-        .pedido-list ol {
-            list-style-type: decimal;
-            padding-left: 20px;
-        }
-
-        .content {
-            display: none;
-        }
-
-        .content.active {
-            display: block;
-        }
-    </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
