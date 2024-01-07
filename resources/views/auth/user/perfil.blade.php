@@ -10,18 +10,11 @@
                     <img src="assets/img/user.png" alt="Foto do Perfil">
                     <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
                     <div class="container row justify-content-start gap-5 mt-4">
-<<<<<<< HEAD
                         <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
                         <a href="#pedidos" class="text-left text-light col-12" onclick="showContent('pedidos')">Seus pedidos</a>
                         <a href="#agendamentos" class="text-left text-light col-12" onclick="showContent('agendamentos')">Seus agendamentos</a>
                         <a href="#allagendamentos" class="text-left text-light col-12" onclick="showContent('allagendamentos')">Todos os agendamentos</a>
                         <a href="#ficha-instrumentos" class="text-left text-light col-12" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
-=======
-                        <a href="#dados" class="text-left text-light col-12 op-perfil" onclick="showContent('dados')">Dados pessoais</a>
-                        <a href="#pedidos" class="text-left text-light col-12 op-perfil" onclick="showContent('pedidos')">Seus pedidos</a>
-                        <a href="#agendamentos" class="text-left text-light col-12 op-perfil" onclick="showContent('agendamentos')">Seus agendamentos</a>
-                        <a href="#ficha-instrumentos" class="text-left text-light col-12 mb-4 op-perfil" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
->>>>>>> fd75c2307c2c7ba8b83b814cdb8e9832cbd5cc5c
                     </div>
                 </div>
             </div>
