@@ -1,7 +1,7 @@
 <header id="header" class="header d-flex align-items-center">
 <div class="container d-flex flex-row justify-content-between align-content-center">
   <a href="{{url('/')}}" class="align-items-center">
-    <img src="assets/img/Logo.png" alt="Logo" class="img_header p-2 mt-2">
+    <img src="{{ asset('assets/img/Logo.png') }}" alt="Logo" class="img_header p-2 mt-2">
   </a>
   <nav id="navbar" class="navbar">
             <ul>

@@ -111,7 +111,7 @@ class BorrowController extends Controller
             $borrow->instruments()->detach();
             $borrow->delete();
 
-            return redirect('/perfil#agendamentos');z
+            return redirect('/perfil#agendamentos');
         }
 
     }
