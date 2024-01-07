@@ -41,9 +41,7 @@ Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::
 Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
     Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
-    Route::delete('/borrows/{id}', [BorrowController::class, 'destroy'])->name('delete')->middleware('auth');
-
-
+    Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete')->middleware('auth');
     
 });
 
@@ -52,9 +50,8 @@ Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::post('musicas', [MusicController::class,'search'])->name('search');
         Route::post('musicas/{id}', [MusicController::class,'store'])->name('store');
         Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->name('delete');
-    }
-
-);
+        
+ });
 
 Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::get('playlist', [PlaylistController::class,'index'])->name('index');

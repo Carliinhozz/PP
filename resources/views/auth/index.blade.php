@@ -56,11 +56,11 @@
               <li onclick="showContent('quinta', 'agendamentos')">Quinta</li>
               <li onclick="showContent('sexta', 'agendamentos')">Sexta</li>
             </ul>
-              <div id="segunda" class="agendamentos-content" style="display: none;">
+              <div id="segunda" class="agendamentos-content">
                   <ul>
-                  @if($borrows_friday->isNotEmpty())
+                  @if($borrows_monday->isNotEmpty())
                       <ul class="agendamento-list">
-                          @foreach ($borrows_friday as $borrow)
+                          @foreach ($borrows_monday as $borrow)
                               <li class="agendamento-item">
                                   <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
                                       @foreach ($borrow->instruments as $instrument)
@@ -80,9 +80,9 @@
               </div>
               <div id="terca" class="agendamentos-content" style="display: none;">
                   <ul>
-                  @if($borrows_friday->isNotEmpty())
+                  @if($borrows_tuesday->isNotEmpty())
                       <ul class="agendamento-list">
-                          @foreach ($borrows_friday as $borrow)
+                          @foreach ($borrows_tuesday as $borrow)
                               <li class="agendamento-item">
                                   <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
                                       @foreach ($borrow->instruments as $instrument)
@@ -102,9 +102,9 @@
               </div>
               <div id="quarta" class="agendamentos-content" style="display: none;">
                   <ul>
-                  @if($borrows_friday->isNotEmpty())
+                  @if($borrows_wednesday ->isNotEmpty())
                       <ul class="agendamento-list">
-                          @foreach ($borrows_friday as $borrow)
+                          @foreach ($borrows_wednesday as $borrow)
                               <li class="agendamento-item">
                                   <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
                                       @foreach ($borrow->instruments as $instrument)
@@ -124,9 +124,9 @@
               </div>
               <div id="quinta" class="agendamentos-content" style="display: none;">
                 <ul>
-                @if($borrows_friday->isNotEmpty())
+                @if($borrows_thursday->isNotEmpty())
                     <ul class="agendamento-list">
-                        @foreach ($borrows_friday as $borrow)
+                        @foreach ($borrows_thursday as $borrow)
                             <li class="agendamento-item">
                                 <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
                                     @foreach ($borrow->instruments as $instrument)
