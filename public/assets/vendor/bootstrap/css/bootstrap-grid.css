@@ -9,7 +9,7 @@
 .container-xl,
 .container-lg,
 .container-md,
-.container-sm {
+.-sm {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   width: 100%;

@@ -1,80 +1,89 @@
 @extends('layouts.default')
 
 @section('main')
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero">
+
+<section id="hero" class="hero">
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
-        <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
+        <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-start">
           <h2>Fazer Agendamento</h2>
           <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
+          @if(session('alert') && session('message'))
+              <div class="alert alert-{{ session('alert') }}">
+                  {{ session('message') }}
+              </div>
+          @endif
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
-          <!-- Adicione uma imagem representativa, se desejar -->
-          <!-- <img src="caminho-para-sua-imagem.jpg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100"> -->
         </div>
       </div>
     </div>
   </section>
-  <!-- End Hero Section -->
 
-  <!-- Adicione o Contêiner de Formulário para Fazer Agendamento -->
-  @if (Auth::check())
     <section id="fazer-agendamento" class="fazer-agendamento">
       <div class="container">
         <div class="row justify-content-center" data-aos="fade-in">
           <div class="col-lg-12">
             <div class="purple-box rounded-3 p-4">
-              <form action="{{ route('borrow.index') }}" method="POST">
+              <form action="{{ route('borrow.create') }}" method="POST">
                 @csrf
                 <div class="row">
                   <div class="mb-3 col-md-6">
-                    <label for="estudante" class="form-label text-white">Estudante:</label>
-                    <input type="text" class="form-control" name="estudante" value="{{ Auth::user()->name }}" readonly>
+                    <label for="date" class="form-label text-white">Data:</label>
+                    <input type="date" class="form-control" name="date" required>
                   </div>
                   <div class="mb-3 col-md-6">
-                    <label for="matricula" class="form-label text-white">Matrícula:</label>
-                    <input type="text" class="form-control" name="matricula" value="{{ Auth::user()->registration }}" readonly>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="mb-3 col-md-6">
-                    <label for="data" class="form-label text-white">Data:</label>
-                    <input type="date" class="form-control" name="data" required>
-                  </div>
-                  <div class="mb-3 col-md-6">
-                    <label for="instrumento" class="form-label text-white">Instrumento:</label>
-                    <input type="text" class="form-control" name="instrumento" required>
-                  </div>
-                </div>
-                <div class="row">
-                <div class="mb-3 col-md-6">
                     <label for="horario" class="form-label text-white">Horário:</label>
                     <select class="form-select" name="horario" required>
                         <!-- Manhã -->
                         <optgroup label="Manhã">
-                            <option value="7h - 8h">7h - 8h</option>
-                            <option value="9h - 10h">9h - 10h</option>
-                            <option value="10h - 11h">10h - 11h</option>
-                            <option value="11h - 12h">11h - 12h</option>
+                            <option value="7">7h - 8h</option>
+                            <option value="9">9h - 10h</option>
+                            <option value="10">10h - 11h</option>
                         </optgroup>
 
                         <!-- Tarde -->
                         <optgroup label="Tarde">
-                            <option value="13h - 14h">13h - 14h</option>
-                            <option value="15h - 16h">15h - 16h</option>
-                            <option value="16h - 17h">16h - 17h</option>
-                            <option value="17h - 18h">17h - 18h</option>
+                            <option value="13">13h - 14h</option>
+                            <option value="15">15h - 16h</option>
+                            <option value="16">16h - 17h</option>
+                            <option value="17">17h - 18h</option>
                         </optgroup>
 
                         <!-- Noite -->
                         <optgroup label="Noite">
-                            <option value="19h - 20h">19h - 20h</option>
-                            <option value="20h - 21h">20h - 21h</option>
+                            <option value="19">19h - 20h</option>
+                            <option value="20">20h - 21h</option>
                         </optgroup>
                     </select>
                 </div>
                 </div>
+                <div class="row">
+                <div class="row">
+                <div class="row">
+    <div class="mb-3">
+        <label for="instruments" class="form-label text-white">Instrumentos:</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="instrumentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Selecionar Instrumentos
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="instrumentDropdown">
+                @foreach ($instruments as $instrument)
+                    <li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="instruments[]" value="{{ $instrument->id }}" id="instrument{{ $instrument->id }}">
+                            <label class="form-check-label" for="instrument{{ $instrument->id }}">
+                                {{ $instrument->name }} - {{ $instrument->description }}
+                            </label>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+
+
                 <button type="submit" class="btn-env">Enviar</button>
               </form>
             </div>
@@ -82,54 +91,59 @@
         </div>
       </div>
     </section>
-  @endif
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', async function () {
-        var dataInput = document.querySelector('input[name="data"]');
+    function isWeekend(date) {
+        const day = date.getDay();
+        return day === 5 || day === 6;
+    }
 
-        // Função para verificar se a data é um feriado ou final de semana
-        async function isHolidayOrWeekend(date) {
-            var formattedDate = date.toISOString().split('T')[0];
-            var apiKey = '5930|Dm6va8HOVnVmCTQiNI4KcdZUEvSs3KmP';
-            var state = 'RN';
+    function isHoliday(date, holidays) {
+        return holidays.some(holiday => holiday.date === date);
+    }
 
-            var url = `https://api.invertexto.com/v1/holidays/${date.getFullYear()}?token=${apiKey}&state=${state}`;
+    $(document).ready(function () {
+        const currentYear = new Date().getFullYear();
 
-            try {
-                var response = await fetch(url);
-                var data = await response.json();
+        const holidaysUrl = `https://api.invertexto.com/v1/holidays/${currentYear}?token=6029|NzXSNB9YQnuGlg6gQ10KsgyZL11VN584&state=RN`;
 
-                // Verifica se a data é um feriado ou final de semana
-                return data.some(feriado => feriado.date === formattedDate) || date.getDay() === 0 || date.getDay() === 6;
-            } catch (error) {
-                console.error('Erro ao verificar feriado:', error);
-                return false;
-            }
-        }
+        $.getJSON(holidaysUrl, function (data) {
+            const holidays = data;
 
-        // Função para validar a data ao selecioná-la
-        async function validarDataSelecionada() {
-            var dataSelecionada = new Date(dataInput.value);
+            $('input[name="date"]').change(function () {
+                const selectedDate = $(this).val();
+                
+                if (!selectedDate) {
+                    return;
+                }
 
-            if (await isHolidayOrWeekend(dataSelecionada)) {
-                alert('Selecione uma data válida. Finais de semana e feriados não são permitidos.');
-                dataInput.value = ''; // Limpar o campo se for inválido
-            }
-        }
+                const selectedDateObj = new Date(selectedDate);
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
 
-        // Adicione um ouvinte de eventos ao campo de data
-        dataInput.addEventListener('change', validarDataSelecionada);
+                if (selectedDateObj.getFullYear() > currentYear) {
+                    alert(`Selecione uma data válida para o ano de ${currentYear}.`);
+                    $(this).val('');
+                    return;
+                }
+
+                if (selectedDateObj < yesterday) {
+                    alert('Selecione uma data igual ou posterior a hoje.');
+                    $(this).val('');
+                    return;
+                }
+
+                if (isWeekend(selectedDateObj) || isHoliday(selectedDate, holidays)) {
+                    alert('Selecione uma data que não seja feriado ou fim de semana.');
+                    $(this).val('');
+                }
+            });
+        });
     });
 </script>
-
-
-
-
-@section('footer')
-  <!-- Sem footer nesta página -->
-@endsection
 
 <div id="preloader"></div>
 

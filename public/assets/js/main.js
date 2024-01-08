@@ -70,36 +70,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavShow = document.querySelector('.mobile-nav-show');
   const mobileNavHide = document.querySelector('.mobile-nav-hide');
 
-  document.querySelectorAll('.mobile-nav-toggle').forEach(el => {
-    el.addEventListener('click', function(event) {
-      event.preventDefault();
-      mobileNavToogle();
-    })
+document.querySelectorAll('.mobile-nav-toggle').forEach(el => {
+  el.addEventListener('click', function(event) {
+    event.preventDefault();
+    mobileNavToggle();
   });
+});
 
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavShow.classList.toggle('d-none');
-    mobileNavHide.classList.toggle('d-none');
-  }
+function mobileNavToggle() {
+  document.body.classList.toggle('mobile-nav-active');
+  mobileNavShow.classList.toggle('d-none');
+  mobileNavHide.classList.toggle('d-none');
+}
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navbar a').forEach(navbarlink => {
+// Ocultar o ícone de fechar inicialmente
+mobileNavHide.classList.add('d-none');
 
-    if (!navbarlink.hash) return;
+/**
+ * Hide mobile nav on same-page/hash links
+ */
+document.querySelectorAll('#navbar a').forEach(navbarlink => {
+  if (!navbarlink.hash) return;
 
-    let section = document.querySelector(navbarlink.hash);
-    if (!section) return;
+  let section = document.querySelector(navbarlink.hash);
+  if (!section) return;
 
-    navbarlink.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
-      }
-    });
-
+  navbarlink.addEventListener('click', () => {
+    if (document.body.classList.contains('mobile-nav-active')) {
+      mobileNavToggle();
+    }
   });
+});
+
 
   /**
    * Toggle mobile nav dropdowns

@@ -4,7 +4,7 @@
 <section id="hero" class="hero">
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
-        <div class="col-lg-6 order-1 flex-column justify-content-center text-center text-lg-start">
+        <div class="col-lg-6 order-1 flex-column justify-content-center text-start">
           <h2>Pedidos de música</h2>
           <p>Sua música favorita tocando nos corredores do IFRN!</p>
         </div>

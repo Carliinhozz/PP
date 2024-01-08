@@ -3,16 +3,14 @@
 @section('main')
 
   <!-- Adicionando o Contêiner da Playlist do Dia para Usuários Autenticados -->
-  @if (Auth::check())
     <section id="playlist" class="playlist">
       <div class="container">
         <div class="row">
           <h2>Playlist do dia</h2>
           <div class="container col-lg-2">
             <ul class="playlist-tabs row justify-content-center">
-              <li onclick="showPlaylist('manha', event)" class="active col-12 mt-4">Manhã</li>
-              <li onclick="showPlaylist('tarde', event)" class="col-12">Tarde</li>
-              <li onclick="showPlaylist('noite', event)" class="col-12">Noite</li>
+              <li onclick="showPlaylist('manha', event)" class="active col-lg-12 col-sm-6 mt-4">Manhã</li>
+              <li onclick="showPlaylist('tarde', event)" class="col-lg-12 col-sm-6">Tarde</li>
             </ul>
           </div>
           <div class="col-lg-10">
@@ -40,20 +38,12 @@
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
             </div>
-            <div id="noite" class="playlist-content" style="display: none;">
-              <ol>
-                <li>Azul da Cor do Mar - Tim Maia</li>
-                <!-- Adicione mais músicas conforme necessário -->
-              </ol>
-            </div>
           </div>
         </div>
       </div>
     </section>
-  @endif
 
   <!-- Adicionando o Contêiner de Agendamentos para Usuários Autenticados -->
-  @if (Auth::check())
     <section id="agendamentos" class="agendamentos">
       <div class="container">
         <div class="row">
@@ -66,81 +56,125 @@
               <li onclick="showContent('quinta', 'agendamentos')">Quinta</li>
               <li onclick="showContent('sexta', 'agendamentos')">Sexta</li>
             </ul>
-            <div id="segunda" class="agendamentos-content">
-              <ul>
-                <li>7h - 9h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
-            </div>
-            <div id="terca" class="agendamentos-content" style="display: none;">
-              <ul>
-                <li>7h - 8h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
-            </div>
-            <div id="quarta" class="agendamentos-content" style="display: none;">
-              <ul>
-                <li>7h - 9h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
-            </div>
-            <div id="quinta" class="agendamentos-content" style="display: none;">
-              <ul>
-                <li>7h - 8h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
-                <!-- Adicione mais agendamentos conforme necessário -->
-              </ul>
+              <div id="segunda" class="agendamentos-content">
+                  <ul>
+                  @if($borrows_monday->isNotEmpty())
+                      <ul class="agendamento-list">
+                          @foreach ($borrows_monday as $borrow)
+                              <li class="agendamento-item">
+                                  <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                      @foreach ($borrow->instruments as $instrument)
+                                          {{ $instrument->name }}
+                                          @if (!$loop->last), @endif
+                                      @endforeach
+                                  </p>
+
+                                  <hr>
+                              </li>
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>Sem agendamentos</p>
+                  @endif
+                  </ul>
+              </div>
+              <div id="terca" class="agendamentos-content" style="display: none;">
+                  <ul>
+                  @if($borrows_tuesday->isNotEmpty())
+                      <ul class="agendamento-list">
+                          @foreach ($borrows_tuesday as $borrow)
+                              <li class="agendamento-item">
+                                  <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                      @foreach ($borrow->instruments as $instrument)
+                                          {{ $instrument->name }}
+                                          @if (!$loop->last), @endif
+                                      @endforeach
+                                  </p>
+
+                                  <hr>
+                              </li>
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>Sem agendamentos</p>
+                  @endif
+                  </ul>
+              </div>
+              <div id="quarta" class="agendamentos-content" style="display: none;">
+                  <ul>
+                  @if($borrows_wednesday ->isNotEmpty())
+                      <ul class="agendamento-list">
+                          @foreach ($borrows_wednesday as $borrow)
+                              <li class="agendamento-item">
+                                  <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                      @foreach ($borrow->instruments as $instrument)
+                                          {{ $instrument->name }}
+                                          @if (!$loop->last), @endif
+                                      @endforeach
+                                  </p>
+
+                                  <hr>
+                              </li>
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>Sem agendamentos</p>
+                  @endif
+                  </ul>
+              </div>
+              <div id="quinta" class="agendamentos-content" style="display: none;">
+                <ul>
+                @if($borrows_thursday->isNotEmpty())
+                    <ul class="agendamento-list">
+                        @foreach ($borrows_thursday as $borrow)
+                            <li class="agendamento-item">
+                                <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                    @foreach ($borrow->instruments as $instrument)
+                                        {{ $instrument->name }}
+                                        @if (!$loop->last), @endif
+                                    @endforeach
+                                </p>
+
+                                <hr>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Sem agendamentos</p>
+                @endif
+                </ul>
             </div>
             <div id="sexta" class="agendamentos-content" style="display: none;">
               <ul>
-                <li>7h - 8h</li>
-                <li>8h - 9h</li>
-                <li>15h - 16h</li>
-                <!-- Adicione mais agendamentos conforme necessário -->
+              @if($borrows_friday->isNotEmpty())
+                  <ul class="agendamento-list">
+                      @foreach ($borrows_friday as $borrow)
+                          <li class="agendamento-item">
+                              <p>{{ $borrow->time }} | {{ $borrow->user->name }} | Instrumentos: 
+                                  @foreach ($borrow->instruments as $instrument)
+                                      {{ $instrument->name }}
+                                      @if (!$loop->last), @endif
+                                  @endforeach
+                              </p>
+
+                              <hr>
+                          </li>
+                      @endforeach
+                  </ul>
+              @else
+                  <p>Sem agendamentos</p>
+              @endif
               </ul>
-            </div>
+          </div>
           </div>
         </div>
       </div>
     </section>
-  @endif
 @endsection
 
 @section('footer')
   @include('layouts.footer')
 @endsection
-
-<style>
-  .playlist-tabs li {
-    cursor: pointer;
-    user-select: none;
-    list-style: none; /* Remova o ponto antes do texto */
-  }
-
-  .playlist-tabs li.active {
-    font-weight: bold;
-  }
-
-  .agendamentos-days li {
-    cursor: pointer;
-    user-select: none;
-    list-style: none; /* Remova o ponto antes do texto */
-    display: inline-block; /* Alinhe os dias horizontalmente */
-    margin-right: 10px; /* Adicione margem entre os dias */
-  }
-
-  .agendamentos-days li.active {
-    font-weight: bold;
-  }
-
-</style>
 
 <script>
   function showPlaylist(target, event) {

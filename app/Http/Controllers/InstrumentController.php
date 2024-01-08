@@ -35,12 +35,14 @@ class InstrumentController extends Controller
     public function store(Request $request)
     {
         $validate=$request->validate([
+            'name'=>'required',
             'description'=>'required',
             'instrument_model'=>'required',
             'institucional_code'=>'required',
         ]);
 
         $instrument=Instrument::create([
+            'name'=>$request->name,
             'description'=>$request->description,
             'model_id'=>$request->instrument_model,
             'institucional_code'=>$request->institucional_code,
@@ -82,6 +84,7 @@ class InstrumentController extends Controller
     public function update(Request $request, string $id)
     {
         $validate=$request->validate([
+            'name'=>'required',
             'description'=>'required',
             'instrument_model'=>'required',
             'institucional_code'=>'required',
@@ -89,6 +92,7 @@ class InstrumentController extends Controller
 
         $instrument=Instrument::findOrFail($id);
         $instrument->update([
+            'name'=>$request->name,
             'description'=>$request->description,
             'model_id'=>$request->instrument_model,
             'institucional_code'=>$request->institucional_code,
@@ -108,4 +112,5 @@ class InstrumentController extends Controller
         return redirect(route('instruments.index'));
         
     }
+    
 }

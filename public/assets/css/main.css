@@ -241,56 +241,6 @@ section {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-.topbar {
-  background: #00796b;
-  height: 40px;
-  font-size: 14px;
-  transition: all 0.5s;
-  color: #fff;
-  padding: 0;
-}
-
-.topbar .contact-info i {
-  font-style: normal;
-  color: #fff;
-  line-height: 0;
-}
-
-.topbar .contact-info i a,
-.topbar .contact-info i span {
-  padding-left: 5px;
-  color: #fff;
-}
-
-@media (max-width: 575px) {
-
-  .topbar .contact-info i a,
-  .topbar .contact-info i span {
-    font-size: 13px;
-  }
-}
-
-.topbar .contact-info i a {
-  line-height: 0;
-  transition: 0.3s;
-}
-
-.topbar .contact-info i a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.topbar .social-links a {
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 0;
-  transition: 0.3s;
-  margin-left: 20px;
-}
-
-.topbar .social-links a:hover {
-  color: #fff;
-}
-
 .header {
   transition: all 0.5s;
   z-index: 997;
@@ -300,7 +250,11 @@ section {
 
 .btn-enter{
   background-color: #E16C24;
-  color: #000;
+  color: white;
+}
+
+.btn-enter:hover{
+  background-color: #393550;
 }
 
 .header.sticked {
@@ -377,7 +331,7 @@ section {
 
   .navbar ul {
     display:flex;
-    flex-direction:
+    flex-direction: row;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -467,7 +421,7 @@ section {
     font-size: 15px;
     text-transform: none;
     font-weight: 600;
-    color: #006a5d;
+    color: #534881;
   }
 
   .navbar .dropdown ul a i {
@@ -517,11 +471,39 @@ section {
   }
 }
 
+.perfil-drop{
+  background-color: #534881;
+}
+
+.drop-perfil-item{
+  background-color: #534881;
+  border-radius: 10px;
+  color: white;
+  font-size: 11pt;
+  font-weight: bold;
+}
+.drop-perfil-item:hover{
+  font-size: 12pt;
+  background-color: #534881;
+  color: #F8E182;
+}
+
+#dadosp{
+  color: white;
+  font-size: 12pt;
+}
+
+#dadosp:hover{
+  color: #F8E182;
+  font-size: 14pt;
+}
+
 /*--------------------------------------------------------------
 # Mobile Navigation
 --------------------------------------------------------------*/
 @media (max-width: 1279px) {
   .navbar {
+    flex-direction: column;
     position: fixed;
     top: 0;
     right: -100%;
@@ -530,17 +512,23 @@ section {
     bottom: 0;
     transition: 0.3s;
     z-index: 9997;
+    background-color: #534881e5;
   }
 
   .navbar ul {
+    flex-direction: column;
     position: absolute;
     inset: 0;
     padding: 50px 0 10px 0;
-    margin: 0;
-    background: rgba(0, 131, 116, 0.9);
+    margin-top: 40px;
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
+  }
+
+  .navbar a{
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .navbar a,
@@ -571,21 +559,6 @@ section {
     color: #fff;
   }
 
-  .navbar .getstarted,
-  .navbar .getstarted:focus {
-    background: var(--color-primary);
-    padding: 8px 20px;
-    border-radius: 4px;
-    margin: 15px;
-    color: #fff;
-  }
-
-  .navbar .getstarted:hover,
-  .navbar .getstarted:focus:hover {
-    color: #fff;
-    background: rgba(0, 131, 116, 0.8);
-  }
-
   .navbar .dropdown ul,
   .navbar .dropdown .dropdown ul {
     position: static;
@@ -593,8 +566,8 @@ section {
     padding: 10px 0;
     margin: 10px 20px;
     transition: all 0.5s ease-in-out;
-    background-color: #007466;
-    border: 1px solid #006459;
+    background-color: #534881cb;
+    border: 1px solid white;
   }
 
   .navbar .dropdown>.dropdown-active,
@@ -603,8 +576,8 @@ section {
   }
 
   .mobile-nav-show {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 28px;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 30px !important;
     cursor: pointer;
     line-height: 0;
     transition: 0.5s;
@@ -618,7 +591,7 @@ section {
     cursor: pointer;
     line-height: 0;
     transition: 0.5s;
-    position: fixed;
+    position: absolute;
     right: 20px;
     top: 20px;
     z-index: 9999;
@@ -634,11 +607,14 @@ section {
 
   .mobile-nav-active .navbar:before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
-    background: rgba(0, 106, 93, 0.8);
     z-index: 9996;
   }
+}
+
+.mobile-nav-toggle{
+  margin-top: 70px;
 }
 
 /*--------------------------------------------------------------
@@ -2693,16 +2669,35 @@ section {
   margin-top: 100px;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colunas, cada uma com a mesma largura */
-  gap: 10px; /* Espaçamento entre os itens do grid */
-}
-
 .grid-item {
-  border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+}
+
+@media(min-width: 400px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 colunas, cada uma com a mesma largura */
+    gap: 10px; /* Espaçamento entre os itens do grid */
+    margin-top: 15px;
+  }
+}
+
+@media(min-width:768px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas, cada uma com a mesma largura */
+    gap: 10px; /* Espaçamento entre os itens do grid */
+    margin-top: 15px;
+  }
+}
+
+@media(min-width:992px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas, cada uma com a mesma largura */
+    gap: 10px; /* Espaçamento entre os itens do grid */
+  }
 }
 
 /*--------------------------------------------------------------
@@ -2738,10 +2733,172 @@ section {
   color: white;
 }
 
+.playlist-tabs li {
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Remova o ponto antes do texto */
+}
+
+.playlist-tabs li.active {
+  font-weight: bold;
+}
+
+.agendamentos-days li {
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Remova o ponto antes do texto */
+  display: inline-block; /* Alinhe os dias horizontalmente */
+  margin-right: 10px; /* Adicione margem entre os dias */
+}
+
+.agendamentos-days li.active {
+  font-weight: bold;
+}
+
 /*--------------------------------------------------------------
 # Editar Playlist
 --------------------------------------------------------------*/
 .edit-btn{
   background-color: #534881;
   color: white;
+  font-weight: bold;
+}
+
+.edit-btn:hover{
+  background-color: #F8E182;
+  color: #534881;
+  font-weight: bold;
+}
+
+/*--------------------------------------------------------------
+# Dados do usuário
+--------------------------------------------------------------*/
+.perfil-title{
+  background-color: #F8E182;
+  color: #E16C24;
+}
+
+.perfil-title h3{
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.perfil-descricao{
+  font-size: 13pt;
+  color: #F8E182;
+}
+
+.perfil-info{
+  display: flex;
+  align-content: center;
+  align-self: center;
+  background-color: #f8e0824f;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+
+.pedido-list{
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.agendamento-list{
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.btn-instrumento{
+  background-color: #534881;
+  padding: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #F8E182;
+  box-shadow: 3px 3px 3px 2px #F8E182;
+}
+
+.box-instrumento{
+  background-color: rgba(255, 255, 255, 0.144);
+  padding: 12px;
+  height: 250px;
+}
+
+.btn-save{
+  background-color: #F8E182;
+  padding: 8px;
+  width: 20%;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #E16C24;
+  box-shadow: 3px 3px 3px 2px #E16C24;
+}
+
+#container2{
+  background-color: #6b6198ce;
+  margin-left: -12px;
+}
+
+.op-perfil{
+  color: white;
+  font-size: 13pt;
+  font-weight: bold;
+}
+
+.op-perfil:hover{
+  font-size: 14pt;
+  background-color: rgba(255, 255, 255, 0.164);
+  border-radius: 10px;
+}
+
+#profile {
+  background-color: #534881;
+  text-align: left;
+  padding: 20px;
+  color: white;
+  height: 100%;
+}
+
+#profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+#container2 {
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.pedido-list {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.pedido-list ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.content {
+  display: none;
+}
+
+.content.active {
+  display: block;
+}
+
+/*--------------------------------------------------------------
+# Instrumentos page
+--------------------------------------------------------------*/
+.instrumento h2{
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #534881;
 }

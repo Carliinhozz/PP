@@ -5,7 +5,7 @@
   <section id="hero" class="hero">
     <div class="container position relative d-flex justify-content-around">
       <div class="row gy-5" data-aos="fade-in">
-        <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
+        <div class="col-lg-6 order-1 flex-column justify-content-center text-center text-lg-start">
           <h2>Rádio Desopila</h2>
           <p>A plataforma da Rádio Desopila é fonte de comunicação e entretenimento dentro da escola e por isso se tornou um ponto de convergência para a diversidade de vozes e interesses, através de programas culturais, revista, pedidos de música, etc., a rádio se esforça para oferecer conteúdo que informe, inspire e, claro, divirta.
           </p>
@@ -13,7 +13,7 @@
         <!-- <div class="video-index col-lg-6 order-1 order-lg-2">
           <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
         </div> -->
-        <div class="video-index col-lg-6 order-1 order-lg-2">
+        <div class="video-index col-lg-6 order-2">
           <!-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
           <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt=""> -->
           <video src="https://www.youtube.com/watch?v=DTIetbQKFEY" controls class="rounded video">
