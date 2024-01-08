@@ -69,15 +69,7 @@ Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
     Route::post('instrumentos/{id}/editar',[InstrumentController::class, 'update'])->name('update');
     Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete');
     Route::post('instrumentos/{id}/edit', [InstrumentController::class, 'edit'])->name('edit');
-    Route::post('instrumentos/get-details/{instrumentId}', function ($instrumentId) {
-        $instrument = \App\Models\Instrument::find($instrumentId);
-
-        return response()->json([
-            'name' => $instrument->name,
-            'disponibility' => $instrument->disponibility,
-            'description' => $instrument->description,
-        ]);
-    })->name('instruments.getDetails');
+    Route::post('instrumentos/get-details/{instrumentId}', [InstrumentController::class, 'getDetails'])->name('get');
 
 });
 Route::middleware(SuapToken::class)->name('admin.')->group(function () {

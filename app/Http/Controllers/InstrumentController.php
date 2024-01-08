@@ -119,5 +119,15 @@ class InstrumentController extends Controller
         return redirect(route('instruments.index'));
         
     }
+
+    public function getDetails ($instrumentId) {
+        $instrument = \App\Models\Instrument::find($instrumentId);
+
+        return response()->json([
+            'name' => $instrument->name,
+            'disponibility' => $instrument->disponibility,
+            'description' => $instrument->description,
+        ]);
+    }
     
 }
