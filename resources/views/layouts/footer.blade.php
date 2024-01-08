@@ -6,7 +6,7 @@
           <a href="{{url('/')}}" class="logo d-flex align-items-center">
             <span>Rádio desopila</span>
           </a>
-          <div class="col-lg-6 col-md-12 footer-contact text-center text-md-start">
+          <div class="col-lg-6 col-md-12 footer-contact text-start">
           <h4>Entre em contato</h4>
           <p>
             Campus IFRN - Caicó <br>
