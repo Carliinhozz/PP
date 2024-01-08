@@ -9,7 +9,7 @@
     <button class="btn edit-btn col-5" onclick="showAfternoon()">Tarde</button>
 </div>
 
-<div class="container" id="morningPlaylist" style="display: block;">
+<div class="container" id="morningPlaylist">
     <div class="card card-body">
         <ul class="list-group list-group-numbered">
             @if (!$morning_playlist_musics->isEmpty())

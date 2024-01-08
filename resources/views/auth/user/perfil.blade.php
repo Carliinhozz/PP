@@ -35,15 +35,15 @@
                         <h3>Seus Pedidos:</h3>
                     </div>
                     <div class="pedido-list">
-                        <ol>
-                            @if ($musics->isNotEmpty())
+                        @if ($musics->isNotEmpty())
+                            <ul>
                                 @foreach ($musics as $music)
                                     <li>
-                                        <div><b>{{$music->title}}</b></div>
-                                        <p>{{$music->artist}}</p>
+                                        <div><p><b>{{ $music->title }}</b> - {{ $music->artist }}</p></div>
+                                        <hr>
                                     </li>
                                 @endforeach
-                        </ol>
+                            </ul>
                         @else
                             <p>Sem pedidos</p>
                         @endif
@@ -178,14 +178,14 @@
             <label for="instrument">Instrumento:</label>
             <select class="form-control" name="instrument" id="instrument" onchange="this.form.submit()">
                 @foreach ($instruments as $instrument)
-                    <option value="{{ $instrument->id }}" {{ $instrument->id == $instrument->id ? 'selected' : '' }}>{{ $instrument->name }}</option>
+                    <option value="{{ $instrument->id }}" {{ $instrument->id == $instrument->id ? 'selected' : '' }}>{{ $instrument->name }} - {{ $instrument->description }}</option>
                 @endforeach
             </select>
         </div>
     </div>
         <div class="box-instrumento mt-5">
             @if(isset($instrument))
-                <h4 id="instrumentName">{{ $instrument->name }}</h4>
+                <h4 id="instrumentName">{{ $instrument->name }} - {{ $instrument->description }}</h4>
                 <form action="{{ route('instruments.edit', ['id' => $instrument->id]) }}" method="POST">
             @csrf
             <div class="form-group">

@@ -18,22 +18,22 @@
               <ol class="row justify-content-center">
                 @if($morning_musics->isNotEmpty())
                   @foreach ($morning_musics as $music)
-                      <li>{{$music->title}}</li>
+                      <li>{{$music->title}} - {{$music->artist}}</li>
                   @endforeach
                 @else
-                  <li>Sem músicas ate o momento</li>
+                  <p>Sem músicas ate o momento</p>
                 @endif
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
             </div>
-            <div id="tarde" class="playlist-content" style="display: none;">
-              <ol>
+            <div id="tarde" class="container playlist-content" style="display: none;">
+              <ol class="row justify-content-center">
                 @if($afternoon_musics->isNotEmpty())
                   @foreach ($afternoon_musics as $music)
-                      <li>{{$music->title}}</li>
+                      <li>{{$music->title}} - {{$music->artist}}</li>
                   @endforeach
                 @else
-                  <li>Sem músicas ate o momento</li>
+                  <p>Sem músicas ate o momento</p>
                 @endif
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
