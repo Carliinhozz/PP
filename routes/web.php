@@ -35,13 +35,15 @@ Route::get('/sobre', function ()  {
     return view('about');
 });
 
-Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::class);
+Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::class)->name('perfil');
 
 
 Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
     Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
     Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete')->middleware('auth');
+    Route::get('/borrow/{id}/editar', [BorrowController::class, 'edit'])->name('edit');
+    Route::post('/borrow/{id}/editar', [BorrowController::class, 'update'])->name('update');
     
 });
 
@@ -72,7 +74,7 @@ Route::middleware(SuapToken::class)->name('admin.')->group(function () {
     Route::post('bolsista',[UserController::class,'search'])->name('search');
     Route::post('bolsista/{id}/delete',[UserController::class,'destroy'])->name('delete');
     Route::post('bolsista/{id}/promote',[UserController::class,'promote'])->name('promote');
-    // Route::get()->name();
+    
 });
 Route::name('suap.')
     ->group(function () {
