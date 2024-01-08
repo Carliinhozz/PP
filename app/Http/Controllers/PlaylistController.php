@@ -103,7 +103,7 @@ class PlaylistController extends Controller
         'afternoon_playlist_musics'=>$afternoon_playlist_musics,
         'morning_playlist'=>$morning_playlist,
         'afternoon_playlist'=>$afternoon_playlist,
-         ]);
+        ]);
  
     }
 
