@@ -241,56 +241,6 @@ section {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-.topbar {
-  background: #00796b;
-  height: 40px;
-  font-size: 14px;
-  transition: all 0.5s;
-  color: #fff;
-  padding: 0;
-}
-
-.topbar .contact-info i {
-  font-style: normal;
-  color: #fff;
-  line-height: 0;
-}
-
-.topbar .contact-info i a,
-.topbar .contact-info i span {
-  padding-left: 5px;
-  color: #fff;
-}
-
-@media (max-width: 575px) {
-
-  .topbar .contact-info i a,
-  .topbar .contact-info i span {
-    font-size: 13px;
-  }
-}
-
-.topbar .contact-info i a {
-  line-height: 0;
-  transition: 0.3s;
-}
-
-.topbar .contact-info i a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.topbar .social-links a {
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 0;
-  transition: 0.3s;
-  margin-left: 20px;
-}
-
-.topbar .social-links a:hover {
-  color: #fff;
-}
-
 .header {
   transition: all 0.5s;
   z-index: 997;
@@ -301,6 +251,10 @@ section {
 .btn-enter{
   background-color: #E16C24;
   color: white;
+}
+
+.btn-enter:hover{
+  background-color: #393550;
 }
 
 .header.sticked {
@@ -467,7 +421,7 @@ section {
     font-size: 15px;
     text-transform: none;
     font-weight: 600;
-    color: #006a5d;
+    color: #534881;
   }
 
   .navbar .dropdown ul a i {
@@ -549,6 +503,7 @@ section {
 --------------------------------------------------------------*/
 @media (max-width: 1279px) {
   .navbar {
+    flex-direction: column;
     position: fixed;
     top: 0;
     right: -100%;
@@ -557,17 +512,23 @@ section {
     bottom: 0;
     transition: 0.3s;
     z-index: 9997;
+    background-color: #534881e5;
   }
 
   .navbar ul {
+    flex-direction: column;
     position: absolute;
     inset: 0;
     padding: 50px 0 10px 0;
-    margin: 0;
-    background: rgba(0, 131, 116, 0.9);
+    margin-top: 40px;
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
+  }
+
+  .navbar a{
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .navbar a,
@@ -598,21 +559,6 @@ section {
     color: #fff;
   }
 
-  .navbar .getstarted,
-  .navbar .getstarted:focus {
-    background: var(--color-primary);
-    padding: 8px 20px;
-    border-radius: 4px;
-    margin: 15px;
-    color: #fff;
-  }
-
-  .navbar .getstarted:hover,
-  .navbar .getstarted:focus:hover {
-    color: #fff;
-    background: rgba(0, 131, 116, 0.8);
-  }
-
   .navbar .dropdown ul,
   .navbar .dropdown .dropdown ul {
     position: static;
@@ -620,8 +566,8 @@ section {
     padding: 10px 0;
     margin: 10px 20px;
     transition: all 0.5s ease-in-out;
-    background-color: #007466;
-    border: 1px solid #006459;
+    background-color: #534881cb;
+    border: 1px solid white;
   }
 
   .navbar .dropdown>.dropdown-active,
@@ -630,8 +576,8 @@ section {
   }
 
   .mobile-nav-show {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 28px;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 30px !important;
     cursor: pointer;
     line-height: 0;
     transition: 0.5s;
@@ -645,7 +591,7 @@ section {
     cursor: pointer;
     line-height: 0;
     transition: 0.5s;
-    position: fixed;
+    position: absolute;
     right: 20px;
     top: 20px;
     z-index: 9999;
@@ -661,11 +607,14 @@ section {
 
   .mobile-nav-active .navbar:before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
-    background: rgba(0, 106, 93, 0.8);
     z-index: 9996;
   }
+}
+
+.mobile-nav-toggle{
+  margin-top: 70px;
 }
 
 /*--------------------------------------------------------------
