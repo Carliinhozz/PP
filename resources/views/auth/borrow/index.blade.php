@@ -61,22 +61,24 @@
                 <div class="row">
                 <div class="row">
                 <div class="row">
-    <div class="mb-3">
-        <label for="instruments" class="form-label text-white">Instrumentos:</label>
+                <div class="mb-3">
+    <label for="instruments" class="form-label text-white">Instrumentos:</label>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="instrumentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 Selecionar Instrumentos
             </button>
             <ul class="dropdown-menu" aria-labelledby="instrumentDropdown">
                 @foreach ($instruments as $instrument)
-                    <li>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="instruments[]" value="{{ $instrument->id }}" id="instrument{{ $instrument->id }}">
-                            <label class="form-check-label" for="instrument{{ $instrument->id }}">
-                                {{ $instrument->name }} - {{ $instrument->description }}
-                            </label>
-                        </div>
-                    </li>
+                    @if ($instrument->disponibility)
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="instruments[]" value="{{ $instrument->id }}" id="instrument{{ $instrument->id }}">
+                                <label class="form-check-label" for="instrument{{ $instrument->id }}">
+                                    {{ $instrument->name }} - {{ $instrument->description }}
+                                </label>
+                            </div>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
         </div>

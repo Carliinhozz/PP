@@ -108,7 +108,7 @@ class BorrowController extends Controller
         $borrow=Borrow::findOrFail($id);
         $borrow->observations=$request->observations;
         $borrow->save();
-        return redirect(route('perfil'));
+        return redirect('/perfil#allagendamentos');
     }
 
     /**

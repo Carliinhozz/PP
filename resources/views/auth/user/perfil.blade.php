@@ -148,7 +148,10 @@
                                                 <form action="{{route('borrow.edit', ['id' => $borrow->id])}}" method="get" >
                                                     <button class="btn btn-info ml-2">Editar Observação</button>
                                                 </form>
-                                                
+                                                @if ($borrow->observations !== '')
+                                                <i class="bi bi-circle-fill text-danger"></i>
+                                                @elseif ($borrow->observations == null)
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -172,7 +175,7 @@
     @csrf
     <div class="row gap-3 mt-3">
         <div class="form-group col-4 mr-2">
-            <label for="instrument">Instrument:</label>
+            <label for="instrument">Instrumento:</label>
             <select class="form-control" name="instrument" id="instrument" onchange="this.form.submit()">
                 @foreach ($instruments as $instrument)
                     <option value="{{ $instrument->id }}" {{ $instrument->id == $instrument->id ? 'selected' : '' }}>{{ $instrument->name }}</option>
