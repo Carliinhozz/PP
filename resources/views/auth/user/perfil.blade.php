@@ -148,6 +148,7 @@
                                                 <form action="{{route('borrow.edit', ['id' => $borrow->id])}}" method="get" >
                                                     <button class="btn btn-info ml-2">Editar Observação</button>
                                                 </form>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
