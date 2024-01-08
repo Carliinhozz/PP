@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('title')
     Instrumentos
 @endsection
@@ -8,7 +7,7 @@
     <section id="cadastrar-instrumento" class="cadastrar-instrumento">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-in">
-                <div class="col-lg-12">
+                <div class="col-lg-12 instrumento">
                 <h2>Cadastrar Instrumento</h2>
                     <div class="purple-box rounded-3 p-4">
                         <form action="{{ route('instruments.store') }}" method="POST">

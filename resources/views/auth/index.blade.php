@@ -9,8 +9,8 @@
           <h2>Playlist do dia</h2>
           <div class="container col-lg-2">
             <ul class="playlist-tabs row justify-content-center">
-              <li onclick="showPlaylist('manha', event)" class="active col-12 mt-4">Manhã</li>
-              <li onclick="showPlaylist('tarde', event)" class="col-12">Tarde</li>
+              <li onclick="showPlaylist('manha', event)" class="active col-lg-12 col-sm-6 mt-4">Manhã</li>
+              <li onclick="showPlaylist('tarde', event)" class="col-lg-12 col-sm-6">Tarde</li>
             </ul>
           </div>
           <div class="col-lg-10">

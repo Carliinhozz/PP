@@ -2669,16 +2669,35 @@ section {
   margin-top: 100px;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colunas, cada uma com a mesma largura */
-  gap: 10px; /* Espaçamento entre os itens do grid */
-}
-
 .grid-item {
-  border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+}
+
+@media(min-width: 400px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 colunas, cada uma com a mesma largura */
+    gap: 10px; /* Espaçamento entre os itens do grid */
+    margin-top: 15px;
+  }
+}
+
+@media(min-width:768px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas, cada uma com a mesma largura */
+    gap: 10px; /* Espaçamento entre os itens do grid */
+    margin-top: 15px;
+  }
+}
+
+@media(min-width:992px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas, cada uma com a mesma largura */
+    gap: 10px; /* Espaçamento entre os itens do grid */
+  }
 }
 
 /*--------------------------------------------------------------
@@ -2872,4 +2891,14 @@ section {
 
 .content.active {
   display: block;
+}
+
+/*--------------------------------------------------------------
+# Instrumentos page
+--------------------------------------------------------------*/
+.instrumento h2{
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #534881;
 }

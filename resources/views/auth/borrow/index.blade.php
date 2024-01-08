@@ -5,7 +5,7 @@
 <section id="hero" class="hero">
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
-        <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-center text-lg-start">
+        <div class="col-lg-6 order-2 order-lg-1 flex-column justify-content-center text-start">
           <h2>Fazer Agendamento</h2>
           <p>Preencha as informações abaixo e reserve seu horário na sala de música!</p>
           @if(session('alert') && session('message'))
