@@ -89,7 +89,7 @@ class PlaylistController extends Controller
                 $afternoon_playlist->duration+= $music->duration;
                 
             }
-            $afternoon_musics=Music::where('time', 0)->get();             
+            $afternoon_musics=Music::where('time', 1)->get();             
         }
         $morning_playlist->save();
         $afternoon_playlist->save();
