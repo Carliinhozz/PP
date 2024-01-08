@@ -10,10 +10,11 @@
                     <img src="assets/img/user.png" alt="Foto do Perfil">
                     <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
                     <div class="container row justify-content-start gap-5 mt-4">
-                        <a href="#dados" class="text-left text-light col-12 op-perfil" onclick="showContent('dados')">Dados pessoais</a>
-                        <a href="#pedidos" class="text-left text-light col-12 op-perfil" onclick="showContent('pedidos')">Seus pedidos</a>
-                        <a href="#agendamentos" class="text-left text-light col-12 op-perfil" onclick="showContent('agendamentos')">Seus agendamentos</a>
-                        <a href="#ficha-instrumentos" class="text-left text-light col-12 mb-4 op-perfil" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
+                        <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
+                        <a href="#pedidos" class="text-left text-light col-12" onclick="showContent('pedidos')">Seus pedidos</a>
+                        <a href="#agendamentos" class="text-left text-light col-12" onclick="showContent('agendamentos')">Seus agendamentos</a>
+                        <a href="#allagendamentos" class="text-left text-light col-12" onclick="showContent('allagendamentos')">Todos os agendamentos</a>
+                        <a href="#ficha-instrumentos" class="text-left text-light col-12" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
                     </div>
                 </div>
             </div>
@@ -96,6 +97,72 @@
                     @endif
                 </div>
                 </div>
+                <div id="content-allagendamentos" class="content">
+                    <div class="perfil-title mt-4">
+                        <h3>Todos os Agendamentos:</h3>
+                    </div>
+                    <div class="agendamento-list">
+                        @if (\App\Models\Borrow::all()->isNotEmpty())
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Hora</th>
+                                        <th>Instrumento</th>
+                                        <th>Situação</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (\App\Models\Borrow::all() as $borrow)
+                                        <tr>
+                                            <td>{{ \Carbon\Carbon::parse($borrow->day)->format('d-m-Y') }}</td>
+                                            <td>{{ $borrow->time }}</td>
+                                            <td>
+                                                @foreach ($borrow->instruments as $instrument)
+                                                    {{ $instrument->name }}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            @if ($borrow->finished == 1)
+                                                <td>Finalizado</td>
+                                            @elseif ($borrow->finished == 0)
+                                                <td>Pendente</td>
+                                            @endif
+                                            <td>
+                                                @if ($borrow->finished == 1)
+                                                    <form action="{{ route('borrow.delete', ['id' => $borrow->id]) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Apagar</button>
+                                                    </form>
+                                                @elseif ($borrow->finished == 0)
+                                                    <form action="{{ route('borrow.delete', ['id' => $borrow->id]) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Cancelar</button>
+                                                    </form>
+                                                @endif
+                                                <button type="button" class="btn btn-info ml-2">Editar Observação
+                                            </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Sem agendamentos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
+                </div>
                 <div id="content-ficha-instrumentos" class="content">
                     <div class="perfil-title mt-4">
                         <h3>Ficha de Instrumentos:</h3>
@@ -149,36 +216,37 @@
             const contents = document.querySelectorAll('.content');
             const hash = window.location.hash.substring(1);
 
-            contents.forEach((content) => {
-                content.classList.remove('active');
-            });
-
-            if (hash) {
-                const targetContent = document.getElementById(`content-${hash}`);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-            } else {
-                const defaultContent = document.getElementById('content-dados');
-                if (defaultContent) {
-                    defaultContent.classList.add('active');
-                }
-            }
+        contents.forEach((content) => {
+            content.classList.remove('active');
         });
 
-        function showContent(contentId) {
-            const contents = document.querySelectorAll('.content');
-            contents.forEach((content) => {
-                content.classList.remove('active');
-            });
-
-            const targetContent = document.getElementById(`content-${contentId}`);
+        if (hash) {
+            const targetContent = document.getElementById(`content-${hash}`);
             if (targetContent) {
                 targetContent.classList.add('active');
-                window.location.hash = contentId;
+            }
+        } else {
+            const defaultContent = document.getElementById('content-dados');
+            if (defaultContent) {
+                defaultContent.classList.add('active');
             }
         }
-        
-    </script>
+    });
+
+    function showContent(contentId) {
+        const contents = document.querySelectorAll('.content');
+        contents.forEach((content) => {
+            content.classList.remove('active');
+        });
+
+        const targetContent = document.getElementById(`content-${contentId}`);
+        if (targetContent) {
+            targetContent.classList.add('active');
+            window.location.hash = contentId;
+        }
+    }
+</script>
+
+
 
 @endsection
