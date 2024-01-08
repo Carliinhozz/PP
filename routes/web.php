@@ -35,13 +35,15 @@ Route::get('/sobre', function ()  {
     return view('about');
 });
 
-Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::class);
+Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::class)->name('perfil');
 
 
 Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
     Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
-    Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete')->middleware('auth');
+    Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete');
+    Route::get('/borrow/{id}/editar', [BorrowController::class, 'edit'])->name('edit');
+    Route::post('/borrow/{id}/editar', [BorrowController::class, 'update'])->name('update');
     
 });
 
@@ -66,13 +68,24 @@ Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
     Route::get('instrumentos/{id}',[InstrumentController::class, 'show'])->name('show');
     Route::post('instrumentos/{id}/editar',[InstrumentController::class, 'update'])->name('update');
     Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete');
+    Route::post('instrumentos/{id}/edit', [InstrumentController::class, 'edit'])->name('edit');
+    Route::post('instrumentos/get-details/{instrumentId}', function ($instrumentId) {
+        $instrument = \App\Models\Instrument::find($instrumentId);
+
+        return response()->json([
+            'name' => $instrument->name,
+            'disponibility' => $instrument->disponibility,
+            'description' => $instrument->description,
+        ]);
+    })->name('instruments.getDetails');
+
 });
 Route::middleware(SuapToken::class)->name('admin.')->group(function () {
     Route::get('bolsista',[UserController::class,'index'])->name('index');
     Route::post('bolsista',[UserController::class,'search'])->name('search');
     Route::post('bolsista/{id}/delete',[UserController::class,'destroy'])->name('delete');
     Route::post('bolsista/{id}/promote',[UserController::class,'promote'])->name('promote');
-    // Route::get()->name();
+
 });
 Route::name('suap.')
     ->group(function () {

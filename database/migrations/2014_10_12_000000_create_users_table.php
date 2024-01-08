@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('registration')->uniqid;
             $table->string('email_ifrn')->uniqid;
             $table->enum('admin', ['0', '1', '2'])->default('0');
+            $table->string('img');
             
             $table->rememberToken();
             $table->timestamps();

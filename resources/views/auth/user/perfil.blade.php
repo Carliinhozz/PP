@@ -7,7 +7,7 @@
         <div class="row no-gutters">
             <div id="container1" class="col-md-4">
                 <div id="profile" class="d-flex flex-column align-items-center">
-                    <img src="assets/img/user.png" alt="Foto do Perfil">
+                <img src="https://suap.ifrn.edu.br/{{ auth()->user()->img }}" onerror="this.src='assets/img/user.png'" alt="Foto do Perfil">
                     <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
                     <div class="container row justify-content-start gap-5 mt-4">
                         <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
@@ -145,8 +145,9 @@
                                                         <button type="submit" class="btn btn-danger">Cancelar</button>
                                                     </form>
                                                 @endif
-                                                <button type="button" class="btn btn-info ml-2">Editar Observação
-                                            </button>
+                                                <form action="{{route('borrow.edit', ['id' => $borrow->id])}}" method="get" >
+                                                    <button class="btn btn-info ml-2">Editar Observação</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -164,49 +165,43 @@
                     </div>
                 </div>
                 <div id="content-ficha-instrumentos" class="content">
-                    <div class="perfil-title mt-4">
-                        <h3>Ficha de Instrumentos:</h3>
-                    </div>
-                    <div class="row gap-3 mt-3">
-                        <div class="form-group col-4">
-                            <label for="tipo-instrumento">Tipo de Instrumento:</label>
-                            <select class="form-control" name="instrument_model" id="instrument_model">
-                                @foreach ($instrument_models as $model)
-                                    <option value="{{ $model->id }}">{{ $model->model }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-4 mr-2">
-                            <label for="instrumento">Instrumento:</label>
-                            <select class="form-control" name="instrumento" id="instrumento">
-                                
-                            </select>
-                        </div>
-                        <div class="col-3 d-flex flex-column justify-content-end align-items-center"><button class="btn-instrumento">Buscar</button></div>
-                    </div>
-                    <div class="box-instrumento mt-5">
-                        <div class="info-instrumento">
-                            <h4>Guitarra</h4>
-                                <div class="row gap-3">
-                                    <div class="col-3">
-                                        <label for="status">Status:</label>
-                                        <select class="form-control" name="status" id="status">
-                                        <option value="1">Disponível</option>
-                                        <option value="0">Indisponível</option>
-                                        </select>
-                                    </div>
-                                <div class="col-8">
-                                    <label for="descrition">Descrição:</label>
-                                    <!-- <input type="text" name="descrition" class="form-control" placeholder="Digite a descrição"> -->
-                                    <textarea name="" id="descrition" name="descrition" class="form-control" placeholder="Digite a descrição" rows="1"></textarea>
-                                </div>
-                                <div class="col-12 mt-5 d-flex flex-column justify-content-end align-content-end">
-                                    <button class="btn-save">Salvar</button>
-                                </div>
-                        </div>
-                    </div>
-                    </div>
+        <div class="perfil-title mt-4">
+            <h3>Ficha de Instrumentos:</h3>
+        </div>
+    @csrf
+    <div class="row gap-3 mt-3">
+        <div class="form-group col-4 mr-2">
+            <label for="instrument">Instrument:</label>
+            <select class="form-control" name="instrument" id="instrument" onchange="this.form.submit()">
+                @foreach ($instruments as $instrument)
+                    <option value="{{ $instrument->id }}" {{ $instrument->id == $instrument->id ? 'selected' : '' }}>{{ $instrument->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+        <div class="box-instrumento mt-5">
+            @if(isset($instrument))
+                <h4 id="instrumentName">{{ $instrument->name }}</h4>
+                <form action="{{ route('instruments.edit', ['id' => $instrument->id]) }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="disponibility">Disponibilidade:</label>
+                <select class="form-control" name="disponibility" id="disponibility">
+                    <option value="1" {{ $instrument->disponibility == 1 ? 'selected' : '' }}>Disponível</option>
+                    <option value="0" {{ $instrument->disponibility == 0 ? 'selected' : '' }}>Indisponível</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Descrição:</label>
+                <textarea name="description" class="form-control">{{ $instrument->description }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
                 </div>
+            @endif
+        </div>
+
+
             </div>
         </div>
     </div>
@@ -244,8 +239,33 @@
             targetContent.classList.add('active');
             window.location.hash = contentId;
         }
-    }
+    };
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#instrument').change(function() {
+            var instrumentId = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('instrumentos/get-details') }}/' + instrumentId,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, // Adicione esta linha
+                success: function(data) {
+                    $('#instrumentName').text(data.name);
+                    $('#disponibility').val(data.disponibility);
+                    $('textarea[name="description"]').val(data.description);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 

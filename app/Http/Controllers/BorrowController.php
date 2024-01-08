@@ -7,6 +7,7 @@ use App\Models\Borrow;
 use App\Models\Instrument;
 use Illuminate\Support\Carbon;
 use App\Models\BorrowInstrument;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class BorrowController extends Controller
@@ -88,7 +89,12 @@ class BorrowController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $borrow=Borrow::findOrFail($id);
+        $user=User::findOrFail($borrow->user_id);
+        return view('auth.borrow.edit',[
+            'borrow'=>$borrow,
+            'user'=>$user
+        ]);
     }
 
     /**
@@ -96,7 +102,13 @@ class BorrowController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate=$request->validate([
+            'observations'=>'required',
+        ]);
+        $borrow=Borrow::findOrFail($id);
+        $borrow->observations=$request->observations;
+        $borrow->save();
+        return redirect(route('perfil'));
     }
 
     /**
@@ -111,7 +123,7 @@ class BorrowController extends Controller
             $borrow->instruments()->detach();
             $borrow->delete();
 
-            return redirect('/perfil#agendamentos');
+            return redirect('perfil');
         }
 
     }

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'role',
         'registration',
         'admin',
-        'super_admin'
+        'img',
         
     ];
 

@@ -7,7 +7,7 @@
             <ul>
             <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Página inicial</a></li>
                 @if (Auth::check())
-                    <li><a href="{{ route('admin.index') }}" class="{{ Request::is('instrumentos') ? 'active' : '' }}">Bolsistas</a></li>
+                    <li><a href="{{ route('admin.index') }}" class="{{ Request::is('bolsista') ? 'active' : '' }}">Bolsistas</a></li>
                     <li><a href="{{ route('instruments.index') }}" class="{{ Request::is('instrumentos') ? 'active' : '' }}">Instrumentos</a></li>
                     <li><a href="{{route('borrow.index') }}" class="{{ Request::is('agendamentos') ? 'active' : '' }}">Fazer Agendamento</a></li>
                     <li><a href="{{ url('/musicas') }}" class="{{ Request::is('musicas') ? 'active' : '' }}">Pedir Música</a></li>
