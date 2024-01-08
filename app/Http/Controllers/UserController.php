@@ -34,9 +34,26 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function index()
     {
-        //
+        $admins=User::where('admin',1)->get();
+        $result=collect();
+        return view('auth.admin.index',[
+            'admins'=>$admins,
+            'result'=>$result,
+        ]);
+    }
+    public function search(Request $request)
+    {
+        $admins=User::where('admin',1)->where('role','Aluno')->get();
+        $validate=$request->validate([
+            'registration'=>'required'
+        ]);
+        $result=User::where('registration',$request->registration)->get();
+        return view('auth.admin.index',[
+            'admins'=>$admins,
+            'result'=>$result,
+        ]);
     }
 
     /**
@@ -50,9 +67,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function promote(string $id)
     {
-        //
+        $user=User::findOrFail($id);
+        $user->admin=1;
+        $user->save();
+        return redirect(route('admin.index'));
     }
 
     /**
@@ -76,6 +96,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user=User::findOrFail($id);
+        $user->admin=0;
+        $user->save();
+        return redirect(route('admin.index'));
     }
 }

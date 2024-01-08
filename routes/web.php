@@ -55,7 +55,6 @@ Route::middleware(SuapToken::class)->name('music.')->group(function () {
 
 Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::get('playlist', [PlaylistController::class,'index'])->name('index');
-    Route::post('playlist/{id}', [PlaylistController::class,'edit'])->name('edit');
     Route::post('playlist/{id}/delete/{music_id}', [PlaylistController::class,'delete'])->name('delete');
     Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add_index'])->name('add_index');
     Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store');
@@ -67,6 +66,13 @@ Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
     Route::get('instrumentos/{id}',[InstrumentController::class, 'show'])->name('show');
     Route::post('instrumentos/{id}/editar',[InstrumentController::class, 'update'])->name('update');
     Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete');
+});
+Route::middleware(SuapToken::class)->name('admin.')->group(function () {
+    Route::get('bolsista',[UserController::class,'index'])->name('index');
+    Route::post('bolsista',[UserController::class,'search'])->name('search');
+    Route::post('bolsista/{id}/delete',[UserController::class,'destroy'])->name('delete');
+    Route::post('bolsista/{id}/promote',[UserController::class,'promote'])->name('promote');
+    // Route::get()->name();
 });
 Route::name('suap.')
     ->group(function () {
