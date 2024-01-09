@@ -10,16 +10,9 @@
           <p>A plataforma da Rádio Desopila é fonte de comunicação e entretenimento dentro da escola e por isso se tornou um ponto de convergência para a diversidade de vozes e interesses, através de programas culturais, revista, pedidos de música, etc., a rádio se esforça para oferecer conteúdo que informe, inspire e, claro, divirta.
           </p>
         </div>
-        <!-- <div class="video-index col-lg-6 order-1 order-lg-2">
-          <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
-        </div> -->
         <div class="video-index col-lg-6 order-2">
-          <!-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-          <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt=""> -->
-          <video src="https://www.youtube.com/watch?v=DTIetbQKFEY" controls class="rounded video">
-                <!-- <source src="assets/videos/Alfabeto.mkv">
-                <source src="assets/videos/Alfabeto.mp4">
-                <source src="assets/videos/Alfabeto.mov"> -->
+          <a href="https://www.youtube.com/watch?v=lkUQMqBayw4" class="glightbox link-video"><i class="bi bi-play-circle-fill b-player"></i></a>
+          <video controls poster="assets/img/capa-video.png" class="rounded video">
         </div>
       </div>
     </div>
