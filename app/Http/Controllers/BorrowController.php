@@ -118,7 +118,7 @@ class BorrowController extends Controller
     {
         $borrow = Borrow::findOrFail($id);
 
-        if ($borrow && $borrow->user_id == Auth::id()) {
+        if ($borrow->user_id == Auth::id() || Auth::user()->admin == 2) {
 
             $borrow->instruments()->detach();
             $borrow->delete();
