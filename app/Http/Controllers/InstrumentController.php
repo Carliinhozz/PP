@@ -75,6 +75,10 @@ class InstrumentController extends Controller
      */
     public function edit(Request $request, string $id)
     {
+        $validate=$request->validate([
+            'disponibility'=>'required',
+            'description'=>'required',
+        ]);
     
         $instrument = Instrument::findOrFail($id);
         $instrument->update([
@@ -121,7 +125,7 @@ class InstrumentController extends Controller
     }
 
     public function getDetails ($instrumentId) {
-        $instrument = \App\Models\Instrument::find($instrumentId);
+        $instrument = Instrument::findOrFail($instrumentId);
 
         return response()->json([
             'name' => $instrument->name,

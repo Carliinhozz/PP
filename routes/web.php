@@ -51,7 +51,7 @@ Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
         Route::post('musicas', [MusicController::class,'search'])->name('search');
         Route::post('musicas/{id}', [MusicController::class,'store'])->name('store');
-        Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->name('delete');
+        Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->name('delete');//bolsista
         
  });
 
@@ -61,7 +61,8 @@ Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
     Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add_index'])->name('add_index');
     Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store');
     Route::post('playlist/{id}/store', [PlaylistController::class,'store'])->name('store');
-});
+});//bolsista
+
 Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
     Route::get('instrumentos',[InstrumentController::class, 'index'])->name('index');
     Route::post('instrumentos',[InstrumentController::class, 'store'])->name('store');
@@ -70,15 +71,15 @@ Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
     Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete');
     Route::post('instrumentos/{id}/edit', [InstrumentController::class, 'edit'])->name('edit');
     Route::post('instrumentos/get-details/{instrumentId}', [InstrumentController::class, 'getDetails'])->name('get');
+});//professor
 
-});
 Route::middleware(SuapToken::class)->name('admin.')->group(function () {
     Route::get('bolsista',[UserController::class,'index'])->name('index');
     Route::post('bolsista',[UserController::class,'search'])->name('search');
     Route::post('bolsista/{id}/delete',[UserController::class,'destroy'])->name('delete');
     Route::post('bolsista/{id}/promote',[UserController::class,'promote'])->name('promote');
-    
-});
+});//professor
+
 Route::name('suap.')
     ->group(function () {
         Route::get('/auth', [LoginController::class, 'index']);

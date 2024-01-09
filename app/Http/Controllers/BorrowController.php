@@ -116,7 +116,7 @@ class BorrowController extends Controller
      */
     public function destroy($id)
     {
-        $borrow = Borrow::find($id);
+        $borrow = Borrow::findOrFail($id);
 
         if ($borrow && $borrow->user_id == Auth::id()) {
 
