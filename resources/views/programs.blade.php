@@ -33,7 +33,7 @@
                     <i class="bi bi-mic"></i>
                     </div>
                     <h3>IFCast</h3>
-                    <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+                    <p>Podcast com temas voltados para o mistério e curiosidades mundiais, fatos inusitados do cotidiano</p>
                     <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
@@ -44,7 +44,7 @@
                     <i class="bi bi-chat"></i>
                     </div>
                     <h3>Papo de Almoço</h3>
-                    <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
+                    <p>Diversas entrevistas sobre variados temas.</p>
                     <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
@@ -55,7 +55,7 @@
                     <i class="bi bi-newspaper"></i>
                     </div>
                     <h3>Desopila News</h3>
-                    <p>Aqui, você permanece informado sobre as últimas notícias envolvendo o </p>
+                    <p>Aqui, você permanece informado sobre as últimas notícias envolvendo o IFRN.</p>
                     <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->
@@ -66,7 +66,7 @@
                     <i class="bi bi-book"></i>
                     </div>
                     <h3>Revista Impúrpura</h3>
-                    <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
+                    <p>Revista da Rádio Desopila.</p>
                     <a href="#" class="readmore stretched-link">Saiba mais</a>
                   </div>
                 </div><!-- End Service Item -->

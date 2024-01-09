@@ -10,7 +10,7 @@
                     <div class="input-group mb-3">
                         @csrf
                         <input type="text" class="form-control" placeholder="Matrícula do aluno" aria-label="Recipient's username" name="registration">
-                        <button class="btn btn-enter">Buscar</button>
+                        <button class="btn btn-enter btn-bolsa">Buscar</button>
     
                     </div>
                 </form>
@@ -22,7 +22,7 @@
             
             @if ($result->isNotEmpty())
                 <div class="col-6 col">
-                    <label for="formGroupExampleInput" class="form-label">Resultado da busca:</label>
+                    <label for="formGroupExampleInput" class="form-label overflow-hidden">Resultado da busca:</label>
                     <ul class="list-group">
                         @foreach ($result as $user)
                             <li class="list-group-item">
@@ -39,7 +39,7 @@
                                     @else
                                     <form action="{{route('admin.promote', ['id'=>$user->id])}}" method="post">
                                         @csrf
-                                        <button data-mdb-ripple-init class="btn btn-success">Vincular</button>
+                                        <button data-mdb-ripple-init class="btn btn-vinculo">Vincular</button>
                                     </form>
                                     @endif
                                     
@@ -49,7 +49,7 @@
                     </ul>
                 </div>
             @else
-                <div class="col-6 col">
+                <div class="col-6 overflow-hidden">
                     <label for="formGroupExampleInput" class="form-label">Resultado da busca</label>
                     <ul class="list-group">
                         <li class="list-group-item">Sem resultado</li>
