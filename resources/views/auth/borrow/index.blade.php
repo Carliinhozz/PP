@@ -67,7 +67,7 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="instrumentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 Selecionar Instrumentos
             </button>
-            <ul class="dropdown-menu" aria-labelledby="instrumentDropdown">
+            <ul class="dropdown-menu" aria-labelledby="instrumentDropdown" style="max-height: 100px; overflow-y: auto; width: 250px">
                 @foreach ($instruments as $instrument)
                     @if ($instrument->disponibility)
                         <li>

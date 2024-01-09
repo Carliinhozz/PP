@@ -41,7 +41,7 @@ Route::get('/perfil', [UserController::class,'perfil'])->middleware (SuapToken::
 Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
     Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
-    Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete')->middleware('auth');
+    Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete');
     Route::get('/borrow/{id}/editar', [BorrowController::class, 'edit'])->name('edit')->middleware(Admin::class);
     Route::post('/borrow/{id}/editar', [BorrowController::class, 'update'])->name('update')->middleware(Admin::class);
     
@@ -51,8 +51,8 @@ Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
 Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
         Route::post('musicas', [MusicController::class,'search'])->name('search');
-        Route::post('musicas/{id}', [MusicController::class,'store'])->name('store')->middleware(Admin::class);
-        Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->middleware(Admin::class);
+        Route::post('musicas/{id}', [MusicController::class,'store'])->name('store');
+        Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->name('delete')->middleware(Admin::class);
         
  });
 
