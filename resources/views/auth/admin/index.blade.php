@@ -10,7 +10,7 @@
                     <div class="input-group mb-3">
                         @csrf
                         <input type="text" class="form-control" placeholder="Matrícula do aluno" aria-label="Recipient's username" name="registration">
-                        <button class="btn btn-enter">Button</button>
+                        <button class="btn btn-enter">Buscar</button>
     
                     </div>
                 </form>
@@ -22,7 +22,7 @@
             
             @if ($result->isNotEmpty())
                 <div class="col-6 col">
-                    <label for="formGroupExampleInput" class="form-label">Resultado da busca</label>
+                    <label for="formGroupExampleInput" class="form-label">Resultado da busca:</label>
                     <ul class="list-group">
                         @foreach ($result as $user)
                             <li class="list-group-item">

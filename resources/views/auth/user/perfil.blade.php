@@ -13,8 +13,12 @@
                         <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
                         <a href="#pedidos" class="text-left text-light col-12" onclick="showContent('pedidos')">Seus pedidos</a>
                         <a href="#agendamentos" class="text-left text-light col-12" onclick="showContent('agendamentos')">Seus agendamentos</a>
+                        @if (auth()->user()->admin > 0)
                         <a href="#allagendamentos" class="text-left text-light col-12" onclick="showContent('allagendamentos')">Todos os agendamentos</a>
+                        @endif
+                        @if (auth()->user()->admin == 1)
                         <a href="#ficha-instrumentos" class="text-left text-light col-12" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -97,6 +101,7 @@
                     @endif
                 </div>
                 </div>
+                @if (auth()->user()->admin > 0)
                 <div id="content-allagendamentos" class="content">
                     <div class="perfil-title mt-4">
                         <h3>Todos os Agendamentos:</h3>
@@ -168,44 +173,47 @@
                         @endif
                     </div>
                 </div>
+                @else
+                @endif
+                @if (auth()->user()->admin == 1)
                 <div id="content-ficha-instrumentos" class="content">
-        <div class="perfil-title mt-4">
-            <h3>Ficha de Instrumentos:</h3>
-        </div>
-    @csrf
-    <div class="row gap-3 mt-3">
-        <div class="form-group col-4 mr-2">
-            <label for="instrument">Instrumento:</label>
-            <select class="form-control" name="instrument" id="instrument" onchange="this.form.submit()">
-                @foreach ($instruments as $instrument)
-                    <option value="{{ $instrument->id }}" {{ $instrument->id == $instrument->id ? 'selected' : '' }}>{{ $instrument->name }} - {{ $instrument->description }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-        <div class="box-instrumento mt-5">
-            @if(isset($instrument))
-                <h4 id="instrumentName">{{ $instrument->name }} - {{ $instrument->description }}</h4>
-                <form action="{{ route('instruments.edit', ['id' => $instrument->id]) }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="disponibility">Disponibilidade:</label>
-                <select class="form-control" name="disponibility" id="disponibility">
-                    <option value="1" {{ $instrument->disponibility == 1 ? 'selected' : '' }}>Disponível</option>
-                    <option value="0" {{ $instrument->disponibility == 0 ? 'selected' : '' }}>Indisponível</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="description">Descrição:</label>
-                <textarea name="description" class="form-control">{{ $instrument->description }}</textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-        </form>
+                    <div class="perfil-title mt-4">
+                        <h3>Ficha de Instrumentos:</h3>
+                    </div>
+                @csrf
+                <div class="row gap-3 mt-3">
+                    <div class="form-group col-4 mr-2">
+                        <label for="instrument">Instrumento:</label>
+                        <select class="form-control" name="instrument" id="instrument" onchange="this.form.submit()">
+                            @foreach ($instruments as $instrument)
+                                <option value="{{ $instrument->id }}" {{ $instrument->id == $instrument->id ? 'selected' : '' }}>{{ $instrument->name }} - {{ $instrument->description }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            @endif
-        </div>
-
-
+                    <div class="box-instrumento mt-5">
+                        @if(isset($instrument))
+                            <h4 id="instrumentName">{{ $instrument->name }} - {{ $instrument->description }}</h4>
+                            <form action="{{ route('instruments.edit', ['id' => $instrument->id]) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="disponibility">Disponibilidade:</label>
+                            <select class="form-control" name="disponibility" id="disponibility">
+                                <option value="1" {{ $instrument->disponibility == 1 ? 'selected' : '' }}>Disponível</option>
+                                <option value="0" {{ $instrument->disponibility == 0 ? 'selected' : '' }}>Indisponível</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descrição:</label>
+                            <textarea name="description" class="form-control">{{ $instrument->description }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </form>
+                            </div>
+                        @endif
+                    </div>
+                    @else
+                    @endif
             </div>
         </div>
     </div>
@@ -255,7 +263,7 @@
             $.ajax({
                 type: 'POST',
                 url: '{{ url('instrumentos/get-details') }}/' + instrumentId,
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, // Adicione esta linha
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 success: function(data) {
                     $('#instrumentName').text(data.name);
                     $('#disponibility').val(data.disponibility);

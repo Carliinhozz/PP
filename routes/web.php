@@ -42,42 +42,43 @@ Route::middleware(SuapToken::class)->name('borrow.')->group(function () {
     Route::get('agendamentos',[BorrowController::class,'index'])->name('index');
     Route::post('agendamentos', [BorrowController::class, 'create'])->name('create');
     Route::delete('/borrow/{id}', [BorrowController::class, 'destroy'])->name('delete')->middleware('auth');
-    Route::get('/borrow/{id}/editar', [BorrowController::class, 'edit'])->name('edit');
-    Route::post('/borrow/{id}/editar', [BorrowController::class, 'update'])->name('update');
+    Route::get('/borrow/{id}/editar', [BorrowController::class, 'edit'])->name('edit')->middleware(Admin::class);
+    Route::post('/borrow/{id}/editar', [BorrowController::class, 'update'])->name('update')->middleware(Admin::class);
     
 });
+
 
 Route::middleware(SuapToken::class)->name('music.')->group(function () {
         Route::get('musicas', [MusicController::class,'index'])->name('index');
         Route::post('musicas', [MusicController::class,'search'])->name('search');
-        Route::post('musicas/{id}', [MusicController::class,'store'])->name('store');
-        Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->name('delete');//bolsista
+        Route::post('musicas/{id}', [MusicController::class,'store'])->name('store')->middleware(Admin::class);
+        Route::post('musicas/{id}/delete/{music_id}', [MusicController::class,'destroy'])->middleware(Admin::class);
         
  });
 
 Route::middleware(SuapToken::class)->name('playlist.')->group(function () {
-    Route::get('playlist', [PlaylistController::class,'index'])->name('index');
-    Route::post('playlist/{id}/delete/{music_id}', [PlaylistController::class,'delete'])->name('delete');
-    Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add_index'])->name('add_index');
-    Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store');
-    Route::post('playlist/{id}/store', [PlaylistController::class,'store'])->name('store');
+    Route::get('playlist', [PlaylistController::class,'index'])->name('index')->middleware(Admin::class);
+    Route::post('playlist/{id}/delete/{music_id}', [PlaylistController::class,'delete'])->name('delete')->middleware(Admin::class);
+    Route::get('playlist/{id}/adicionar', [PlaylistController::class,'add_index'])->name('add_index')->middleware(Admin::class);
+    Route::post('playlist/{id}/adicionar{music_id}', [PlaylistController::class,'add_store'])->name('add_store')->middleware(Admin::class);
+    Route::post('playlist/{id}/store', [PlaylistController::class,'store'])->name('store')->middleware(Admin::class);
 });//bolsista
 
 Route::middleware(SuapToken::class)->name('instruments.')->group(function (){
-    Route::get('instrumentos',[InstrumentController::class, 'index'])->name('index');
-    Route::post('instrumentos',[InstrumentController::class, 'store'])->name('store');
-    Route::get('instrumentos/{id}',[InstrumentController::class, 'show'])->name('show');
-    Route::post('instrumentos/{id}/editar',[InstrumentController::class, 'update'])->name('update');
-    Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete');
-    Route::post('instrumentos/{id}/edit', [InstrumentController::class, 'edit'])->name('edit');
-    Route::post('instrumentos/get-details/{instrumentId}', [InstrumentController::class, 'getDetails'])->name('get');
+    Route::get('instrumentos',[InstrumentController::class, 'index'])->name('index')->middleware(SuperAdmin::class);
+    Route::post('instrumentos',[InstrumentController::class, 'store'])->name('store')->middleware(SuperAdmin::class);
+    Route::get('instrumentos/{id}',[InstrumentController::class, 'show'])->name('show')->middleware(SuperAdmin::class);
+    Route::post('instrumentos/{id}/editar',[InstrumentController::class, 'update'])->name('update')->middleware(SuperAdmin::class);
+    Route::post('instrumentos/{id}/deletar',[InstrumentController::class, 'destroy'])->name('delete')->middleware(SuperAdmin::class);
+    Route::post('instrumentos/{id}/edit', [InstrumentController::class, 'edit'])->name('edit')->middleware(Admin::class);
+    Route::post('instrumentos/get-details/{instrumentId}', [InstrumentController::class, 'getDetails'])->name('get')->middleware(Admin::class);
 });//professor
 
 Route::middleware(SuapToken::class)->name('admin.')->group(function () {
-    Route::get('bolsista',[UserController::class,'index'])->name('index');
-    Route::post('bolsista',[UserController::class,'search'])->name('search');
-    Route::post('bolsista/{id}/delete',[UserController::class,'destroy'])->name('delete');
-    Route::post('bolsista/{id}/promote',[UserController::class,'promote'])->name('promote');
+    Route::get('bolsista',[UserController::class,'index'])->name('index')->middleware(SuperAdmin::class);
+    Route::post('bolsista',[UserController::class,'search'])->name('search')->middleware(SuperAdmin::class);
+    Route::post('bolsista/{id}/delete',[UserController::class,'destroy'])->name('delete')->middleware(SuperAdmin::class);
+    Route::post('bolsista/{id}/promote',[UserController::class,'promote'])->name('promote')->middleware(SuperAdmin::class);
 });//professor
 
 Route::name('suap.')

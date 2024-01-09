@@ -10,9 +10,7 @@
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{$music->title}}</div>
                 <p>{{$music->artist}}</p>
-                <p>Solicitado por: {{App\Models\User::find($music->user_id)->name}}</p>
-                
-
+                <p>Solicitado por: {{App\Models\User::find($music->user_id)->name}}</p>   
             </div>
             <div class="align-items-end">
                 <form action="{{route('music.delete', ['id'=>$playlist->id, 'music_id' => $music->id])}}" method="post">

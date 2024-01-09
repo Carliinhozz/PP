@@ -7,11 +7,15 @@
             <ul>
             <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Página inicial</a></li>
                 @if (Auth::check())
+                @if (auth()->user()->admin == 2)
                     <li><a href="{{ route('admin.index') }}" class="{{ Request::is('bolsista') ? 'active' : '' }}">Bolsistas</a></li>
                     <li><a href="{{ route('instruments.index') }}" class="{{ Request::is('instrumentos') ? 'active' : '' }}">Instrumentos</a></li>
+                @endif
                     <li><a href="{{route('borrow.index') }}" class="{{ Request::is('agendamentos') ? 'active' : '' }}">Fazer Agendamento</a></li>
                     <li><a href="{{ url('/musicas') }}" class="{{ Request::is('musicas') ? 'active' : '' }}">Pedir Música</a></li>
+                @if (auth()->user()->admin == 1)
                     <li><a href="{{ route('playlist.index') }}" class="{{ Request::is('playlist') ? 'active' : '' }}">Editar playlist</a></li>
+                @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ Request::is('perfil') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             @auth {{ auth()->user()->name }} @endauth
