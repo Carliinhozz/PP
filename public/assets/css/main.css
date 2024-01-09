@@ -2845,6 +2845,48 @@ section {
   border-radius: 10px;
 }
 
+.b-perfil{
+  background-color: #9387c2a4;
+  border-radius: 15px;
+  font-size: 12pt;
+  padding: 5px;
+}
+
+.b-perfil.active{
+  background-color: rgba(255, 255, 255, 0.363);
+  border-radius: 15px;
+  font-size: 13pt;
+  padding: 5px;
+}
+
+.b-perfil:hover{
+  background-color: rgba(255, 255, 255, 0.363);
+  border-radius: 15px;
+  font-size: 13pt;
+  padding: 5px;
+}
+
+@media(min-width:400px){
+  .nav-perfil{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+  }
+  #container2{
+    background-color: #6b6198ce;
+    padding: 20px;
+  }
+}
+
+@media(min-width:768px){
+  .nav-perfil{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+  }
+  #container2{
+    background-color: #6b6198ce;
+    margin-left: -12px;
+  }
+}
 
 .pedido-list{
   height: 350px;
@@ -2887,11 +2929,6 @@ section {
   font-weight: bold;
   color: #E16C24;
   box-shadow: 3px 3px 3px 2px #E16C24;
-}
-
-#container2{
-  background-color: #6b6198ce;
-  margin-left: -12px;
 }
 
 .op-perfil{

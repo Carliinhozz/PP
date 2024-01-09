@@ -4,25 +4,25 @@
 @endsection
 @section('main')
     <div class="container pt-5">
-        <div class="row no-gutters">
+        <div class="row justify-content-center mb-4">
             <div id="container1" class="col-md-4">
                 <div id="profile" class="d-flex flex-column align-items-center">
                 <img src="https://suap.ifrn.edu.br/{{ auth()->user()->img }}" onerror="this.src='assets/img/user.png'" alt="Foto do Perfil">
                     <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
-                    <div class="container row justify-content-start gap-5 mt-4">
-                        <a href="#dados" class="text-left text-light col-12" onclick="showContent('dados')">Dados pessoais</a>
-                        <a href="#pedidos" class="text-left text-light col-12" onclick="showContent('pedidos')">Seus pedidos</a>
-                        <a href="#agendamentos" class="text-left text-light col-12" onclick="showContent('agendamentos')">Seus agendamentos</a>
+                    <div class="container row justify-content-start gap-5 mt-2 p-4 nav-perfil">
+                        <a href="#dados" class="text-left text-light col-12 b-perfil active" onclick="showContent('dados')">Dados pessoais</a>
+                        <a href="#pedidos" class="text-left text-light col-12 b-perfil" onclick="showContent('pedidos')">Seus pedidos</a>
+                        <a href="#agendamentos" class="text-left text-light col-12 b-perfil" onclick="showContent('agendamentos')">Seus agendamentos</a>
                         @if (auth()->user()->admin > 0)
-                        <a href="#allagendamentos" class="text-left text-light col-12" onclick="showContent('allagendamentos')">Todos os agendamentos</a>
+                        <a href="#allagendamentos" class="text-left text-light col-12 b-perfil" onclick="showContent('allagendamentos')">Todos os agendamentos</a>
                         @endif
                         @if (auth()->user()->admin == 1)
-                        <a href="#ficha-instrumentos" class="text-left text-light col-12" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
+                        <a href="#ficha-instrumentos" class="text-left text-light col-12 b-perfil" onclick="showContent('ficha-instrumentos')">Ficha de Instrumentos</a>
                         @endif
                     </div>
                 </div>
             </div>
-            <div id="container2" class="col-md-8 text-light">
+            <div id="container2" class="col-md-8 text-light ctn-2">
                 <div id="content-dados" class="container mt-4 content active">
                     <div class="perfil-title">
                         <h3>Dados pessoais:</h3>
