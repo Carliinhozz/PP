@@ -8,8 +8,8 @@
         <div class="row">
           <h2>Playlist do dia</h2>
           <div class="container col-lg-2">
-            <ul class="playlist-tabs row justify-content-center">
-              <li onclick="showPlaylist('manha', event)" class="active col-lg-12 col-sm-6 mt-4">Manhã</li>
+            <ul class="playlist-tabs row gap-3 justify-content-center">
+              <li onclick="showPlaylist('manha', event)" class="active col-lg-12 col-sm-6 mt-lg-4">Manhã</li>
               <li onclick="showPlaylist('tarde', event)" class="col-lg-12 col-sm-6">Tarde</li>
             </ul>
           </div>
@@ -21,7 +21,7 @@
                       <li>{{$music->title}} - {{$music->artist}}</li>
                   @endforeach
                 @else
-                  <p>Sem músicas ate o momento</p>
+                  <p class="text-light">Sem músicas ate o momento</p>
                 @endif
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
@@ -30,10 +30,10 @@
               <ol class="row justify-content-center">
                 @if($afternoon_musics->isNotEmpty())
                   @foreach ($afternoon_musics as $music)
-                      <li>{{$music->title}} - {{$music->artist}}</li>
+                      <li class="text-light music-list">{{$music->title}} - {{$music->artist}}</li>
                   @endforeach
                 @else
-                  <p>Sem músicas ate o momento</p>
+                  <p class="text-light">Sem músicas ate o momento</p>
                 @endif
                 <!-- Adicione mais músicas conforme necessário -->
               </ol>
@@ -74,7 +74,7 @@
                           @endforeach
                       </ul>
                   @else
-                      <p>Sem agendamentos</p>
+                      <p class="no-agd">Sem agendamentos</p>
                   @endif
                   </ul>
               </div>
@@ -96,7 +96,7 @@
                           @endforeach
                       </ul>
                   @else
-                      <p>Sem agendamentos</p>
+                      <p class="no-agd">Sem agendamentos</p>
                   @endif
                   </ul>
               </div>
@@ -118,7 +118,7 @@
                           @endforeach
                       </ul>
                   @else
-                      <p>Sem agendamentos</p>
+                      <p class="no-agd">Sem agendamentos</p>
                   @endif
                   </ul>
               </div>
@@ -140,7 +140,7 @@
                         @endforeach
                     </ul>
                 @else
-                    <p>Sem agendamentos</p>
+                    <p class="no-agd">Sem agendamentos</p>
                 @endif
                 </ul>
             </div>
@@ -162,7 +162,7 @@
                       @endforeach
                   </ul>
               @else
-                  <p>Sem agendamentos</p>
+                  <p class="no-agd">Sem agendamentos</p>
               @endif
               </ul>
           </div>

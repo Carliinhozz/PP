@@ -2732,21 +2732,48 @@ section {
   color: #534881;
 }
 
-.playlist-tabs{
-  background-color: #534881;
-  height: 200px;
-  color: white;
+@media(min-width:400px){
+  .playlist-tabs{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    background-color: #534881;
+    height: 50px;
+    color: white;
+  }
+  .playlist-tabs li{
+    margin-top: 12px;
+  }
+}
+
+@media(min-width:768px){
+  .playlist-tabs{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    background-color: #534881;
+    height: 150px;
+    color: white;
+  }
 }
 
 .playlist-content{
-  background-color: #b9aceb;
-  height: 200px;
+  background-color: #9c8be2;
+  height: 150px;
+}
+
+.playlist-content li, .playlist-content p{
+  margin-top: 15px;
 }
 
 .agendamentos-days{
   background-color: #534881;
   color: white;
 }
+
+.agendamento-list{
+  margin: 0;
+  padding: 0;
+}
+
 
 .playlist-tabs li {
   cursor: pointer;
@@ -2767,6 +2794,12 @@ section {
 }
 
 .agendamentos-days li.active {
+  font-weight: bold;
+}
+
+.no-agd{
+  color: #E16C24;
+  padding: 10px;
   font-weight: bold;
 }
 
@@ -2818,10 +2851,15 @@ section {
   overflow-y: scroll;
 }
 
+.music-list{
+  background-color: #5348813f;
+}
+
 .agendamento-list{
   height: 350px;
   overflow-y: scroll;
 }
+
 
 .btn-instrumento{
   background-color: #534881;
