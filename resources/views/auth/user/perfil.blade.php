@@ -7,7 +7,7 @@
         <div class="row justify-content-center mb-4">
             <div id="container1" class="col-md-4">
                 <div id="profile" class="d-flex flex-column align-items-center">
-                <img src="https://suap.ifrn.edu.br/{{ auth()->user()->img }}" onerror="this.src='assets/img/user.png'" alt="Foto do Perfil">
+                <img src="{{ auth()->user()->img }}" onerror="this.src='assets/img/user.png'" alt="Foto do Perfil">
                     <h3 class="text-light">@auth {{ auth()->user()->name }} @endauth</h3>
                     <div class="container row justify-content-start gap-5 mt-2 p-4 nav-perfil">
                         <a href="#dados" class="text-left text-light col-12 b-perfil active" onclick="showContent('dados')">Dados pessoais</a>
